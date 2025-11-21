@@ -1,9 +1,7 @@
 /*
 Custom Css
 */
-/* =============================
-   ESTILOS AISLADOS PARA LOGIN
-   ============================= */
+
 .login-page {
     display: flex;
     justify-content: center;
@@ -67,9 +65,7 @@ Custom Css
     text-decoration: underline;
 }
 
-/* =============================
-   ESTILOS AISLADOS PARA REGISTRO
-   ============================= */
+
 .register-page {
     display: flex;
     justify-content: center;
@@ -223,6 +219,42 @@ Custom Css
 .producto-individual button:hover {
     background: #009900;
 }
+
+/* Solo afecta la sección de contacto encapsulada */
+.contacto-wrapper .contacto-fullscreen {
+    min-height: 100vh; /* ocupa toda la altura de la pantalla */
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* centra verticalmente */
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.contacto-wrapper .contacto-fullscreen h1 {
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+.contacto-wrapper .contacto-fullscreen p {
+    color: #555;
+    font-size: 18px;
+    max-width: 600px;
+    margin: 0 auto 40px auto;
+}
+
+.contacto-wrapper .contacto-fullscreen .bg-light {
+    background-color: #fff !important;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.contacto-wrapper .contacto-fullscreen .bg-light:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+
+
 
 /* Responsive */
 @media (max-width: 768px) {
