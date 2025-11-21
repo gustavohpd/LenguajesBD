@@ -1,11 +1,4 @@
---------------------------------------------------------
--- Archivo creado  - viernes-noviembre-21-2025   
---------------------------------------------------------
---------------------------------------------------------
---  DDL for Package FIDE_ANGELUS_ESTETICA_PKG
---------------------------------------------------------
-
-  CREATE OR REPLACE EDITIONABLE PACKAGE "ANGELUS"."FIDE_ANGELUS_ESTETICA_PKG" AS
+create or replace PACKAGE FIDE_ANGELUS_ESTETICA_PKG AS
 -- =========================
 -- FUNCIONES
 -- =========================
@@ -557,5 +550,3 @@ PROCEDURE FIDE_DIRECCIONES_PROVEEDORES_TB_UPDATE_SP(
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 END FIDE_ANGELUS_ESTETICA_PKG;
-
-/
