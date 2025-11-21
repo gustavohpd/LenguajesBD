@@ -1,3 +1,134 @@
 /*
 Custom Css
 */
+/* =============================
+   ESTILOS AISLADOS PARA LOGIN
+   ============================= */
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
+.login-page .login-box {
+    width: 100%;
+    max-width: 380px;
+    background: white;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.25);
+}
+
+.login-page h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+.login-page input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+.login-page button {
+    width: 100%;
+    padding: 12px;
+    background: #c33764;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.login-page button:hover {
+    background: #1d2671;
+}
+
+.login-page .link {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.login-page .link a {
+    color: #1d2671;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-page .link a:hover {
+    text-decoration: underline;
+}
+
+/* =============================
+   ESTILOS AISLADOS PARA REGISTRO
+   ============================= */
+.register-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
+.register-page .register-box {
+    width: 100%;
+    max-width: 420px;
+    background: white;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.25);
+}
+
+.register-page h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+.register-page input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+.register-page button {
+    width: 100%;
+    padding: 12px;
+    background: #c33764;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.register-page button:hover {
+    background: #1d2671;
+}
+
+.register-page .link {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.register-page .link a {
+    color: #1d2671;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.register-page .link a:hover {
+    text-decoration: underline;
+}
