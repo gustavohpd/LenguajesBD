@@ -1,0 +1,236 @@
+/*
+Custom Css
+*/
+/* =============================
+   ESTILOS AISLADOS PARA LOGIN
+   ============================= */
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
+.login-page .login-box {
+    width: 100%;
+    max-width: 380px;
+    background: white;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.25);
+}
+
+.login-page h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+.login-page input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+.login-page button {
+    width: 100%;
+    padding: 12px;
+    background: #c33764;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.login-page button:hover {
+    background: #1d2671;
+}
+
+.login-page .link {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.login-page .link a {
+    color: #1d2671;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-page .link a:hover {
+    text-decoration: underline;
+}
+
+/* =============================
+   ESTILOS AISLADOS PARA REGISTRO
+   ============================= */
+.register-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
+.register-page .register-box {
+    width: 100%;
+    max-width: 420px;
+    background: white;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.25);
+}
+
+.register-page h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+.register-page input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+.register-page button {
+    width: 100%;
+    padding: 12px;
+    background: #c33764;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.register-page button:hover {
+    background: #1d2671;
+}
+
+.register-page .link {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.register-page .link a {
+    color: #1d2671;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.register-page .link a:hover {
+    text-decoration: underline;
+}
+
+
+.producto-individual {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+/* Cada sección de producto */
+.producto-individual section {
+    display: flex; /* se cambia a flex cuando se muestra */
+    flex-wrap: wrap;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+/* Área de imagen */
+.producto-individual .img-area {
+    flex: 1 1 400px;
+}
+
+.producto-individual .img-area img {
+    width: 100%;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+/* Área de información */
+.producto-individual .info-area {
+    flex: 1 1 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Título */
+.producto-individual h1 {
+    font-size: 32px;
+    margin: 0;
+}
+
+/* Precio */
+.producto-individual .precio {
+    font-size: 26px;
+    color: #009900;
+    font-weight: bold;
+}
+
+/* Descripción */
+.producto-individual p {
+    font-size: 16px;
+    color: #444;
+}
+
+/* Label y cantidad */
+.producto-individual label {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.producto-individual input[type="number"] {
+    width: 80px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+/* Botón Comprar */
+.producto-individual button {
+    background: #c33764;
+    color: #fff;
+    border: none;
+    padding: 14px 28px;
+    font-size: 17px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.producto-individual button:hover {
+    background: #009900;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .producto-individual section {
+        flex-direction: column;
+    }
+    .producto-individual .img-area,
+    .producto-individual .info-area {
+        flex: 1 1 100%;
+    }
+}

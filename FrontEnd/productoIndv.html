@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Estetica Angelus</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--<link rel="apple-touch-icon" href="assets/img/apple-icon.png">-->
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">-->
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/templatemo.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
+
+    <!-- Load fonts style after rendering the layout styles -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+
+    <!-- Slick -->
+    <link rel="stylesheet" type="text/css" href="assets/css/slick.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/slick-theme.css">
+    <!--
+    
+TemplateMo 559 Zay Shop
+
+https://templatemo.com/tm-559-zay-shop
+
+-->
+</head>
+
+<body>
+
+
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-light shadow">
+        <div class="container d-flex justify-content-between align-items-center">
+
+            <a class="navbar-brand text-success logo h1 align-self-center" href="index.html">
+                Angelus
+            </a>
+
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between"
+                id="templatemo_main_nav">
+                <div class="flex-fill">
+                    <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="sobresnosotros.html">Servicios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="productos.html">Productos</a>
+                        </li>
+                        <!--- <li class="nav-item">
+                            <a class="nav-link" href="contacto.html">Contacto</a>
+                        </li> -->
+                    </ul>
+                </div>
+                <div class="navbar align-self-center d-flex">
+                    <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
+                            <div class="input-group-text">
+                                <i class="fa fa-fw fa-search"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal"
+                        data-bs-target="#templatemo_search">
+                        <i class="fa fa-fw fa-search text-dark mr-2"></i>
+                    </a>
+                    <a class="nav-icon position-relative text-decoration-none" href="#">
+                        <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+                        <span
+                            class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
+                    </a>
+                    <a class="nav-icon position-relative text-decoration-none" href="login.html">
+                        <i class="fa fa-fw fa-user text-dark mr-3"></i>
+                        <span
+                            class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+    <!-- Close Header -->
+
+    <div class="producto-individual">
+
+        <!-- PRODUCTO 1 -->
+        <section id="p1" style="display:none">
+            <div class="img-area">
+                <img src="assets/img/cremahidratante.jpg" alt="Producto 1">
+            </div>
+            <div class="info-area">
+                <h1>Crema Hidratante Intensa</h1>
+                <p class="precio">10,000</p>
+                <p>Crema facial hidratante exelente para piel seca o mixta</p>
+                <label>Cantidad:</label>
+                <input id="cantidad1" type="number" min="1" value="1">
+                <button onclick="comprar(1)">Comprar</button>
+            </div>
+        </section>
+
+        <!-- PRODUCTO 2 -->
+        <section id="p2" style="display:none">
+            <div class="img-area">
+                <img src="assets/img/serumvc.png" alt="Producto 2">
+            </div>
+            <div class="info-area">
+                <h1>Serum Vitamina C</h1>
+                <p class="precio">15,000</p>
+                <p>Serum antioxidante que contiene vitamina C</p>
+                <label>Cantidad:</label>
+                <input id="cantidad2" type="number" min="1" value="1">
+                <button onclick="comprar(2)">Comprar</button>
+            </div>
+        </section>
+
+        <!-- PRODUCTO 3 -->
+        <section id="p3" style="display:none">
+            <div class="img-area">
+                <img src="assets/img/protectorsolar.png" alt="Producto 3">
+            </div>
+            <div class="info-area">
+                <h1>Protector Solar FPS 50</h1>
+                <p class="precio">20,000</p>
+                <p>Protector solar mineral para piel</p>
+                <label>Cantidad:</label>
+                <input id="cantidad3" type="number" min="1" value="1">
+                <button onclick="comprar(3)">Comprar</button>
+            </div>
+        </section>
+
+        <!-- PRODUCTO 4 -->
+        <section id="p4" style="display:none">
+            <div class="img-area">
+                <img src="assets/img/gelfacial.png" alt="Producto 4">
+            </div>
+            <div class="info-area">
+                <h1>Gel Limpiador Suave</h1>
+                <p class="precio">9,000</p>
+                <p>Gel limpiador para todo tipo de piel</p>
+                <label>Cantidad:</label>
+                <input id="cantidad4" type="number" min="1" value="1">
+                <button onclick="comprar(4)">Comprar</button>
+            </div>
+        </section>
+
+        <!-- PRODUCTO 5 -->
+        <section id="p5" style="display:none">
+            <div class="img-area">
+                <img src="assets/img/antiarrugas.png" alt="Producto 5">
+            </div>
+            <div class="info-area">
+                <h1>Crema Anti-Arruga</h1>
+                <p class="precio">16,000</p>
+                <p>Tratamiento contra las arrugas</p>
+                <label>Cantidad:</label>
+                <input id="cantidad5" type="number" min="1" value="1">
+                <button onclick="comprar(5)">Comprar</button>
+            </div>
+        </section>
+
+        <!-- PRODUCTO 6 -->
+        <section id="p6" style="display:none">
+            <div class="img-area">
+                <img src="assets/img/arcilla.png" alt="Producto 6">
+            </div>
+            <div class="info-area">
+                <h1>Mascarilla de Arcilla</h1>
+                <p class="precio">7,000</p>
+                <p>Mascarilla purificante de arcilla natural deja la piel lisa</p>
+                <label>Cantidad:</label>
+                <input id="cantidad6" type="number" min="1" value="1">
+                <button onclick="comprar(6)">Comprar</button>
+            </div>
+        </section>
+
+        <!-- PRODUCTO 7 -->
+        <section id="p7" style="display:none">
+            <div class="img-area">
+                <img src="assets/img/tonicofacial.png" alt="Producto 7">
+            </div>
+            <div class="info-area">
+                <h1>Tónico Facial</h1>
+                <p class="precio">12,500</p>
+                <p>Tónico equilibrante con extractos naturales</p>
+                <label>Cantidad:</label>
+                <input id="cantidad7" type="number" min="1" value="1">
+                <button onclick="comprar(7)">Comprar</button>
+            </div>
+        </section>
+
+        <!-- PRODUCTO 8 -->
+        <section id="p8" style="display:none">
+            <div class="img-area">
+                <img src="assets/img/contornoojos.png" alt="Producto 8">
+            </div>
+            <div class="info-area">
+                <h1>Contorno de ojos</h1>
+                <p class="precio">9,500</p>
+                <p>Crema para contorno de ojos</p>
+                <label>Cantidad:</label>
+                <input id="cantidad8" type="number" min="1" value="1">
+                <button onclick="comprar(8)">Comprar</button>
+            </div>
+        </section>
+
+        <!-- PRODUCTO 9 -->
+        <section id="p9" style="display:none">
+            <div class="img-area">
+                <img src="assets/img/exfoliantequimico.jpeg" alt="Producto 9">
+            </div>
+            <div class="info-area">
+                <h1>Exfoliante Químico</h1>
+                <p class="precio">15,000</p>
+                <p>Exfoliante con AHA para renovación celular</p>
+                <label>Cantidad:</label>
+                <input id="cantidad9" type="number" min="1" value="1">
+                <button onclick="comprar(9)">Comprar</button>
+            </div>
+        </section>
+
+        <!-- PRODUCTO 10 -->
+        <section id="p10" style="display:none">
+            <div class="img-area">
+                <img src="assets/img/aceitefacial.jpg" alt="Producto 10">
+            </div>
+            <div class="info-area">
+                <h1>Aceite Facial</h1>
+                <p class="precio">18,000</p>
+                <p>Aceite nutritivo para piel seca</p>
+                <label>Cantidad:</label>
+                <input id="cantidad10" type="number" min="1" value="1">
+                <button onclick="comprar(10)">Comprar</button>
+            </div>
+        </section>
+
+        <!-- PRODUCTO 11 -->
+        <section id="p11" style="display:none">
+            <div class="img-area">
+                <img src="assets/img/cremacorporal.png" alt="Producto 11">
+            </div>
+            <div class="info-area">
+                <h1>Crema Corporal</h1>
+                <p class="precio">11,500</p>
+                <p>Hidratación avanzada para una piel brillante y sedosa</p>
+                <label>Cantidad:</label>
+                <input id="cantidad11" type="number" min="1" value="1">
+                <button onclick="comprar(11)">Comprar</button>
+            </div>
+        </section>
+
+        <!-- PRODUCTO 12 -->
+        <section id="p12" style="display:none">
+            <div class="img-area">
+                <img src="assets/img/bodyoil.png" alt="Producto 12">
+            </div>
+            <div class="info-area">
+                <h1>Aceite de masaje</h1>
+                <p class="precio">17,000</p>
+                <p>Aceite esencial para masajes relajantes</p>
+                <label>Cantidad:</label>
+                <input id="cantidad12" type="number" min="1" value="1">
+                <button onclick="comprar(12)">Comprar</button>
+            </div>
+        </section>
+
+        <!-- PRODUCTO 13 -->
+        <section id="p13" style="display:none">
+            <div class="img-area">
+                <img src="assets/img/gelreductor.png" alt="Producto 13">
+            </div>
+            <div class="info-area">
+                <h1>Gel reductor</h1>
+                <p class="precio">8,500</p>
+                <p>Gel para masajes reductor de celulitis</p>
+                <label>Cantidad:</label>
+                <input id="cantidad13" type="number" min="1" value="1">
+                <button onclick="comprar(13)">Comprar</button>
+            </div>
+        </section>
+
+        <!-- PRODUCTO 14 -->
+        <section id="p14" style="display:none">
+            <div class="img-area">
+                <img src="assets/img/creamestrias.png" alt="Producto 14">
+            </div>
+            <div class="info-area">
+                <h1>Crema para Estrías</h1>
+                <p class="precio">22,000/p>
+                <p>Tratamiento intensivo para estrías</p>
+                <label>Cantidad:</label>
+                <input id="cantidad14" type="number" min="1" value="1">
+                <button onclick="comprar(14)">Comprar</button>
+            </div>
+        </section>
+
+        <!-- PRODUCTO 15 -->
+        <section id="p15" style="display:none">
+            <div class="img-area">
+                <img src="assets/img/kitmani.png" alt="Producto 15">
+            </div>
+            <div class="info-area">
+                <h1>Kit Manicura</h1>
+                <p class="precio">10,500</p>
+                <p>Kit completo para manicura profesiona</p>
+                <label>Cantidad:</label>
+                <input id="cantidad15" type="number" min="1" value="1">
+                <button onclick="comprar(15)">Comprar</button>
+            </div>
+        </section>
+
+        <!-- PRODUCTO 16 -->
+        <section id="p16" style="display:none">
+            <div class="img-area">
+                <img src="assets/img/esmalte.png" alt="Producto 16">
+            </div>
+            <div class="info-area">
+                <h1>Esmaltes Premium</h1>
+                <p class="precio">9,800</p>
+                <p>>Set de esmaltespara uñas de larga duración</p>
+                <label>Cantidad:</label>
+                <input id="cantidad16" type="number" min="1" value="1">
+                <button onclick="comprar(16)">Comprar</button>
+            </div>
+        </section>
+
+        <!-- PRODUCTO 17 -->
+        <section id="p17" style="display:none">
+            <div class="img-area">
+                <img src="assets/img/cremadepiladora.jpg" alt="Producto 17">
+            </div>
+            <div class="info-area">
+                <h1>Crema Depilatoria</h1>
+                <p class="precio">10,200</p>
+                <p>Crema depilatoria para piel sensible</p>
+                <label>Cantidad:</label>
+                <input id="cantidad17" type="number" min="1" value="1">
+                <button onclick="comprar(17)">Comprar</button>
+            </div>
+        </section>
+
+        <!-- PRODUCTO 18 -->
+        <section id="p18" style="display:none">
+            <div class="img-area">
+                <img src="assets/img/ceradepi.png" alt="Producto 18">
+            </div>
+            <div class="info-area">
+                <h1>Cera Depilatoria</h1>
+                <p class="precio">19,500</p>
+                <p>Cera fría para depilación profesional</p>
+                <label>Cantidad:</label>
+                <input id="cantidad18" type="number" min="1" value="1">
+                <button onclick="comprar(18)">Comprar</button>
+            </div>
+        </section>
+
+        <!-- PRODUCTO 19 -->
+        <section id="p19" style="display:none">
+            <div class="img-area">
+                <img src="assets/img/shampooprof.jpg" alt="Producto 19">
+            </div>
+            <div class="info-area">
+                <h1>Shampoo Profesional</h1>
+                <p class="precio">8,000</p>
+                <p>Shampoo para tratamientos capilares</p>
+                <label>Cantidad:</label>
+                <input id="cantidad19" type="number" min="1" value="1">
+                <button onclick="comprar(19)">Comprar</button>
+            </div>
+        </section>
+
+    </div>
+
+    <!--Start Footer -->
+    <footer class="bg-dark" id="tempaltemo_footer">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-4 pt-5">
+                    <h2 class="h2 text-success border-bottom pb-3 border-light logo">Estética Angelus</h2>
+                    <ul class="list-unstyled text-light footer-link-list">
+                        <li>
+                            <i class="fas fa-map-marker-alt fa-fw"></i>
+                            123 Consectetur at ligula 10660
+                        </li>
+                        <li>
+                            <i class="fa fa-phone fa-fw"></i>
+                            <a class="text-decoration-none" href="tel:010-020-0340">010-020-0340</a>
+                        </li>
+                        <li>
+                            <i class="fa fa-envelope fa-fw"></i>
+                            <a class="text-decoration-none" href="mailto:info@company.com">info@company.com</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!--   <div class="col-md-4 pt-5">
+                    <h2 class="h2 text-light border-bottom pb-3 border-light">Products</h2>
+                    <ul class="list-unstyled text-light footer-link-list">
+                        <li><a class="text-decoration-none" href="#">Luxury</a></li>
+                        <li><a class="text-decoration-none" href="#">Sport Wear</a></li>
+                        <li><a class="text-decoration-none" href="#">Men's Shoes</a></li>
+                        <li><a class="text-decoration-none" href="#">Women's Shoes</a></li>
+                        <li><a class="text-decoration-none" href="#">Popular Dress</a></li>
+                        <li><a class="text-decoration-none" href="#">Gym Accessories</a></li>
+                        <li><a class="text-decoration-none" href="#">Sport Shoes</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4 pt-5">
+                    <h2 class="h2 text-light border-bottom pb-3 border-light">Further Info</h2>
+                    <ul class="list-unstyled text-light footer-link-list">
+                        <li><a class="text-decoration-none" href="#">Home</a></li>
+                        <li><a class="text-decoration-none" href="#">About Us</a></li>
+                        <li><a class="text-decoration-none" href="#">Shop Locations</a></li>
+                        <li><a class="text-decoration-none" href="#">FAQs</a></li>
+                        <li><a class="text-decoration-none" href="#">Contact</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="row text-light mb-4">
+                <div class="col-12 mb-3">
+                    <div class="w-100 my-3 border-top border-light"></div>
+                </div>
+                <div class="col-auto me-auto">
+                    <ul class="list-inline text-left footer-icons">
+                        <li class="list-inline-item border border-light rounded-circle text-center">
+                            <a class="text-light text-decoration-none" target="_blank" href="http://facebook.com/"><i
+                                    class="fab fa-facebook-f fa-lg fa-fw"></i></a>
+                        </li>
+                        <li class="list-inline-item border border-light rounded-circle text-center">
+                            <a class="text-light text-decoration-none" target="_blank"
+                                href="https://www.instagram.com/"><i class="fab fa-instagram fa-lg fa-fw"></i></a>
+                        </li>
+                        <li class="list-inline-item border border-light rounded-circle text-center">
+                            <a class="text-light text-decoration-none" target="_blank" href="https://twitter.com/"><i
+                                    class="fab fa-twitter fa-lg fa-fw"></i></a>
+                        </li>
+                        <li class="list-inline-item border border-light rounded-circle text-center">
+                            <a class="text-light text-decoration-none" target="_blank"
+                                href="https://www.linkedin.com/"><i class="fab fa-linkedin fa-lg fa-fw"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-auto">
+                    <label class="sr-only" for="subscribeEmail">Email address</label>
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control bg-dark border-light" id="subscribeEmail"
+                            placeholder="Email address">
+                        <div class="input-group-text btn-success text-light">Subscribe</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+ -->
+                <div class="w-100 bg-black py-3">
+                    <div class="container">
+                        <div class="row pt-2">
+                            <div class="col-12">
+                                <p class="text-left text-light">
+                                    Copyright &copy; Estética Angelus
+                                    | Designed by <a rel="sponsored" href="https://templatemo.com"
+                                        target="_blank">TemplateMo</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+    </footer>
+    <!-- End Footer -->
+
+    <!-- Start Script -->
+    <script src="assets/js/jquery-1.11.0.min.js"></script>
+    <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/templatemo.js"></script>
+    <script src="assets/js/custom.js"></script>
+    <!-- End Script -->
+
+
+
+    <!-- Mostrar producto según ID -->
+    <script>
+        const id = new URLSearchParams(window.location.search).get("id");
+        const seccion = document.getElementById("p" + id);
+        if (seccion) seccion.style.display = "flex"; // display:flex para tu layout
+    </script>
+
+    <!-- Función de compra -->
+    <script>
+        function comprar(idProducto) {
+            const cantidad = document.getElementById("cantidad" + idProducto).value;
+            alert("Agregado: " + cantidad + " unidad(es) del Producto " + idProducto);
+        }
+    </script>
+
+
+    <!-- Start Slider Script 
+    <script src="assets/js/slick.min.js"></script>
+    <script>
+        $('#carousel-related-product').slick({
+            infinite: true,
+            arrows: false,
+            slidesToShow: 4,
+            slidesToScroll: 3,
+            dots: true,
+            responsive: [{
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 3
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 3
+                    }
+                }
+            ]
+        });
+    </script>
+   End Slider Script -->
+
+</body>
+
+</html>
