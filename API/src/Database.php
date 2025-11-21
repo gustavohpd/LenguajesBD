@@ -4,8 +4,8 @@ class Database {
 
     public function __construct($cfg = []) {
         // lee .env o recibe $cfg
-        $user = $cfg['DB_USER'] ?? 'TAREA1';
-        $pass = $cfg['DB_PASS'] ?? 'Tarea123';
+        $user = $cfg['DB_USER'] ?? 'ANGELUS_ESTETICA';
+        $pass = $cfg['DB_PASS'] ?? 'ag123';
         $host = $cfg['DB_HOST'] ?? 'localhost';
         $port = $cfg['DB_PORT'] ?? '1521';
         $service = $cfg['DB_SERVICE'] ?? 'xe';
