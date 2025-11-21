@@ -1,0 +1,277 @@
+SET SERVEROUTPUT ON;
+
+--Devuelve el nombre del usuario
+CREATE OR REPLACE FUNCTION USUARIOS_OBTENER_NOMBRE_USUARIO_FN(
+    P_USUARIO_ID NUMBER
+) RETURN VARCHAR2 IS
+    V_NOMBRE VARCHAR2(300);
+BEGIN
+    SELECT NOMBRE || ' ' || APELLIDO_PATERNO
+    INTO V_NOMBRE
+    FROM FIDE_USUARIOS_TB
+    WHERE USUARIO_ID = P_USUARIO_ID;
+
+    RETURN V_NOMBRE;
+
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('No se encontró el usuario con el ID especificado');
+        RETURN V_NOMBRE;
+END;
+/
+SELECT OBTENER_NOMBRE_USUARIO_FN(1) FROM DUAL;
+----------------------------------------------------------
+
+-- Busca el correo del usuario
+CREATE OR REPLACE FUNCTION CORREOS_OBTENER_CORREO_USUARIO_FN(
+    P_USUARIO_ID NUMBER
+) RETURN VARCHAR2 IS
+    V_CORREO VARCHAR2(255);
+BEGIN
+    SELECT C.CORREO
+    INTO V_CORREO
+    FROM FIDE_USUARIOS_TB U
+    JOIN FIDE_CORREOS_TB C ON U.CORREO_ID = C.CORREO_ID
+    WHERE U.USUARIO_ID = P_USUARIO_ID;
+
+    RETURN V_CORREO;
+
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('No fue posible obtener el correo del usuario');
+        RETURN V_CORREO;
+END;
+/
+SELECT OBTENER_CORREO_USUARIO_FN(1) FROM DUAL;
+-----------------------------------------------------------
+--total de una factura
+CREATE OR REPLACE FUNCTION DETALLES_FACTURA_TOTAL_FACTURA_FN(
+    P_FACTURA_ID NUMBER
+) RETURN NUMBER IS
+    V_TOTAL NUMBER := 0;
+BEGIN
+    SELECT SUM(PRECIO_UNITARIO * CANTIDAD)
+    INTO V_TOTAL
+    FROM FIDE_DETALLES_FACTURA_TB
+    WHERE FACTURA_ID = P_FACTURA_ID;
+
+    RETURN NVL(V_TOTAL, 0);
+
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('No se encontró la factura con el ID especificado');
+        RETURN V_TOTAL;
+END;
+/
+SELECT TOTAL_FACTURA_FN(10) FROM DUAL;
+
+---------------------------------------------------------------------
+-- Cita disponible
+CREATE OR REPLACE FUNCTION CITAS_CITA_DISPONIBLE_FN(
+    P_FECHA_HORA TIMESTAMP,
+    P_SERVICIO_ID NUMBER
+) RETURN NUMBER IS
+    V_CANT NUMBER := 0;
+BEGIN
+    SELECT COUNT(*)
+    INTO V_CANT
+    FROM FIDE_CITAS_TB
+    WHERE FECHA_HORA = P_FECHA_HORA
+      AND SERVICIO_ID = P_SERVICIO_ID
+      AND ESTADO_ID = 1;
+
+    IF V_CANT = 0 THEN
+        RETURN 1;
+    ELSE
+        RETURN 0;
+    END IF;
+
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('No fue posible verificar la disponibilidad de la cita');
+        RETURN V_CANT;
+END;
+/
+SELECT CITA_DISPONIBLE_FN(TIMESTAMP'2025-01-01 10:00:00', 3) FROM DUAL;
+------------------------------------------------------------
+--Stock actual de un producto
+
+CREATE OR REPLACE FUNCTION INVENTARIO_STOCK_PRODUCTO_FN(
+    P_PRODUCTO_ID NUMBER
+) RETURN NUMBER IS
+    V_STOCK NUMBER := 0;
+BEGIN
+    SELECT CANTIDAD
+    INTO V_STOCK
+    FROM FIDE_INVENTARIO_TB
+    WHERE PRODUCTO_ID = P_PRODUCTO_ID;
+
+    RETURN V_STOCK;
+
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('No se encontró inventario para el producto');
+        RETURN V_STOCK;
+END;
+/
+SELECT STOCK_PRODUCTO_FN(5) FROM DUAL;
+
+-----------------------------------------------
+--nombre del estado de un producto
+CREATE OR REPLACE FUNCTION PRODUCTOS_ESTADO_TEXTO_FN(
+    P_ESTADO_ID NUMBER
+) RETURN VARCHAR2 IS
+    V_ESTADO VARCHAR2(100);
+BEGIN
+    SELECT NOMBRE_ESTADO
+    INTO V_ESTADO
+    FROM FIDE_ESTADOS_TB
+    WHERE ESTADO_ID = P_ESTADO_ID;
+
+    RETURN V_ESTADO;
+
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('No se encontró un estado con el ID especificado');
+        RETURN V_ESTADO;
+END;
+/
+SELECT ESTADO_TEXTO_FN(1) FROM DUAL;
+----------------------------------------------
+--total d ventas
+CREATE OR REPLACE FUNCTION FACTURAS_TOTAL_VENTAS_CLIENTE_FN(
+    P_CLIENTE_ID NUMBER
+) RETURN NUMBER IS
+    V_TOTAL NUMBER := 0;
+BEGIN
+    SELECT SUM(TOTAL)
+    INTO V_TOTAL
+    FROM FIDE_FACTURAS_TB
+    WHERE CLIENTE_ID = P_CLIENTE_ID;
+
+    RETURN NVL(V_TOTAL,0);
+
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('No fue posible calcular las ventas para el cliente');
+        RETURN V_TOTAL;
+END;
+/
+SELECT TOTAL_VENTAS_CLIENTE_FN(1) FROM DUAL;
+--------------------------------------------------------
+--citas en un dia
+CREATE OR REPLACE FUNCTION CITAS_POR_DIA_FN(
+    P_FECHA DATE
+) RETURN NUMBER IS
+    V_CANT NUMBER := 0;
+BEGIN
+    SELECT COUNT(*)
+    INTO V_CANT
+    FROM FIDE_CITAS_TB
+    WHERE TRUNC(FECHA_HORA) = TRUNC(P_FECHA);
+
+    RETURN V_CANT;
+
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('No fue posible obtener las citas del día indicado');
+        RETURN V_CANT;
+END;
+/
+SELECT CITAS_POR_DIA_FN(SYSDATE) FROM DUAL;
+--------------------------------------------------
+--Dirección del usuario
+CREATE OR REPLACE FUNCTION DIRECCIONES_DIRECCION_USUARIO_FN(
+    P_USUARIO_ID NUMBER
+) RETURN VARCHAR2 IS
+    V_DIR VARCHAR2(500);
+BEGIN
+    SELECT 
+        P.NOMBRE_PROVINCIA || ', ' ||
+        C.NOMBRE_CANTON || ', ' ||
+        D.NOMBRE_DISTRITO || ' - ' ||
+        DIR.DESCRIPCION
+    INTO V_DIR
+    FROM FIDE_DIRECCIONES_TB DIR
+    JOIN FIDE_DISTRITOS_TB D ON DIR.DISTRITO_ID = D.DISTRITO_ID
+    JOIN FIDE_CANTONES_TB C ON D.CANTON_ID = C.CANTON_ID
+    JOIN FIDE_PROVINCIAS_TB P ON C.PROVINCIA_ID = P.PROVINCIA_ID
+    WHERE DIR.USUARIO_ID = P_USUARIO_ID;
+
+    RETURN V_DIR;
+
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('No fue posible obtener la dirección del usuario');
+        RETURN V_DIR;
+END;
+/
+SELECT DIRECCION_USUARIO_FN(1) FROM DUAL;
+-----------------------------------------------
+--Servicios por categoria
+CREATE OR REPLACE FUNCTION SERVICIOS_POR_CATEGORIA_FN(
+    P_CATEGORIA_ID NUMBER
+) RETURN NUMBER IS
+    V_CANT NUMBER := 0;
+BEGIN
+    SELECT COUNT(*)
+    INTO V_CANT
+    FROM FIDE_SERVICIOS_TB
+    WHERE CATEGORIA_ID = P_CATEGORIA_ID;
+
+    RETURN V_CANT;
+
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('No se encontraron servicios para la categoría indicada');
+        RETURN V_CANT;
+END;
+/
+SELECT SERVICIOS_POR_CATEGORIA_FN(2) FROM DUAL;
+----------------------------------------------------
+--Cuantos productos hay por proveedor.
+CREATE OR REPLACE FUNCTION PRODUCTOS_POR_PROVEEDOR_FN(
+    P_PROVEEDOR_ID NUMBER
+) RETURN NUMBER IS
+    V_CANT NUMBER := 0;
+BEGIN
+    SELECT COUNT(*)
+    INTO V_CANT
+    FROM FIDE_PRODUCTOS_TB
+    WHERE PROVEEDOR_ID = P_PROVEEDOR_ID;
+
+    RETURN V_CANT;
+
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('No se encontraron productos para el proveedor indicado');
+        RETURN V_CANT;
+END;
+/
+SELECT PRODUCTOS_POR_PROVEEDOR_FN(1) FROM DUAL;
+-----------------------------------------------------
+--Si existe el cliente buscado
+CREATE OR REPLACE FUNCTION CLIENTES_EXISTE_FN(
+    P_CLIENTE_ID NUMBER
+) RETURN NUMBER IS
+    V_CANT NUMBER := 0;
+BEGIN
+    SELECT COUNT(*)
+    INTO V_CANT
+    FROM FIDE_CLIENTES_TB
+    WHERE CLIENTE_ID = P_CLIENTE_ID;
+
+    IF V_CANT > 0 THEN
+        RETURN 1;
+    ELSE
+        RETURN 0;
+    END IF;
+
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('No fue posible verificar el cliente indicado');
+        RETURN V_CANT;
+END;
+/
+SELECT CLIENTE_EXISTE_FN(3) FROM DUAL;
+/
