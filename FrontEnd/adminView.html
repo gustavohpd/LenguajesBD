@@ -1,465 +1,662 @@
 <!DOCTYPE html>
+
 <html lang="es">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Panel Administrador - CRUD</title>
+    <title>Estetica Angelus - Admin</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Bootstrap CSS -->
+    ```
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/templatemo.css" />
+    <link rel="stylesheet" href="assets/css/custom.css" />
+
+    <!-- Fonts & icons -->
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap"
     />
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css" />
 
-    <!-- Optional: íconos (bootstrap icons) -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
-      rel="stylesheet"
-    />
-
-    <!-- jQuery (necesario para app.js) -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- app.js - cargado al final del body -->
     <style>
-      body {
-        background: #f7f7f9;
+      /* Ajustes específicos para el dashboard */
+      .admin-hero {
+        background: linear-gradient(
+          90deg,
+          rgba(0, 123, 85, 0.06),
+          rgba(255, 255, 255, 0)
+        );
+        padding: 30px 0;
       }
-      .table-wrap {
-        max-height: 55vh;
+      .admin-card {
+        margin-top: -40px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        border-radius: 12px;
+      }
+      .table-container {
+        max-height: 58vh;
         overflow: auto;
       }
+      #status {
+        font-size: 0.95rem;
+      }
+      .modal-lg .form-label {
+        font-weight: 500;
+      }
+      .tab-actions {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
     </style>
+    ```
   </head>
+
   <body>
-    <div class="container py-4">
-      <h2 class="mb-3 text-center">Panel de Administración</h2>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-light shadow">
+      <div class="container d-flex justify-content-between align-items-center">
+        <a
+          class="navbar-brand text-success logo h1 align-self-center"
+          href="index.html"
+          >Angelus</a
+        >
+        <button
+          class="navbar-toggler border-0"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#templatemo_main_nav"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <!-- Alertas globales -->
-      <div id="alertPlaceholder"></div>
-
-      <!-- Nav tabs -->
-      <ul class="nav nav-tabs" id="adminTabs" role="tablist">
-        <li class="nav-item" role="presentation">
-          <button
-            class="nav-link active"
-            id="clientes-tab"
-            data-bs-toggle="tab"
-            data-bs-target="#clientes"
-            type="button"
-            role="tab"
-          >
-            Clientes
-          </button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button
-            class="nav-link"
-            id="servicios-tab"
-            data-bs-toggle="tab"
-            data-bs-target="#servicios"
-            type="button"
-            role="tab"
-          >
-            Servicios
-          </button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button
-            class="nav-link"
-            id="productos-tab"
-            data-bs-toggle="tab"
-            data-bs-target="#productos"
-            type="button"
-            role="tab"
-          >
-            Productos
-          </button>
-        </li>
-      </ul>
-
-      <div class="tab-content mt-4">
-        <!-- CLIENTES TAB -->
-        <div class="tab-pane fade show active" id="clientes" role="tabpanel">
-          <div class="d-flex justify-content-between align-items-center mb-2">
-            <h5>Clientes</h5>
-            <div>
-              <button id="btnAgregarCliente" class="btn btn-primary btn-sm">
-                <i class="bi bi-plus-lg"></i> Agregar
-              </button>
-            </div>
+        ```
+        <div
+          class="align-self-center collapse navbar-collapse flex-fill d-lg-flex justify-content-lg-between"
+          id="templatemo_main_nav"
+        >
+          <div class="flex-fill">
+            <ul
+              class="nav navbar-nav d-flex justify-content-between mx-lg-auto"
+            >
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Inicio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="sobresnosotros.html">Servicios</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="productos.html">Productos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="adminView.html">Admin</a>
+              </li>
+            </ul>
           </div>
-
-          <div class="table-wrap border rounded bg-white p-2">
-            <table class="table table-hover mb-0" id="tablaClientes">
-              <thead class="table-dark">
-                <tr>
-                  <th>ID</th>
-                  <th>Usuario</th>
-                  <th>Estado</th>
-                  <th>Preferencias</th>
-                  <th>Historial Tratamientos</th>
-                  <th style="width: 140px">Acciones</th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- SERVICIOS TAB -->
-        <div class="tab-pane fade" id="servicios" role="tabpanel">
-          <div class="d-flex justify-content-between align-items-center mb-2">
-            <h5>Servicios</h5>
-            <div>
-              <button id="btnAgregarServicio" class="btn btn-primary btn-sm">
-                <i class="bi bi-plus-lg"></i> Agregar
-              </button>
-            </div>
-          </div>
-
-          <div class="table-wrap border rounded bg-white p-2">
-            <table class="table table-hover mb-0" id="tablaServicios">
-              <thead class="table-dark">
-                <tr>
-                  <th>ID</th>
-                  <th>Estado</th>
-                  <th>Categoría</th>
-                  <th>Nombre</th>
-                  <th>Descripción</th>
-                  <th>Duración</th>
-                  <th>Precio</th>
-                  <th style="width: 140px">Acciones</th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- PRODUCTOS TAB -->
-        <div class="tab-pane fade" id="productos" role="tabpanel">
-          <div class="d-flex justify-content-between align-items-center mb-2">
-            <h5>Productos</h5>
-            <div>
-              <button id="btnAgregarProducto" class="btn btn-primary btn-sm">
-                <i class="bi bi-plus-lg"></i> Agregar
-              </button>
-            </div>
-          </div>
-
-          <div class="table-wrap border rounded bg-white p-2">
-            <table class="table table-hover mb-0" id="tablaProductos">
-              <thead class="table-dark">
-                <tr>
-                  <th>ID</th>
-                  <th>Categoría</th>
-                  <th>Estado</th>
-                  <th>Proveedor</th>
-                  <th>Nombre</th>
-                  <th>Descripción</th>
-                  <th>Precio</th>
-                  <th style="width: 140px">Acciones</th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
+          <div class="navbar align-self-center d-flex">
+            <a
+              class="nav-icon position-relative text-decoration-none"
+              href="login.html"
+              ><i class="fa fa-fw fa-user text-dark mr-3"></i
+            ></a>
           </div>
         </div>
       </div>
-    </div>
+    </nav>
+    <!-- End Header -->
 
-    <!-- ---------------------------
-     MODALES CLIENTES
-   --------------------------- -->
-
-    <!-- Modal Crear / Editar Cliente -->
-    <div class="modal fade" id="modalCliente" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <form id="formCliente" class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modalClienteTitle">Nuevo Cliente</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Cerrar"
-            ></button>
+    <!-- Small hero -->
+    <section class="admin-hero">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-8">
+            <h1 class="h2">Panel de Administración</h1>
+            <p class="mb-0">
+              Gestiona clientes, servicios y productos — crea, edita y elimina
+              registros.
+            </p>
           </div>
-          <div class="modal-body">
-            <input hidden id="isCreate" class="form-control" />
-            <div class="mb-3">
-              <label class="form-label">Cliente ID</label>
-              <input
-                type="number"
-                id="cliente_id"
-                name="cliente_id"
-                class="form-control"
-                required
-              />
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Usuario ID</label>
-              <input
-                type="number"
-                id="usuario_id"
-                name="usuario_id"
-                class="form-control"
-                required
-              />
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Estado</label>
-              <select
-                id="estado_id"
-                name="estado_id"
-                class="form-select"
-                required
+        </div>
+      </div>
+    </section>
+
+    <div style="height: 20px"></div>
+
+    <!-- Main admin card -->
+    <section class="container admin-card p-4 bg-white">
+      <div class="row">
+        <div class="col-12">
+          <!-- Tabs -->
+          <ul class="nav nav-tabs mb-3" id="adminTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link active"
+                id="tab-clientes"
+                data-bs-toggle="tab"
+                data-bs-target="#pane-clientes"
+                type="button"
+                role="tab"
               >
-                <option value="1">1 - Habilitado</option>
-                <option value="2">2 - Eliminado</option>
-              </select>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Preferencias</label>
-              <textarea
-                id="preferencias"
-                name="preferencias"
-                class="form-control"
-                rows="2"
-              ></textarea>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Historial Tratamientos</label>
-              <textarea
-                id="historial_tratamientos"
-                name="historial_tratamientos"
-                class="form-control"
-                rows="2"
-              ></textarea>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
+                Clientes
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link"
+                id="tab-servicios"
+                data-bs-toggle="tab"
+                data-bs-target="#pane-servicios"
+                type="button"
+                role="tab"
+              >
+                Servicios
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link"
+                id="tab-productos"
+                data-bs-toggle="tab"
+                data-bs-target="#pane-productos"
+                type="button"
+                role="tab"
+              >
+                Productos
+              </button>
+            </li>
+          </ul>
+
+          <div class="tab-content">
+            <!-- PANE CLIENTES -->
+            <div
+              class="tab-pane fade show active"
+              id="pane-clientes"
+              role="tabpanel"
             >
-              Cerrar
-            </button>
-            <button type="submit" class="btn btn-primary" id="saveClienteBtn">
-              Guardar
-            </button>
+              <div
+                class="d-flex justify-content-between align-items-center mb-3"
+              >
+                <div>
+                  <h3 class="h5 mb-0">Clientes</h3>
+                  <small class="text-muted"
+                    >Lista de clientes registrados</small
+                  >
+                </div>
+
+                <div class="tab-actions">
+                  <input
+                    id="search-clientes"
+                    type="search"
+                    class="form-control form-control-sm"
+                    placeholder="Buscar cliente_id, preferencia..."
+                    style="width: 260px"
+                  />
+                  <button
+                    id="btn-refresh-clientes"
+                    class="btn btn-outline-success btn-sm ms-2"
+                  >
+                    Recargar
+                  </button>
+                  <button
+                    id="btn-new-client"
+                    class="btn btn-success btn-sm ms-2"
+                  >
+                    + Nuevo
+                  </button>
+                </div>
+              </div>
+
+              <div id="status-clientes" class="mb-2 text-muted">
+                Estado: esperando acción...
+              </div>
+
+              <div class="table-container border rounded">
+                <table class="table table-hover mb-0">
+                  <thead class="table-light">
+                    <tr>
+                      <th>cliente_id</th>
+                      <th>usuario_id</th>
+                      <th>estado_id</th>
+                      <th>preferencias</th>
+                      <th>historial</th>
+                      <th class="text-end">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody id="clientes-tbody"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- PANE SERVICIOS -->
+            <div class="tab-pane fade" id="pane-servicios" role="tabpanel">
+              <div
+                class="d-flex justify-content-between align-items-center mb-3"
+              >
+                <div>
+                  <h3 class="h5 mb-0">Servicios</h3>
+                  <small class="text-muted"
+                    >Gestiona los servicios ofrecidos</small
+                  >
+                </div>
+
+                <div class="tab-actions">
+                  <input
+                    id="search-servicios"
+                    type="search"
+                    class="form-control form-control-sm"
+                    placeholder="Buscar servicio_id, nombre..."
+                    style="width: 300px"
+                  />
+                  <button
+                    id="btn-refresh-servicios"
+                    class="btn btn-outline-success btn-sm ms-2"
+                  >
+                    Recargar
+                  </button>
+                  <button
+                    id="btn-new-servicio"
+                    class="btn btn-success btn-sm ms-2"
+                  >
+                    + Nuevo
+                  </button>
+                </div>
+              </div>
+
+              <div id="status-servicios" class="mb-2 text-muted">
+                Estado: esperando acción...
+              </div>
+
+              <div class="table-container border rounded">
+                <table class="table table-hover mb-0">
+                  <thead class="table-light">
+                    <tr>
+                      <th>servicio_id</th>
+                      <th>categoria_id</th>
+                      <th>nombre</th>
+                      <th>duracion (min)</th>
+                      <th>precio</th>
+                      <th class="text-end">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody id="servicios-tbody"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- PANE PRODUCTOS -->
+            <div class="tab-pane fade" id="pane-productos" role="tabpanel">
+              <div
+                class="d-flex justify-content-between align-items-center mb-3"
+              >
+                <div>
+                  <h3 class="h5 mb-0">Productos</h3>
+                  <small class="text-muted"
+                    >Administra el inventario de productos</small
+                  >
+                </div>
+
+                <div class="tab-actions">
+                  <input
+                    id="search-productos"
+                    type="search"
+                    class="form-control form-control-sm"
+                    placeholder="Buscar producto_id, nombre..."
+                    style="width: 320px"
+                  />
+                  <button
+                    id="btn-refresh-productos"
+                    class="btn btn-outline-success btn-sm ms-2"
+                  >
+                    Recargar
+                  </button>
+                  <button
+                    id="btn-new-producto"
+                    class="btn btn-success btn-sm ms-2"
+                  >
+                    + Nuevo
+                  </button>
+                </div>
+              </div>
+
+              <div id="status-productos" class="mb-2 text-muted">
+                Estado: esperando acción...
+              </div>
+
+              <div class="table-container border rounded">
+                <table class="table table-hover mb-0">
+                  <thead class="table-light">
+                    <tr>
+                      <th>producto_id</th>
+                      <th>categoria_id</th>
+                      <th>estado_id</th>
+                      <th>proveedor_id</th>
+                      <th>nombre</th>
+                      <th>precio</th>
+                      <th class="text-end">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody id="productos-tbody"></tbody>
+                </table>
+              </div>
+            </div>
           </div>
-        </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODAL CLIENTE -->
+    <div class="modal fade" id="clienteModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <form id="clienteForm" class="p-0">
+            <div class="modal-header">
+              <h5 class="modal-title" id="clienteModalTitle">Nuevo cliente</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Cerrar"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div
+                id="cliente-form-error"
+                class="alert alert-danger d-none"
+              ></div>
+              <div class="row g-3">
+                <div class="col-md-4">
+                  <label class="form-label">cliente_id</label
+                  ><input
+                    type="number"
+                    id="cliente_id"
+                    class="form-control"
+                    placeholder="Ej: 1234"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label">usuario_id</label
+                  ><input
+                    type="number"
+                    id="usuario_id"
+                    class="form-control"
+                    placeholder="Ej: 13"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label">estado_id</label>
+                  <select id="estado_id" class="form-select">
+                    <option value="1">1 - Activo</option>
+                    <option value="2">2 - Inactivo</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">preferencias</label
+                  ><input id="preferencias" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">historial</label
+                  ><input id="historial" class="form-control" />
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                class="btn btn-secondary"
+                type="button"
+                data-bs-dismiss="modal"
+              >
+                Cerrar
+              </button>
+              <button class="btn btn-success" type="submit">Guardar</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
 
-    <!-- ---------------------------
-     MODALES SERVICIOS
-   --------------------------- -->
-
-    <!-- Modal Crear / Editar Servicio -->
-    <div class="modal fade" id="modalServicio" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <form id="formServicio" class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modalServicioTitle">Nuevo Servicio</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Cerrar"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <input type="hidden" id="servicio_id" name="servicio_id" />
-            <div class="mb-3">
-              <label class="form-label">Estado</label>
-              <select
-                id="serv_estado_id"
-                name="estado_id"
-                class="form-select"
-                required
+    <!-- MODAL SERVICIO -->
+    <div class="modal fade" id="servicioModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <form id="servicioForm" class="p-0">
+            <div class="modal-header">
+              <h5 class="modal-title" id="servicioModalTitle">
+                Nuevo servicio
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Cerrar"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div
+                id="servicio-form-error"
+                class="alert alert-danger d-none"
+              ></div>
+              <div class="row g-3">
+                <div class="col-md-4">
+                  <label class="form-label">servicio_id</label
+                  ><input
+                    type="number"
+                    id="servicio_id"
+                    class="form-control"
+                    placeholder="Ej: 1"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label">estado_id</label
+                  ><input
+                    type="number"
+                    id="servicio_estado_id"
+                    class="form-control"
+                    value="1"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label">categoria_id</label
+                  ><input
+                    type="number"
+                    id="categoria_id"
+                    class="form-control"
+                    value="1"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">nombre</label
+                  ><input id="nombre" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">descripcion</label
+                  ><input id="descripcion" class="form-control" />
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label">duracion (min)</label
+                  ><input
+                    type="number"
+                    id="duracion"
+                    class="form-control"
+                    value="60"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label">precio</label
+                  ><input
+                    type="number"
+                    id="precio"
+                    class="form-control"
+                    value="0"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                class="btn btn-secondary"
+                type="button"
+                data-bs-dismiss="modal"
               >
-                <option value="1">1 - Habilitado</option>
-                <option value="2">2 - Eliminado</option>
-              </select>
+                Cerrar
+              </button>
+              <button class="btn btn-success" type="submit">Guardar</button>
             </div>
-            <div class="mb-3">
-              <label class="form-label">Categoría ID</label>
-              <input
-                type="number"
-                id="categoria_id_serv"
-                name="categoria_id"
-                class="form-control"
-                required
-              />
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Nombre</label>
-              <input
-                type="text"
-                id="serv_nombre"
-                name="nombre"
-                class="form-control"
-                required
-              />
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Descripción</label>
-              <textarea
-                id="serv_descripcion"
-                name="descripcion"
-                class="form-control"
-                rows="2"
-              ></textarea>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Duración (min)</label>
-              <input
-                type="number"
-                id="duracion"
-                name="duracion"
-                class="form-control"
-              />
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Precio (centavos/moneda)</label>
-              <input
-                type="number"
-                id="serv_precio"
-                name="precio"
-                class="form-control"
-              />
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Cerrar
-            </button>
-            <button type="submit" class="btn btn-primary" id="saveServicioBtn">
-              Guardar
-            </button>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
 
-    <!-- ---------------------------
-     MODALES PRODUCTOS
-   --------------------------- -->
+    <!-- MODAL PRODUCTO -->
+    <div class="modal fade" id="productoModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <form id="productoForm" class="p-0">
+            <div class="modal-header">
+              <h5 class="modal-title" id="productoModalTitle">
+                Nuevo producto
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Cerrar"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div
+                id="producto-form-error"
+                class="alert alert-danger d-none"
+              ></div>
+              <div class="row g-3">
+                <div class="col-md-3">
+                  <label class="form-label">producto_id</label
+                  ><input
+                    type="number"
+                    id="producto_id"
+                    class="form-control"
+                    placeholder="Ej: 12"
+                  />
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">categoria_id</label
+                  ><input
+                    type="number"
+                    id="producto_categoria_id"
+                    class="form-control"
+                    value="1"
+                  />
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">estado_id</label
+                  ><input
+                    type="number"
+                    id="producto_estado_id"
+                    class="form-control"
+                    value="1"
+                  />
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">proveedor_id</label
+                  ><input
+                    type="number"
+                    id="proveedor_id"
+                    class="form-control"
+                    value="1"
+                  />
+                </div>
 
-    <!-- Modal Crear / Editar Producto -->
-    <div class="modal fade" id="modalProducto" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <form id="formProducto" class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modalProductoTitle">Nuevo Producto</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Cerrar"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <input hidden id="isCreate" class="form-control" />
-            <div class="mb-3">
-              <label class="form-label">Producto ID</label>
-              <input
-                type="number"
-                id="producto_id"
-                name="producto_id"
-                class="form-control"
-                required
-              />
+                <div class="col-md-6">
+                  <label class="form-label">nombre</label
+                  ><input id="producto_nombre" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">descripcion</label
+                  ><input id="producto_descripcion" class="form-control" />
+                </div>
+
+                <div class="col-md-4">
+                  <label class="form-label">precio</label
+                  ><input
+                    type="number"
+                    id="producto_precio"
+                    class="form-control"
+                    value="0"
+                  />
+                </div>
+              </div>
             </div>
-            <div class="mb-3">
-              <label class="form-label">Categoría ID</label>
-              <input
-                type="number"
-                id="categoria_id_prod"
-                name="categoria_id"
-                class="form-control"
-                required
-              />
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Estado</label>
-              <select
-                id="prod_estado_id"
-                name="estado_id"
-                class="form-select"
-                required
+            <div class="modal-footer">
+              <button
+                class="btn btn-secondary"
+                type="button"
+                data-bs-dismiss="modal"
               >
-                <option value="1">1 - Habilitado</option>
-                <option value="2">2 - Eliminado</option>
-              </select>
+                Cerrar
+              </button>
+              <button class="btn btn-success" type="submit">Guardar</button>
             </div>
-            <div class="mb-3">
-              <label class="form-label">Proveedor (manual)</label>
-              <input
-                type="text"
-                id="proveedor_id"
-                name="proveedor_id"
-                class="form-control"
-                placeholder="ID o nombre (temporal)"
-              />
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Nombre</label>
-              <input
-                type="text"
-                id="prod_nombre"
-                name="nombre"
-                class="form-control"
-                required
-              />
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Descripción</label>
-              <textarea
-                id="prod_descripcion"
-                name="descripcion"
-                class="form-control"
-                rows="2"
-              ></textarea>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Precio</label>
-              <input
-                type="number"
-                id="prod_precio"
-                name="precio"
-                class="form-control"
-              />
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Cerrar
-            </button>
-            <button type="submit" class="btn btn-primary" id="saveProductoBtn">
-              Guardar
-            </button>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
 
-    <!-- Bootstrap Bundle JS (incluye Popper) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Footer -->
+    <footer class="bg-dark" id="tempaltemo_footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 pt-5">
+            <h2 class="h2 text-success border-bottom pb-3 border-light logo">
+              Estética Angelus
+            </h2>
+            <ul class="list-unstyled text-light footer-link-list">
+              <li>
+                <i class="fas fa-map-marker-alt fa-fw"></i> San Jose , Costa
+                Rica
+              </li>
+              <li>
+                <i class="fa fa-phone fa-fw"></i>
+                <a class="text-decoration-none" href="tel:50600000000"
+                  >506 0000-0000</a
+                >
+              </li>
+              <li>
+                <i class="fa fa-envelope fa-fw"></i>
+                <a
+                  class="text-decoration-none"
+                  href="mailto:esteticangelus@gmail.com"
+                  >esteticangelus@gmail.com</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="w-100 bg-black py-3 mt-4">
+          <div class="container">
+            <div class="row pt-2">
+              <div class="col-12">
+                <p class="text-left text-light mb-0">
+                  Copyright &copy; Estética Angelus | Designed by TemplateMo
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
 
-    <!-- app.js: contiene todo el CRUD con jQuery -->
-    <script src="./assets/js/adminApp.js"></script>
+    <!-- Scripts (template) -->
+    <script src="assets/js/jquery-1.11.0.min.js"></script>
+    <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/templatemo.js"></script>
+    <script src="assets/js/custom.js"></script>
+
+    <!-- lógica jQuery -->
+    <script src="assets/js/adminApp.js"></script>
+    ```
   </body>
 </html>

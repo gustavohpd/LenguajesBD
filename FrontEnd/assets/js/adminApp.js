@@ -1,480 +1,730 @@
-// ---------------------------
-// CONFIG
-// ---------------------------
-const API_BASE = "http://localhost/LenguajesBD/API/public/index.php"; // ajusta si necesitas
+/* assets/js/adminApp.js
+JQuery: CRUD para Clientes, Servicios y Productos
+Endpoints:
+- /api/clientes
+- /api/servicios
+- /api/productos
+Nota: siempre se envía el *_id en POST y PUT (validación incluida).
+*/
+const BASE_API = "http://localhost/LenguajesBD/API/public/index.php";
+const ENDPOINT_CLIENTES = BASE_API + "/api/clientes";
+const ENDPOINT_SERVICIOS = BASE_API + "/api/servicios";
+const ENDPOINT_PRODUCTOS = BASE_API + "/api/productos";
 
-// helpers de UI
-function showAlert(msg, type = "success", timeout = 3500) {
-  const id = "a" + Date.now();
-  const html = `<div id="${id}" class="alert alert-${type} alert-dismissible fade show mx-3" role="alert">
-            ${msg}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>`;
-  $("#alertPlaceholder").append(html);
-  if (timeout) setTimeout(() => $(`#${id}`).alert("close"), timeout);
-}
-
-// ---------------------------
-// DOCUMENT READY
-// ---------------------------
 $(function () {
-  // Cargar listas
-  cargarClientes();
-  cargarServicios();
-  cargarProductos();
+  // Bootstrap modals
+  const clienteModal = new bootstrap.Modal(
+    document.getElementById("clienteModal")
+  );
+  const servicioModal = new bootstrap.Modal(
+    document.getElementById("servicioModal")
+  );
+  const productoModal = new bootstrap.Modal(
+    document.getElementById("productoModal")
+  );
 
-  // Abrir modales
-  $("#btnAgregarCliente").click(() => abrirModalCliente("create"));
-  $("#btnAgregarServicio").click(() => abrirModalServicio("create"));
-  $("#btnAgregarProducto").click(() => abrirModalProducto("create"));
+  // Modes
+  let clienteMode = "create";
+  let servicioMode = "create";
+  let productoMode = "create";
 
-  // Submit formularios
-  $("#formCliente").submit(submitFormCliente);
-  $("#formServicio").submit(submitFormServicio);
-  $("#formProducto").submit(submitFormProducto);
-
-  // Delegación: botones editar y eliminar para cada tabla
-  $("#tablaClientes").on("click", ".edit-cliente", function () {
-    const id = $(this).data("id");
-    abrirModalCliente("edit", id);
-  });
-  $("#tablaClientes").on("click", ".delete-cliente", function () {
-    const id = $(this).data("id");
-    confirmarEliminar("cliente", id);
-  });
-
-  $("#tablaServicios").on("click", ".edit-servicio", function () {
-    const id = $(this).data("id");
-    abrirModalServicio("edit", id);
-  });
-  $("#tablaServicios").on("click", ".delete-servicio", function () {
-    const id = $(this).data("id");
-    confirmarEliminar("servicio", id);
+  /* ------------------ EVENT BINDING ------------------ */
+  // Clientes
+  $("#btn-new-client").on("click", openClienteCreate);
+  $("#btn-refresh-clientes").on("click", () =>
+    loadClientes($("#search-clientes").val())
+  );
+  $("#search-clientes").on("input", () =>
+    loadClientes($("#search-clientes").val())
+  );
+  $("#clienteForm").on("submit", function (e) {
+    e.preventDefault();
+    if (clienteMode === "create") createCliente();
+    else updateCliente();
   });
 
-  $("#tablaProductos").on("click", ".edit-producto", function () {
-    const id = $(this).data("id");
-    abrirModalProducto("edit", id);
+  // Servicios
+  $("#btn-new-servicio").on("click", openServicioCreate);
+  $("#btn-refresh-servicios").on("click", () =>
+    loadServicios($("#search-servicios").val())
+  );
+  $("#search-servicios").on("input", () =>
+    loadServicios($("#search-servicios").val())
+  );
+  $("#servicioForm").on("submit", function (e) {
+    e.preventDefault();
+    if (servicioMode === "create") createServicio();
+    else updateServicio();
   });
-  $("#tablaProductos").on("click", ".delete-producto", function () {
-    const id = $(this).data("id");
-    confirmarEliminar("producto", id);
+
+  // Productos
+  $("#btn-new-producto").on("click", openProductoCreate);
+  $("#btn-refresh-productos").on("click", () =>
+    loadProductos($("#search-productos").val())
+  );
+  $("#search-productos").on("input", () =>
+    loadProductos($("#search-productos").val())
+  );
+  $("#productoForm").on("submit", function (e) {
+    e.preventDefault();
+    if (productoMode === "create") createProducto();
+    else updateProducto();
   });
+
+  // Initial load
+  loadClientes();
+  loadServicios();
+  loadProductos();
+
+  /* ------------------ CLIENTES ------------------ */
+  function setStatusClientes(txt) {
+    $("#status-clientes").text("Estado: " + txt);
+  }
+  function showClienteError(msg) {
+    $("#cliente-form-error").removeClass("d-none").text(msg);
+  }
+
+  function loadClientes(filter = "") {
+    setStatusClientes("Cargando clientes...");
+    $.ajax({ url: ENDPOINT_CLIENTES, method: "GET", dataType: "json" })
+      .done((data) => {
+        const list = Array.isArray(data) ? data : data.data || [];
+        renderClientes(list, filter);
+        setStatusClientes("Clientes cargados: " + list.length);
+      })
+      .fail((xhr) => {
+        setStatusClientes(
+          "Error al cargar clientes: " +
+            (xhr.responseJSON?.message || xhr.statusText || xhr.status)
+        );
+        $("#clientes-tbody").html(
+          '<tr><td colspan="6" class="text-center">No se pudo cargar la lista</td></tr>'
+        );
+      });
+  }
+
+  function renderClientes(list, filter = "") {
+    const q = (filter || "").toLowerCase();
+    const tbody = $("#clientes-tbody").empty();
+    const filtered = list.filter((c) => {
+      if (!q) return true;
+      return (
+        String(c.cliente_id).includes(q) ||
+        String(c.usuario_id).includes(q) ||
+        (c.preferencias || "").toLowerCase().includes(q) ||
+        (c.historial || "").toLowerCase().includes(q)
+      );
+    });
+    if (filtered.length === 0) {
+      tbody.html(
+        '<tr><td colspan="6" class="text-center">No hay clientes</td></tr>'
+      );
+      return;
+    }
+    filtered.forEach((c) => {
+      const $tr = $("<tr>");
+      $tr.append($("<td>").text(c.cliente_id));
+      $tr.append($("<td>").text(c.usuario_id));
+      $tr.append($("<td>").text(c.estado_id));
+      $tr.append($("<td>").text(c.preferencias || ""));
+      $tr.append($("<td>").text(c.historial || ""));
+      const $actions = $('<td class="text-end">');
+      $actions.append(
+        $('<button class="btn btn-sm btn-info me-1">Editar</button>').on(
+          "click",
+          () => openClienteEdit(c.cliente_id)
+        )
+      );
+      $actions.append(
+        $('<button class="btn btn-sm btn-danger">Eliminar</button>').on(
+          "click",
+          () => confirmDeleteCliente(c.cliente_id)
+        )
+      );
+      $tr.append($actions);
+      tbody.append($tr);
+    });
+  }
+
+  function openClienteCreate() {
+    clienteMode = "create";
+    $("#clienteModalTitle").text("Nuevo cliente");
+    $("#clienteForm")[0].reset();
+    $("#cliente_id").val("");
+    $("#cliente-form-error").addClass("d-none").text("");
+    clienteModal.show();
+  }
+
+  function openClienteEdit(id) {
+    clienteMode = "edit";
+    setStatusClientes("Cargando cliente " + id + "...");
+    $.ajax({
+      url: ENDPOINT_CLIENTES + "/" + encodeURIComponent(id),
+      method: "GET",
+      dataType: "json",
+    })
+      .done((data) => {
+        const c = Array.isArray(data) ? data[0] : data.data || data;
+        if (!c) {
+          setStatusClientes("Cliente no encontrado");
+          return;
+        }
+        $("#clienteModalTitle").text("Editar cliente " + id);
+        $("#cliente_id").val(c.cliente_id || "");
+        $("#usuario_id").val(c.usuario_id || "");
+        $("#estado_id").val(c.estado_id || 1);
+        $("#preferencias").val(c.preferencias || "");
+        $("#historial").val(c.historial || "");
+        $("#cliente-form-error").addClass("d-none").text("");
+        clienteModal.show();
+        setStatusClientes("Cliente cargado");
+      })
+      .fail((xhr) =>
+        setStatusClientes(
+          "Error cargando cliente: " +
+            (xhr.responseJSON?.message || xhr.statusText || xhr.status)
+        )
+      );
+  }
+
+  function validateInteger(val, name, $err) {
+    if (val === "" || val === null || val === undefined) {
+      $err
+        .removeClass("d-none")
+        .text(name + " es obligatorio y debe ser entero");
+      return false;
+    }
+    if (!/^\d+$/.test(String(val))) {
+      $err.removeClass("d-none").text(name + " debe ser un número entero");
+      return false;
+    }
+    return true;
+  }
+
+  function readClienteFormAlwaysSendId() {
+    $("#cliente-form-error").addClass("d-none").text("");
+    const clienteId = $("#cliente_id").val();
+    const usuarioId = $("#usuario_id").val();
+    const estadoId = $("#estado_id").val();
+    if (!validateInteger(clienteId, "cliente_id", $("#cliente-form-error")))
+      return null;
+    if (!validateInteger(usuarioId, "usuario_id", $("#cliente-form-error")))
+      return null;
+    if (!validateInteger(estadoId, "estado_id", $("#cliente-form-error")))
+      return null;
+    return {
+      cliente_id: Number(clienteId),
+      usuario_id: Number(usuarioId),
+      estado_id: Number(estadoId),
+      preferencias: $("#preferencias").val() || "",
+      historial: $("#historial").val() || "",
+    };
+  }
+
+  function createCliente() {
+    const payload = readClienteFormAlwaysSendId();
+    if (payload === null) return;
+    setStatusClientes("Creando cliente...");
+    $.ajax({
+      url: ENDPOINT_CLIENTES,
+      method: "POST",
+      contentType: "application/json",
+      data: JSON.stringify(payload),
+      dataType: "json",
+    })
+      .done(() => {
+        clienteModal.hide();
+        loadClientes();
+        setStatusClientes("Cliente creado");
+      })
+      .fail((xhr) =>
+        showClienteError(
+          "Error creando cliente: " +
+            (xhr.responseJSON?.message || xhr.statusText || xhr.status)
+        )
+      );
+  }
+
+  function updateCliente() {
+    const payload = readClienteFormAlwaysSendId();
+    if (payload === null) return;
+    const id = payload.cliente_id;
+    setStatusClientes("Actualizando cliente " + id + "...");
+    $.ajax({
+      url: ENDPOINT_CLIENTES + "/" + encodeURIComponent(id),
+      method: "PUT",
+      contentType: "application/json",
+      data: JSON.stringify(payload),
+      dataType: "json",
+    })
+      .done(() => {
+        clienteModal.hide();
+        loadClientes();
+        setStatusClientes("Cliente actualizado");
+      })
+      .fail((xhr) =>
+        showClienteError(
+          "Error actualizando: " +
+            (xhr.responseJSON?.message || xhr.statusText || xhr.status)
+        )
+      );
+  }
+
+  function confirmDeleteCliente(id) {
+    if (!confirm("¿Eliminar cliente " + id + " ?")) return;
+    $.ajax({
+      url: ENDPOINT_CLIENTES + "/" + encodeURIComponent(id),
+      method: "DELETE",
+      dataType: "json",
+    })
+      .done(() => {
+        loadClientes();
+        setStatusClientes("Cliente eliminado");
+      })
+      .fail((xhr) =>
+        setStatusClientes(
+          "Error al eliminar: " +
+            (xhr.responseJSON?.message || xhr.statusText || xhr.status)
+        )
+      );
+  }
+
+  /* ------------------ SERVICIOS ------------------ */
+  function setStatusServicios(txt) {
+    $("#status-servicios").text("Estado: " + txt);
+  }
+  function showServicioError(msg) {
+    $("#servicio-form-error").removeClass("d-none").text(msg);
+  }
+
+  function loadServicios(filter = "") {
+    setStatusServicios("Cargando servicios...");
+    $.ajax({ url: ENDPOINT_SERVICIOS, method: "GET", dataType: "json" })
+      .done((data) => {
+        const list = Array.isArray(data) ? data : data.data || [];
+        renderServicios(list, filter);
+        setStatusServicios("Servicios cargados: " + list.length);
+      })
+      .fail((xhr) => {
+        setStatusServicios(
+          "Error al cargar servicios: " +
+            (xhr.responseJSON?.message || xhr.statusText || xhr.status)
+        );
+        $("#servicios-tbody").html(
+          '<tr><td colspan="6" class="text-center">No se pudo cargar la lista</td></tr>'
+        );
+      });
+  }
+
+  function renderServicios(list, filter = "") {
+    const q = (filter || "").toLowerCase();
+    const tbody = $("#servicios-tbody").empty();
+    const filtered = list.filter((s) => {
+      if (!q) return true;
+      return (
+        String(s.servicio_id).includes(q) ||
+        (s.nombre || "").toLowerCase().includes(q) ||
+        String(s.categoria_id).includes(q)
+      );
+    });
+    if (filtered.length === 0) {
+      tbody.html(
+        '<tr><td colspan="6" class="text-center">No hay servicios</td></tr>'
+      );
+      return;
+    }
+    filtered.forEach((s) => {
+      const $tr = $("<tr>");
+      $tr.append($("<td>").text(s.servicio_id));
+      $tr.append($("<td>").text(s.categoria_id));
+      $tr.append($("<td>").text(s.nombre));
+      $tr.append($("<td>").text(s.duracion));
+      $tr.append($("<td>").text(s.precio));
+      const $actions = $('<td class="text-end">');
+      $actions.append(
+        $('<button class="btn btn-sm btn-info me-1">Editar</button>').on(
+          "click",
+          () => openServicioEdit(s.servicio_id)
+        )
+      );
+      $actions.append(
+        $('<button class="btn btn-sm btn-danger">Eliminar</button>').on(
+          "click",
+          () => confirmDeleteServicio(s.servicio_id)
+        )
+      );
+      $tr.append($actions);
+      tbody.append($tr);
+    });
+  }
+
+  function openServicioCreate() {
+    servicioMode = "create";
+    $("#servicioModalTitle").text("Nuevo servicio");
+    $("#servicioForm")[0].reset();
+    $("#servicio_id").val("");
+    $("#servicio-form-error").addClass("d-none").text("");
+    servicioModal.show();
+  }
+
+  function openServicioEdit(id) {
+    servicioMode = "edit";
+    setStatusServicios("Cargando servicio " + id + "...");
+    $.ajax({
+      url: ENDPOINT_SERVICIOS + "/" + encodeURIComponent(id),
+      method: "GET",
+      dataType: "json",
+    })
+      .done((data) => {
+        const s = Array.isArray(data) ? data[0] : data.data || data;
+        if (!s) {
+          setStatusServicios("Servicio no encontrado");
+          return;
+        }
+        $("#servicioModalTitle").text("Editar servicio " + id);
+        $("#servicio_id").val(s.servicio_id || "");
+        $("#servicio_estado_id").val(s.estado_id || 1);
+        $("#categoria_id").val(s.categoria_id || 1);
+        $("#nombre").val(s.nombre || "");
+        $("#descripcion").val(s.descripcion || "");
+        $("#duracion").val(s.duracion || 60);
+        $("#precio").val(s.precio || 0);
+        $("#servicio-form-error").addClass("d-none").text("");
+        servicioModal.show();
+        setStatusServicios("Servicio cargado");
+      })
+      .fail((xhr) =>
+        setStatusServicios(
+          "Error cargando servicio: " +
+            (xhr.responseJSON?.message || xhr.statusText || xhr.status)
+        )
+      );
+  }
+
+  function readServicioFormAlwaysSendId() {
+    $("#servicio-form-error").addClass("d-none").text("");
+    const sid = $("#servicio_id").val();
+    const est = $("#servicio_estado_id").val();
+    const cat = $("#categoria_id").val();
+    const dur = $("#duracion").val();
+    const precio = $("#precio").val();
+    if (!validateInteger(sid, "servicio_id", $("#servicio-form-error")))
+      return null;
+    if (!validateInteger(est, "estado_id", $("#servicio-form-error")))
+      return null;
+    if (!validateInteger(cat, "categoria_id", $("#servicio-form-error")))
+      return null;
+    if (!validateInteger(dur, "duracion", $("#servicio-form-error")))
+      return null;
+    if (precio === "" || isNaN(Number(precio))) {
+      $("#servicio-form-error")
+        .removeClass("d-none")
+        .text("precio debe ser un número");
+      return null;
+    }
+    return {
+      servicio_id: Number(sid),
+      estado_id: Number(est),
+      categoria_id: Number(cat),
+      nombre: $("#nombre").val() || "",
+      descripcion: $("#descripcion").val() || "",
+      duracion: Number(dur),
+      precio: Number(precio),
+    };
+  }
+
+  function createServicio() {
+    const payload = readServicioFormAlwaysSendId();
+    if (payload === null) return;
+    setStatusServicios("Creando servicio...");
+    $.ajax({
+      url: ENDPOINT_SERVICIOS,
+      method: "POST",
+      contentType: "application/json",
+      data: JSON.stringify(payload),
+      dataType: "json",
+    })
+      .done(() => {
+        servicioModal.hide();
+        loadServicios();
+        setStatusServicios("Servicio creado");
+      })
+      .fail((xhr) =>
+        showServicioError(
+          "Error creando servicio: " +
+            (xhr.responseJSON?.message || xhr.statusText || xhr.status)
+        )
+      );
+  }
+
+  function updateServicio() {
+    const payload = readServicioFormAlwaysSendId();
+    if (payload === null) return;
+    const id = payload.servicio_id;
+    setStatusServicios("Actualizando servicio " + id + "...");
+    $.ajax({
+      url: ENDPOINT_SERVICIOS + "/" + encodeURIComponent(id),
+      method: "PUT",
+      contentType: "application/json",
+      data: JSON.stringify(payload),
+      dataType: "json",
+    })
+      .done(() => {
+        servicioModal.hide();
+        loadServicios();
+        setStatusServicios("Servicio actualizado");
+      })
+      .fail((xhr) =>
+        showServicioError(
+          "Error actualizando servicio: " +
+            (xhr.responseJSON?.message || xhr.statusText || xhr.status)
+        )
+      );
+  }
+
+  function confirmDeleteServicio(id) {
+    if (!confirm("¿Eliminar servicio " + id + " ?")) return;
+    $.ajax({
+      url: ENDPOINT_SERVICIOS + "/" + encodeURIComponent(id),
+      method: "DELETE",
+      dataType: "json",
+    })
+      .done(() => {
+        loadServicios();
+        setStatusServicios("Servicio eliminado");
+      })
+      .fail((xhr) =>
+        setStatusServicios(
+          "Error al eliminar: " +
+            (xhr.responseJSON?.message || xhr.statusText || xhr.status)
+        )
+      );
+  }
+
+  /* ------------------ PRODUCTOS ------------------ */
+  function setStatusProductos(txt) {
+    $("#status-productos").text("Estado: " + txt);
+  }
+  function showProductoError(msg) {
+    $("#producto-form-error").removeClass("d-none").text(msg);
+  }
+
+  function loadProductos(filter = "") {
+    setStatusProductos("Cargando productos...");
+    $.ajax({ url: ENDPOINT_PRODUCTOS, method: "GET", dataType: "json" })
+      .done((data) => {
+        const list = Array.isArray(data) ? data : data.data || [];
+        renderProductos(list, filter);
+        setStatusProductos("Productos cargados: " + list.length);
+      })
+      .fail((xhr) => {
+        setStatusProductos(
+          "Error al cargar productos: " +
+            (xhr.responseJSON?.message || xhr.statusText || xhr.status)
+        );
+        $("#productos-tbody").html(
+          '<tr><td colspan="7" class="text-center">No se pudo cargar la lista</td></tr>'
+        );
+      });
+  }
+
+  function renderProductos(list, filter = "") {
+    const q = (filter || "").toLowerCase();
+    const tbody = $("#productos-tbody").empty();
+    const filtered = list.filter((p) => {
+      if (!q) return true;
+      return (
+        String(p.producto_id).includes(q) ||
+        (p.nombre || "").toLowerCase().includes(q) ||
+        String(p.categoria_id).includes(q)
+      );
+    });
+    if (filtered.length === 0) {
+      tbody.html(
+        '<tr><td colspan="7" class="text-center">No hay productos</td></tr>'
+      );
+      return;
+    }
+    filtered.forEach((p) => {
+      const $tr = $("<tr>");
+      $tr.append($("<td>").text(p.producto_id));
+      $tr.append($("<td>").text(p.categoria_id));
+      $tr.append($("<td>").text(p.estado_id));
+      $tr.append($("<td>").text(p.proveedor_id));
+      $tr.append($("<td>").text(p.nombre));
+      $tr.append($("<td>").text(p.precio));
+      const $actions = $('<td class="text-end">');
+      $actions.append(
+        $('<button class="btn btn-sm btn-info me-1">Editar</button>').on(
+          "click",
+          () => openProductoEdit(p.producto_id)
+        )
+      );
+      $actions.append(
+        $('<button class="btn btn-sm btn-danger">Eliminar</button>').on(
+          "click",
+          () => confirmDeleteProducto(p.producto_id)
+        )
+      );
+      $tr.append($actions);
+      tbody.append($tr);
+    });
+  }
+
+  function openProductoCreate() {
+    productoMode = "create";
+    $("#productoModalTitle").text("Nuevo producto");
+    $("#productoForm")[0].reset();
+    $("#producto_id").val("");
+    $("#producto-form-error").addClass("d-none").text("");
+    productoModal.show();
+  }
+
+  function openProductoEdit(id) {
+    productoMode = "edit";
+    setStatusProductos("Cargando producto " + id + "...");
+    $.ajax({
+      url: ENDPOINT_PRODUCTOS + "/" + encodeURIComponent(id),
+      method: "GET",
+      dataType: "json",
+    })
+      .done((data) => {
+        const p = Array.isArray(data) ? data[0] : data.data || data;
+        if (!p) {
+          setStatusProductos("Producto no encontrado");
+          return;
+        }
+        $("#productoModalTitle").text("Editar producto " + id);
+        $("#producto_id").val(p.producto_id || "");
+        $("#producto_categoria_id").val(p.categoria_id || 1);
+        $("#producto_estado_id").val(p.estado_id || 1);
+        $("#proveedor_id").val(p.proveedor_id || 1);
+        $("#producto_nombre").val(p.nombre || "");
+        $("#producto_descripcion").val(p.descripcion || "");
+        $("#producto_precio").val(p.precio || 0);
+        $("#producto-form-error").addClass("d-none").text("");
+        productoModal.show();
+        setStatusProductos("Producto cargado");
+      })
+      .fail((xhr) =>
+        setStatusProductos(
+          "Error cargando producto: " +
+            (xhr.responseJSON?.message || xhr.statusText || xhr.status)
+        )
+      );
+  }
+
+  function readProductoFormAlwaysSendId() {
+    $("#producto-form-error").addClass("d-none").text("");
+    const pid = $("#producto_id").val();
+    const cat = $("#producto_categoria_id").val();
+    const est = $("#producto_estado_id").val();
+    const prov = $("#proveedor_id").val();
+    const precio = $("#producto_precio").val();
+
+    if (!validateInteger(pid, "producto_id", $("#producto-form-error")))
+      return null;
+    if (!validateInteger(cat, "categoria_id", $("#producto-form-error")))
+      return null;
+    if (!validateInteger(est, "estado_id", $("#producto-form-error")))
+      return null;
+    if (!validateInteger(prov, "proveedor_id", $("#producto-form-error")))
+      return null;
+    if (precio === "" || isNaN(Number(precio))) {
+      $("#producto-form-error")
+        .removeClass("d-none")
+        .text("precio debe ser un número");
+      return null;
+    }
+
+    return {
+      producto_id: Number(pid),
+      categoria_id: Number(cat),
+      estado_id: Number(est),
+      proveedor_id: Number(prov),
+      nombre: $("#producto_nombre").val() || "",
+      descripcion: $("#producto_descripcion").val() || "",
+      precio: Number(precio),
+    };
+  }
+
+  function createProducto() {
+    const payload = readProductoFormAlwaysSendId();
+    if (payload === null) return;
+    setStatusProductos("Creando producto...");
+    $.ajax({
+      url: ENDPOINT_PRODUCTOS,
+      method: "POST",
+      contentType: "application/json",
+      data: JSON.stringify(payload),
+      dataType: "json",
+    })
+      .done(() => {
+        productoModal.hide();
+        loadProductos();
+        setStatusProductos("Producto creado");
+      })
+      .fail((xhr) =>
+        showProductoError(
+          "Error creando producto: " +
+            (xhr.responseJSON?.message || xhr.statusText || xhr.status)
+        )
+      );
+  }
+
+  function updateProducto() {
+    const payload = readProductoFormAlwaysSendId();
+    if (payload === null) return;
+    const id = payload.producto_id;
+    setStatusProductos("Actualizando producto " + id + "...");
+    $.ajax({
+      url: ENDPOINT_PRODUCTOS + "/" + encodeURIComponent(id),
+      method: "PUT",
+      contentType: "application/json",
+      data: JSON.stringify(payload),
+      dataType: "json",
+    })
+      .done(() => {
+        productoModal.hide();
+        loadProductos();
+        setStatusProductos("Producto actualizado");
+      })
+      .fail((xhr) =>
+        showProductoError(
+          "Error actualizando producto: " +
+            (xhr.responseJSON?.message || xhr.statusText || xhr.status)
+        )
+      );
+  }
+
+  function confirmDeleteProducto(id) {
+    if (!confirm("¿Eliminar producto " + id + " ?")) return;
+    $.ajax({
+      url: ENDPOINT_PRODUCTOS + "/" + encodeURIComponent(id),
+      method: "DELETE",
+      dataType: "json",
+    })
+      .done(() => {
+        loadProductos();
+        setStatusProductos("Producto eliminado");
+      })
+      .fail((xhr) =>
+        setStatusProductos(
+          "Error al eliminar: " +
+            (xhr.responseJSON?.message || xhr.statusText || xhr.status)
+        )
+      );
+  }
 });
 
-// ---------------------------
-// CARGAR LISTAS (READ)
-// ---------------------------
-function cargarClientes() {
-  $.ajax({
-    url: API_BASE + "/api/clientes",
-    method: "GET",
-    dataType: "json",
-    success: function (data) {
-      let rows = "";
-      (data || []).forEach((c) => {
-        rows += `<tr>
-                        <td>${c.cliente_id}</td>
-                        <td>${c.usuario_id}</td>
-                        <td>${c.estado_id}</td>
-                        <td>${escapeHtml(c.preferencias || "")}</td>
-                        <td>${escapeHtml(c.historial_tratamientos || "")}</td>
-                        <td>
-                            <button class="btn btn-sm btn-info edit-cliente" data-id="${
-                              c.cliente_id
-                            }"><i class="bi bi-pencil"></i></button>
-                            <button class="btn btn-sm btn-danger delete-cliente" data-id="${
-                              c.cliente_id
-                            }"><i class="bi bi-trash"></i></button>
-                        </td>
-                    </tr>`;
-      });
-      $("#tablaClientes tbody").html(rows);
-    },
-    error: function (xhr) {
-      showAlert("No se pudieron cargar clientes.", "danger");
-      console.error(xhr);
-    },
-  });
-}
+$('#clienteModal').on('hidden.bs.modal', function () {
+    $('#openModalButton').focus(); // move focus back to trigger
+});
 
-function cargarServicios() {
-  $.ajax({
-    url: API_BASE + "/api/servicios",
-    method: "GET",
-    dataType: "json",
-    success: function (data) {
-      let rows = "";
-      (data || []).forEach((s) => {
-        rows += `<tr>
-                        <td>${s.servicio_id}</td>
-                        <td>${s.estado_id}</td>
-                        <td>${s.categoria_id}</td>
-                        <td>${escapeHtml(s.nombre || "")}</td>
-                        <td>${escapeHtml(s.descripcion || "")}</td>
-                        <td>${s.duracion ? s.duracion + " min" : ""}</td>
-                        <td>${s.precio || ""}</td>
-                        <td>
-                            <button class="btn btn-sm btn-info edit-servicio" data-id="${
-                              s.servicio_id
-                            }"><i class="bi bi-pencil"></i></button>
-                            <button class="btn btn-sm btn-danger delete-servicio" data-id="${
-                              s.servicio_id
-                            }"><i class="bi bi-trash"></i></button>
-                        </td>
-                    </tr>`;
-      });
-      $("#tablaServicios tbody").html(rows);
-    },
-    error: function (xhr) {
-      showAlert("No se pudieron cargar servicios.", "danger");
-      console.error(xhr);
-    },
-  });
-}
+$('#servicioModal').on('hidden.bs.modal', function () {
+    $('#openServicioModalButton').focus(); // move focus back to trigger
+});
 
-function cargarProductos() {
-  $.ajax({
-    url: API_BASE + "/api/productos",
-    method: "GET",
-    dataType: "json",
-    success: function (data) {
-      let rows = "";
-      (data || []).forEach((p) => {
-        rows += `<tr>
-                        <td>${p.producto_id}</td>
-                        <td>${p.categoria_id}</td>
-                        <td>${p.estado_id}</td>
-                        <td>${escapeHtml(p.proveedor_id || "")}</td>
-                        <td>${escapeHtml(p.nombre || "")}</td>
-                        <td>${escapeHtml(p.descripcion || "")}</td>
-                        <td>${p.precio || ""}</td>
-                        <td>
-                            <button class="btn btn-sm btn-info edit-producto" data-id="${
-                              p.producto_id
-                            }"><i class="bi bi-pencil"></i></button>
-                            <button class="btn btn-sm btn-danger delete-producto" data-id="${
-                              p.producto_id
-                            }"><i class="bi bi-trash"></i></button>
-                        </td>
-                    </tr>`;
-      });
-      $("#tablaProductos tbody").html(rows);
-    },
-    error: function (xhr) {
-      showAlert("No se pudieron cargar productos.", "danger");
-      console.error(xhr);
-    },
-  });
-}
-
-// ---------------------------
-// MODALES: abrir y precargar
-// ---------------------------
-function abrirModalCliente(mode, id) {
-  const modalEl = new bootstrap.Modal(document.getElementById("modalCliente"));
-  $("#formCliente")[0].reset();
-  $("#isCreate").val("");
-  if (mode === "create") {
-    $("#isCreate").val(1);
-    $("#modalClienteTitle").text("Nuevo Cliente");
-    $("#estado_id").val("1");
-    modalEl.show();
-  } else {
-    $("#modalClienteTitle").text("Editar Cliente");
-    // cargar por id
-    $.ajax({
-      url: API_BASE + "/api/clientes/" + id,
-      method: "GET",
-      dataType: "json",
-      success: function (c) {
-        $("#cliente_id").val(c.cliente_id);
-        $("#usuario_id").val(c.usuario_id);
-        $("#estado_id").val(c.estado_id);
-        $("#preferencias").val(c.preferencias);
-        $("#historial_tratamientos").val(c.historial_tratamientos);
-        modalEl.show();
-      },
-      error: function () {
-        showAlert("No se pudo obtener el cliente.", "danger");
-      },
-    });
-  }
-}
-
-function abrirModalProducto(mode, id) {
-  const modalEl = new bootstrap.Modal(document.getElementById("modalProducto"));
-  $("#formServicio")[0].reset();
-  $("#isCreate").val("");
-  if (mode === "create") {
-    $("#isCreate").val(1);
-    $("#modalProductoTitle").text("Nuevo Producto");
-    $("#producto_id").val("1");
-    modalEl.show();
-  } else {
-    $("#modalProductoTitle").text("Editar Producto");
-    $.ajax({
-      url: API_BASE + "/api/productos/" + id,
-      method: "GET",
-      dataType: "json",
-      success: function (s) {
-        $("#producto_id").val(s.producto_id);
-        $("#categoria_id_prod").val(s.categoria_id);
-        $("#prod_estado_id").val(s.estado_id);
-        $("#proveedor_id").val(s.proveedor_id);
-        $("#prod_nombre").val(s.nombre);
-        $("#prod_descripcion").val(s.descripcion);
-        $("#prod_precio").val(s.precio);
-        modalEl.show();
-      },
-      error: function () {
-        showAlert("No se pudo obtener el servicio.", "danger");
-      },
-    });
-  }
-}
-
-function abrirModalServicio(mode, id) {
-  const modalEl = new bootstrap.Modal(document.getElementById("modalServicio"));
-  $("#formServicio")[0].reset();
-  $("#isCreate").val("");
-  if (mode === "create") {
-    $("#modalServicioTitle").text("Nuevo Servicio");
-    $("#serv_estado_id").val("1");
-    modalEl.show();
-  } else {
-    $("#modalServicioTitle").text("Editar Servicio");
-    $.ajax({
-      url: API_BASE + "/api/servicios/" + id,
-      method: "GET",
-      dataType: "json",
-      success: function (s) {
-        $("#servicio_id").val(s.servicio_id);
-        $("#serv_estado_id").val(s.estado_id);
-        $("#categoria_id_serv").val(s.categoria_id);
-        $("#serv_nombre").val(s.nombre);
-        $("#serv_descripcion").val(s.descripcion);
-        $("#duracion").val(s.duracion);
-        $("#serv_precio").val(s.precio);
-        modalEl.show();
-      },
-      error: function () {
-        showAlert("No se pudo obtener el servicio.", "danger");
-      },
-    });
-  }
-}
-
-function submitFormCliente(e) {
-  e.preventDefault();
-
-  // Siempre tomamos cliente_id del input
-  const isCreate = $("#isCreate").val();
-  const id = $("#cliente_id").val();
-
-  const payload = {
-    cliente_id: parseInt($("#cliente_id").val()), // requerido incluso para POST
-    usuario_id: parseInt($("#usuario_id").val()),
-    estado_id: parseInt($("#estado_id").val()),
-    preferencias: $("#preferencias").val(),
-    historial: $("#historial_tratamientos").val(),
-  };
-
-  if (!payload.cliente_id || !payload.usuario_id) {
-    showAlert("Cliente ID y Usuario ID son obligatorios.", "warning");
-    return;
-  }
-  if (!isCreate) {
-    console.log("PUT", isCreate);
-    $.ajax({
-      url: API_BASE + "/api/clientes/" + id,
-      method: "PUT",
-      contentType: "application/json",
-      data: JSON.stringify(payload),
-      success: function () {
-        bootstrap.Modal.getInstance(
-          document.getElementById("modalCliente")
-        ).hide();
-        showAlert("Cliente actualizado.", "success");
-        cargarServicios();
-      },
-      error: function () {
-        showAlert("Error al actualizar Cliente.", "danger");
-      },
-    });
-  } else {
-    console.log("POST", isCreate);
-    $.ajax({
-      url: API_BASE + "/api/clientes",
-      method: "POST",
-      contentType: "application/json",
-      data: JSON.stringify(payload),
-      success: function () {
-        bootstrap.Modal.getInstance(
-          document.getElementById("modalCliente")
-        ).hide();
-        showAlert("Cliente creado.", "success");
-        cargarServicios();
-      },
-      error: function () {
-        showAlert("Error al crear cliente.", "danger");
-      },
-    });
-  }
-}
-
-// ---------------------------
-// SUBMITS (CREATE / UPDATE)
-// ---------------------------
-
-function submitFormServicio(e) {
-  e.preventDefault();
-  const id = $("#servicio_id").val();
-  const payload = {
-    estado_id: $("#serv_estado_id").val(),
-    categoria_id: $("#categoria_id_serv").val(),
-    nombre: $("#serv_nombre").val(),
-    descripcion: $("#serv_descripcion").val(),
-    duracion: $("#duracion").val(),
-    precio: $("#serv_precio").val(),
-  };
-
-  if (!payload.nombre) {
-    showAlert("Nombre del servicio es obligatorio.", "warning");
-    return;
-  }
-
-  if (id) {
-    $.ajax({
-      url: API_BASE + "/api/servicios/" + id,
-      method: "PUT",
-      contentType: "application/json",
-      data: JSON.stringify(payload),
-      success: function () {
-        bootstrap.Modal.getInstance(
-          document.getElementById("modalServicio")
-        ).hide();
-        showAlert("Servicio actualizado.", "success");
-        cargarServicios();
-      },
-      error: function () {
-        showAlert("Error al actualizar servicio.", "danger");
-      },
-    });
-  } else {
-    $.ajax({
-      url: API_BASE + "/api/servicios",
-      method: "POST",
-      contentType: "application/json",
-      data: JSON.stringify(payload),
-      success: function () {
-        bootstrap.Modal.getInstance(
-          document.getElementById("modalServicio")
-        ).hide();
-        showAlert("Servicio creado.", "success");
-        cargarServicios();
-      },
-      error: function () {
-        showAlert("Error al crear servicio.", "danger");
-      },
-    });
-  }
-}
-
-function submitFormProducto(e) {
-  e.preventDefault();
-  const isCreate = $("#isCreate").val();
-  const id = $("#producto_id").val();
-  const payload = {
-    producto_id: parseInt($("#producto_id").val()),
-    categoria_id: parseInt($("#categoria_id_prod").val()),
-    estado_id: parseInt($("#prod_estado_id").val()),
-    proveedor_id: parseInt($("#proveedor_id").val()),
-    nombre: $("#prod_nombre").val(),
-    descripcion: $("#prod_descripcion").val(),
-    precio: parseInt($("#prod_precio").val()),
-  };
-
-  if (!payload.nombre) {
-    showAlert("Nombre del producto es obligatorio.", "warning");
-    return;
-  }
-
-  if (!isCreate) {
-    $.ajax({
-      url: API_BASE + "/api/productos/" + id,
-      method: "PUT",
-      contentType: "application/json",
-      data: JSON.stringify(payload),
-      success: function () {
-        bootstrap.Modal.getInstance(
-          document.getElementById("modalProducto")
-        ).hide();
-        showAlert("Producto actualizado.", "success");
-        cargarProductos();
-      },
-      error: function () {
-        showAlert("Error al actualizar producto.", "danger");
-      },
-    });
-  } else {
-    $.ajax({
-      url: API_BASE + "/api/productos",
-      method: "POST",
-      contentType: "application/json",
-      data: JSON.stringify(payload),
-      success: function () {
-        bootstrap.Modal.getInstance(
-          document.getElementById("modalProducto")
-        ).hide();
-        showAlert("Producto creado.", "success");
-        cargarProductos();
-      },
-      error: function () {
-        showAlert("Error al crear producto.", "danger");
-      },
-    });
-  }
-}
-
-// ---------------------------
-// ELIMINAR (DELETE) -> cambia estado a 2 en el backend
-// ---------------------------
-function confirmarEliminar(tipo, id) {
-  const ok = confirm(
-    "¿Confirmar eliminar? (esto ejecutará un DELETE que en tu API cambia estado a 2)"
-  );
-  if (!ok) return;
-
-  let url = API_BASE;
-  if (tipo === "cliente") url += "/api/clientes/" + id;
-  if (tipo === "servicio") url += "/api/servicios/" + id;
-  if (tipo === "producto") url += "/api/productos/" + id;
-
-  $.ajax({
-    url: url,
-    method: "DELETE",
-    success: function () {
-      showAlert("Eliminado correctamente (estado actualizado).", "success");
-      // recargar tabla correspondiente
-      if (tipo === "cliente") cargarClientes();
-      if (tipo === "servicio") cargarServicios();
-      if (tipo === "producto") cargarProductos();
-    },
-    error: function () {
-      showAlert("Error al eliminar.", "danger");
-    },
-  });
-}
-
-// ---------------------------
-// UTILIDADES
-// ---------------------------
-function escapeHtml(unsafe) {
-  return String(unsafe)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
+$('#productoModal').on('hidden.bs.modal', function () {
+    $('#openProductoModalButton').focus(); // return focus to trigger
+});
