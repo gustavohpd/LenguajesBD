@@ -91,462 +91,445 @@ PROCEDURE FIDE_PRODUCTOS_LISTAR_SP (
 );
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- =========================
--- FIDE_ESTADOS_TB
+-- PROCEDIMIENTOS Melissa
 -- =========================
-PROCEDURE FIDE_ESTADOS_TB_INSERT_SP(
-    P_ESTADO_ID     IN FIDE_ESTADOS_TB.ESTADO_ID%TYPE,
-    P_NOMBRE_ESTADO IN FIDE_ESTADOS_TB.NOMBRE_ESTADO%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE FIDE_ESTADOS_TB_UPDATE_SP(
-    P_ESTADO_ID     IN FIDE_ESTADOS_TB.ESTADO_ID%TYPE,
-    P_NOMBRE_ESTADO IN FIDE_ESTADOS_TB.NOMBRE_ESTADO%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
--- =========================
--- FIDE_ROLES_TB
--- =========================
-PROCEDURE FIDE_ROLES_TB_INSERT_SP(
-    P_ROL_ID     IN FIDE_ROLES_TB.ROL_ID%TYPE,
-    P_ESTADO_ID  IN FIDE_ROLES_TB.ESTADO_ID%TYPE DEFAULT 1,
-    P_NOMBRE_ROL IN FIDE_ROLES_TB.NOMBRE_ROL%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE FIDE_ROLES_TB_UPDATE_SP(
-    P_ROL_ID     IN FIDE_ROLES_TB.ROL_ID%TYPE,
-    P_ESTADO_ID  IN FIDE_ROLES_TB.ESTADO_ID%TYPE,
-    P_NOMBRE_ROL IN FIDE_ROLES_TB.NOMBRE_ROL%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE FIDE_ROLES_TB_DELETE_SP(
-    P_ROL_ID IN FIDE_ROLES_TB.ROL_ID%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  -- =========================
+  -- FIDE_ESTADOS_TB
+  -- =========================
+  PROCEDURE FIDE_ESTADOS_INSERTAR_SP (
+    p_estado_id     IN FIDE_ESTADOS_TB.ESTADO_ID%TYPE,
+    p_nombre_estado IN FIDE_ESTADOS_TB.NOMBRE_ESTADO%TYPE
+  );
 
--- =========================
--- FIDE_CORREOS_TB
--- =========================
-PROCEDURE FIDE_CORREOS_TB_INSERT_SP(
-    P_CORREO_ID IN FIDE_CORREOS_TB.CORREO_ID%TYPE,
-    P_ESTADO_ID IN FIDE_CORREOS_TB.ESTADO_ID%TYPE DEFAULT 1,
-    P_CORREO    IN FIDE_CORREOS_TB.CORREO%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE FIDE_CORREOS_TB_UPDATE_SP(
-    P_CORREO_ID IN FIDE_CORREOS_TB.CORREO_ID%TYPE,
-    P_ESTADO_ID IN FIDE_CORREOS_TB.ESTADO_ID%TYPE,
-    P_CORREO    IN FIDE_CORREOS_TB.CORREO%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE FIDE_CORREOS_TB_DELETE_SP(
-    P_CORREO_ID IN FIDE_CORREOS_TB.CORREO_ID%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  PROCEDURE FIDE_ESTADOS_MODIFICAR_SP (
+    p_estado_id     IN FIDE_ESTADOS_TB.ESTADO_ID%TYPE,
+    p_nombre_estado IN FIDE_ESTADOS_TB.NOMBRE_ESTADO%TYPE
+  );
 
--- =========================
--- FIDE_TELEFONOS_TB
--- =========================
-PROCEDURE FIDE_TELEFONOS_TB_INSERT_SP(
-    P_TELEFONO_ID IN FIDE_TELEFONOS_TB.TELEFONO_ID%TYPE,
-    P_ESTADO_ID   IN FIDE_TELEFONOS_TB.ESTADO_ID%TYPE DEFAULT 1,
-    P_TELEFONO    IN FIDE_TELEFONOS_TB.TELEFONO%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE FIDE_TELEFONOS_TB_UPDATE_SP(
-    P_TELEFONO_ID IN FIDE_TELEFONOS_TB.TELEFONO_ID%TYPE,
-    P_ESTADO_ID   IN FIDE_TELEFONOS_TB.ESTADO_ID%TYPE,
-    P_TELEFONO    IN FIDE_TELEFONOS_TB.TELEFONO%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE FIDE_TELEFONOS_TB_DELETE_SP(
-    P_TELEFONO_ID IN FIDE_TELEFONOS_TB.TELEFONO_ID%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  -- =========================
+  -- FIDE_ROLES_TB
+  -- =========================
+  PROCEDURE FIDE_ROLES_INSERTAR_SP (
+    p_rol_id     IN FIDE_ROLES_TB.ROL_ID%TYPE,
+    p_estado_id  IN FIDE_ROLES_TB.ESTADO_ID%TYPE DEFAULT 1, -- Activo
+    p_nombre_rol IN FIDE_ROLES_TB.NOMBRE_ROL%TYPE
+  );
 
--- =========================
--- FIDE_USUARIOS_TB
--- =========================
-PROCEDURE FIDE_USUARIOS_TB_INSERT_SP(
-    P_USUARIO_ID       IN FIDE_USUARIOS_TB.USUARIO_ID%TYPE,
-    P_ROL_ID           IN FIDE_USUARIOS_TB.ROL_ID%TYPE,
-    P_CORREO_ID        IN FIDE_USUARIOS_TB.CORREO_ID%TYPE,
-    P_TELEFONO_ID      IN FIDE_USUARIOS_TB.TELEFONO_ID%TYPE,
-    P_ESTADO_ID        IN FIDE_USUARIOS_TB.ESTADO_ID%TYPE DEFAULT 1,
-    P_NOMBRE           IN FIDE_USUARIOS_TB.NOMBRE%TYPE,
-    P_APELLIDO_PATERNO IN FIDE_USUARIOS_TB.APELLIDO_PATERNO%TYPE,
-    P_APELLIDO_MATERNO IN FIDE_USUARIOS_TB.APELLIDO_MATERNO%TYPE,
-    P_FECHA_REGISTRO   IN FIDE_USUARIOS_TB.FECHA_REGISTRO%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE FIDE_USUARIOS_TB_UPDATE_SP(
-    P_USUARIO_ID       IN FIDE_USUARIOS_TB.USUARIO_ID%TYPE,
-    P_ROL_ID           IN FIDE_USUARIOS_TB.ROL_ID%TYPE,
-    P_CORREO_ID        IN FIDE_USUARIOS_TB.CORREO_ID%TYPE,
-    P_TELEFONO_ID      IN FIDE_USUARIOS_TB.TELEFONO_ID%TYPE,
-    P_ESTADO_ID        IN FIDE_USUARIOS_TB.ESTADO_ID%TYPE,
-    P_NOMBRE           IN FIDE_USUARIOS_TB.NOMBRE%TYPE,
-    P_APELLIDO_PATERNO IN FIDE_USUARIOS_TB.APELLIDO_PATERNO%TYPE,
-    P_APELLIDO_MATERNO IN FIDE_USUARIOS_TB.APELLIDO_MATERNO%TYPE,
-    P_FECHA_REGISTRO   IN FIDE_USUARIOS_TB.FECHA_REGISTRO%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE FIDE_USUARIOS_TB_DELETE_SP(
-    P_USUARIO_ID IN FIDE_USUARIOS_TB.USUARIO_ID%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  PROCEDURE FIDE_ROLES_MODIFICAR_SP (
+    p_rol_id     IN FIDE_ROLES_TB.ROL_ID%TYPE,
+    p_estado_id  IN FIDE_ROLES_TB.ESTADO_ID%TYPE,
+    p_nombre_rol IN FIDE_ROLES_TB.NOMBRE_ROL%TYPE
+  );
 
--- =========================
--- FIDE_CLIENTES_TB
--- =========================
-PROCEDURE FIDE_CLIENTES_TB_INSERT_SP(
-    P_CLIENTE_ID IN FIDE_CLIENTES_TB.CLIENTE_ID%TYPE,
-    P_USUARIO_ID IN FIDE_CLIENTES_TB.USUARIO_ID%TYPE,
-    P_ESTADO_ID  IN FIDE_CLIENTES_TB.ESTADO_ID%TYPE DEFAULT 1,
-    P_PREFERENCIAS IN FIDE_CLIENTES_TB.PREFERENCIAS%TYPE,
-    P_HISTORIAL    IN FIDE_CLIENTES_TB.HISTORIAL_TRATAMIENTOS%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE FIDE_CLIENTES_TB_UPDATE_SP(
-    P_CLIENTE_ID IN FIDE_CLIENTES_TB.CLIENTE_ID%TYPE,
-    P_USUARIO_ID IN FIDE_CLIENTES_TB.USUARIO_ID%TYPE,
-    P_ESTADO_ID  IN FIDE_CLIENTES_TB.ESTADO_ID%TYPE,
-    P_PREFERENCIAS IN FIDE_CLIENTES_TB.PREFERENCIAS%TYPE,
-    P_HISTORIAL    IN FIDE_CLIENTES_TB.HISTORIAL_TRATAMIENTOS%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE FIDE_CLIENTES_TB_DELETE_SP(
-    P_CLIENTE_ID IN FIDE_CLIENTES_TB.CLIENTE_ID%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  PROCEDURE FIDE_ROLES_ELIMINAR_SP (
+    p_rol_id IN FIDE_ROLES_TB.ROL_ID%TYPE
+  );
 
--- =========================
--- FIDE_PROVINCIAS_TB
--- =========================
-PROCEDURE FIDE_PROVINCIAS_TB_INSERT_SP(
-    P_PROVINCIA_ID   IN FIDE_PROVINCIAS_TB.PROVINCIA_ID%TYPE,
-    P_ESTADO_ID      IN FIDE_PROVINCIAS_TB.ESTADO_ID%TYPE DEFAULT 1,
-    P_NOMBRE         IN FIDE_PROVINCIAS_TB.NOMBRE_PROVINCIA%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE FIDE_PROVINCIAS_TB_UPDATE_SP(
-    P_PROVINCIA_ID   IN FIDE_PROVINCIAS_TB.PROVINCIA_ID%TYPE,
-    P_ESTADO_ID      IN FIDE_PROVINCIAS_TB.ESTADO_ID%TYPE,
-    P_NOMBRE         IN FIDE_PROVINCIAS_TB.NOMBRE_PROVINCIA%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE FIDE_PROVINCIAS_TB_DELETE_SP(
-    P_PROVINCIA_ID IN FIDE_PROVINCIAS_TB.PROVINCIA_ID%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  -- =========================
+  -- FIDE_CORREOS_TB
+  -- =========================
+  PROCEDURE FIDE_CORREOS_INSERTAR_SP (
+    p_correo_id IN FIDE_CORREOS_TB.CORREO_ID%TYPE,
+    p_estado_id IN FIDE_CORREOS_TB.ESTADO_ID%TYPE DEFAULT 1, -- Activo
+    p_correo    IN FIDE_CORREOS_TB.CORREO%TYPE
+  );
 
--- =========================
--- FIDE_CANTONES_TB
--- =========================
-PROCEDURE FIDE_CANTONES_TB_INSERT_SP(
-    P_CANTON_ID   IN FIDE_CANTONES_TB.CANTON_ID%TYPE,
-    P_PROVINCIA_ID IN FIDE_CANTONES_TB.PROVINCIA_ID%TYPE,
-    P_ESTADO_ID    IN FIDE_CANTONES_TB.ESTADO_ID%TYPE DEFAULT 1,
-    P_NOMBRE       IN FIDE_CANTONES_TB.NOMBRE_CANTON%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE FIDE_CANTONES_TB_UPDATE_SP(
-    P_CANTON_ID   IN FIDE_CANTONES_TB.CANTON_ID%TYPE,
-    P_PROVINCIA_ID IN FIDE_CANTONES_TB.PROVINCIA_ID%TYPE,
-    P_ESTADO_ID    IN FIDE_CANTONES_TB.ESTADO_ID%TYPE,
-    P_NOMBRE       IN FIDE_CANTONES_TB.NOMBRE_CANTON%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE FIDE_CANTONES_TB_DELETE_SP(
-    P_CANTON_ID IN FIDE_CANTONES_TB.CANTON_ID%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  PROCEDURE FIDE_CORREOS_MODIFICAR_SP (
+    p_correo_id IN FIDE_CORREOS_TB.CORREO_ID%TYPE,
+    p_estado_id IN FIDE_CORREOS_TB.ESTADO_ID%TYPE,
+    p_correo    IN FIDE_CORREOS_TB.CORREO%TYPE
+  );
 
--- =========================
--- FIDE_DISTRITOS_TB
--- =========================
-PROCEDURE FIDE_DISTRITOS_TB_INSERT_SP(
-    P_DISTRITO_ID IN FIDE_DISTRITOS_TB.DISTRITO_ID%TYPE,
-    P_CANTON_ID   IN FIDE_DISTRITOS_TB.CANTON_ID%TYPE,
-    P_ESTADO_ID   IN FIDE_DISTRITOS_TB.ESTADO_ID%TYPE DEFAULT 1,
-    P_NOMBRE      IN FIDE_DISTRITOS_TB.NOMBRE_DISTRITO%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE FIDE_DISTRITOS_TB_UPDATE_SP(
-    P_DISTRITO_ID IN FIDE_DISTRITOS_TB.DISTRITO_ID%TYPE,
-    P_CANTON_ID   IN FIDE_DISTRITOS_TB.CANTON_ID%TYPE,
-    P_ESTADO_ID   IN FIDE_DISTRITOS_TB.ESTADO_ID%TYPE,
-    P_NOMBRE      IN FIDE_DISTRITOS_TB.NOMBRE_DISTRITO%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE FIDE_DISTRITOS_TB_DELETE_SP(
-    P_DISTRITO_ID IN FIDE_DISTRITOS_TB.DISTRITO_ID%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  PROCEDURE FIDE_CORREOS_ELIMINAR_SP (
+    p_correo_id IN FIDE_CORREOS_TB.CORREO_ID%TYPE
+  );
 
--- =========================
--- FIDE_DIRECCIONES_TB
--- =========================
-PROCEDURE FIDE_DIRECCIONES_TB_INSERT_SP(
-    P_USUARIO_ID  IN FIDE_DIRECCIONES_TB.USUARIO_ID%TYPE,
-    P_DISTRITO_ID IN FIDE_DIRECCIONES_TB.DISTRITO_ID%TYPE,
-    P_ESTADO_ID   IN FIDE_DIRECCIONES_TB.ESTADO_ID%TYPE DEFAULT 1,
-    P_DESCRIPCION IN FIDE_DIRECCIONES_TB.DESCRIPCION%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE FIDE_DIRECCIONES_TB_UPDATE_SP(
-    P_USUARIO_ID  IN FIDE_DIRECCIONES_TB.USUARIO_ID%TYPE,
-    P_DISTRITO_ID IN FIDE_DIRECCIONES_TB.DISTRITO_ID%TYPE,
-    P_ESTADO_ID   IN FIDE_DIRECCIONES_TB.ESTADO_ID%TYPE,
-    P_DESCRIPCION IN FIDE_DIRECCIONES_TB.DESCRIPCION%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE FIDE_DIRECCIONES_TB_DELETE_SP(
-    P_USUARIO_ID  IN FIDE_DIRECCIONES_TB.USUARIO_ID%TYPE,
-    P_DISTRITO_ID IN FIDE_DIRECCIONES_TB.DISTRITO_ID%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  -- =========================
+  -- FIDE_TELEFONOS_TB
+  -- =========================
+  PROCEDURE FIDE_TELEFONOS_INSERTAR_SP (
+    p_telefono_id IN FIDE_TELEFONOS_TB.TELEFONO_ID%TYPE,
+    p_estado_id   IN FIDE_TELEFONOS_TB.ESTADO_ID%TYPE DEFAULT 1, -- Activo
+    p_telefono    IN FIDE_TELEFONOS_TB.TELEFONO%TYPE
+  );
 
--- =========================
--- FIDE_CATEGORIAS_TB
--- =========================
-PROCEDURE FIDE_CATEGORIAS_TB_INSERT_SP(
-    P_CATEGORIA_ID IN FIDE_CATEGORIAS_TB.CATEGORIA_ID%TYPE,
-    P_ESTADO_ID    IN FIDE_CATEGORIAS_TB.ESTADO_ID%TYPE DEFAULT 1,
-    P_NOMBRE       IN FIDE_CATEGORIAS_TB.NOMBRE_CATEGORIA%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE FIDE_CATEGORIAS_TB_UPDATE_SP(
-    P_CATEGORIA_ID IN FIDE_CATEGORIAS_TB.CATEGORIA_ID%TYPE,
-    P_ESTADO_ID    IN FIDE_CATEGORIAS_TB.ESTADO_ID%TYPE,
-    P_NOMBRE       IN FIDE_CATEGORIAS_TB.NOMBRE_CATEGORIA%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE FIDE_CATEGORIAS_TB_DELETE_SP(
-    P_CATEGORIA_ID IN FIDE_CATEGORIAS_TB.CATEGORIA_ID%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  PROCEDURE FIDE_TELEFONOS_MODIFICAR_SP (
+    p_telefono_id IN FIDE_TELEFONOS_TB.TELEFONO_ID%TYPE,
+    p_estado_id   IN FIDE_TELEFONOS_TB.ESTADO_ID%TYPE,
+    p_telefono    IN FIDE_TELEFONOS_TB.TELEFONO%TYPE
+  );
 
--- =========================
--- FIDE_SERVICIOS_TB
--- =========================
-PROCEDURE FIDE_SERVICIOS_TB_INSERT_SP(
-    P_SERVICIO_ID IN FIDE_SERVICIOS_TB.SERVICIO_ID%TYPE,
-    P_ESTADO_ID   IN FIDE_SERVICIOS_TB.ESTADO_ID%TYPE DEFAULT 1,
-    P_CATEGORIA_ID IN FIDE_SERVICIOS_TB.CATEGORIA_ID%TYPE,
-    P_NOMBRE      IN FIDE_SERVICIOS_TB.NOMBRE%TYPE,
-    P_DESCRIPCION IN FIDE_SERVICIOS_TB.DESCRIPCION%TYPE,
-    P_DURACION    IN FIDE_SERVICIOS_TB.DURACION%TYPE,
-    P_PRECIO      IN FIDE_SERVICIOS_TB.PRECIO%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE FIDE_SERVICIOS_TB_UPDATE_SP(
-    P_SERVICIO_ID IN FIDE_SERVICIOS_TB.SERVICIO_ID%TYPE,
-    P_ESTADO_ID   IN FIDE_SERVICIOS_TB.ESTADO_ID%TYPE,
-    P_CATEGORIA_ID IN FIDE_SERVICIOS_TB.CATEGORIA_ID%TYPE,
-    P_NOMBRE      IN FIDE_SERVICIOS_TB.NOMBRE%TYPE,
-    P_DESCRIPCION IN FIDE_SERVICIOS_TB.DESCRIPCION%TYPE,
-    P_DURACION    IN FIDE_SERVICIOS_TB.DURACION%TYPE,
-    P_PRECIO      IN FIDE_SERVICIOS_TB.PRECIO%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE FIDE_SERVICIOS_TB_DELETE_SP(
-    P_SERVICIO_ID IN FIDE_SERVICIOS_TB.SERVICIO_ID%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  PROCEDURE FIDE_TELEFONOS_ELIMINAR_SP (
+    p_telefono_id IN FIDE_TELEFONOS_TB.TELEFONO_ID%TYPE
+  );
 
--- =========================
--- FIDE_CITAS_TB
--- =========================
-PROCEDURE FIDE_CITAS_TB_INSERT_SP(
-    P_CITA_ID     IN FIDE_CITAS_TB.CITA_ID%TYPE,
-    P_CLIENTE_ID  IN FIDE_CITAS_TB.CLIENTE_ID%TYPE,
-    P_SERVICIO_ID IN FIDE_CITAS_TB.SERVICIO_ID%TYPE,
-    P_ESTADO_ID   IN FIDE_CITAS_TB.ESTADO_ID%TYPE DEFAULT 3,
-    P_FECHA_HORA  IN FIDE_CITAS_TB.FECHA_HORA%TYPE,
-    P_NOTAS       IN FIDE_CITAS_TB.NOTAS%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE FIDE_CITAS_TB_UPDATE_SP(
-    P_CITA_ID     IN FIDE_CITAS_TB.CITA_ID%TYPE,
-    P_CLIENTE_ID  IN FIDE_CITAS_TB.CLIENTE_ID%TYPE,
-    P_SERVICIO_ID IN FIDE_CITAS_TB.SERVICIO_ID%TYPE,
-    P_ESTADO_ID   IN FIDE_CITAS_TB.ESTADO_ID%TYPE,
-    P_FECHA_HORA  IN FIDE_CITAS_TB.FECHA_HORA%TYPE,
-    P_NOTAS       IN FIDE_CITAS_TB.NOTAS%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE FIDE_CITAS_TB_DELETE_SP(
-    P_CITA_ID IN FIDE_CITAS_TB.CITA_ID%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  -- =========================
+  -- FIDE_USUARIOS_TB
+  -- =========================
+  PROCEDURE FIDE_USUARIOS_INSERTAR_SP (
+    p_usuario_id       IN FIDE_USUARIOS_TB.USUARIO_ID%TYPE,
+    p_rol_id           IN FIDE_USUARIOS_TB.ROL_ID%TYPE,
+    p_correo_id        IN FIDE_USUARIOS_TB.CORREO_ID%TYPE,
+    p_telefono_id      IN FIDE_USUARIOS_TB.TELEFONO_ID%TYPE,
+    p_estado_id        IN FIDE_USUARIOS_TB.ESTADO_ID%TYPE DEFAULT 1, -- Activo
+    p_nombre           IN FIDE_USUARIOS_TB.NOMBRE%TYPE,
+    p_apellido_paterno IN FIDE_USUARIOS_TB.APELLIDO_PATERNO%TYPE,
+    p_apellido_materno IN FIDE_USUARIOS_TB.APELLIDO_MATERNO%TYPE,
+    p_fecha_registro   IN FIDE_USUARIOS_TB.FECHA_REGISTRO%TYPE DEFAULT SYSDATE
+  );
 
--- =========================
--- FIDE_PROVEEDORES_TB
--- =========================
-PROCEDURE FIDE_PROVEEDORES_TB_INSERT_SP(
-    P_PROVEEDOR_ID IN FIDE_PROVEEDORES_TB.PROVEEDOR_ID%TYPE,
-    P_ESTADO_ID    IN FIDE_PROVEEDORES_TB.ESTADO_ID%TYPE DEFAULT 1,
-    P_TELEFONO_ID  IN FIDE_PROVEEDORES_TB.TELEFONO_ID%TYPE,
-    P_NOMBRE       IN FIDE_PROVEEDORES_TB.NOMBRE%TYPE,
-    P_CONTACTO     IN FIDE_PROVEEDORES_TB.CONTACTO%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE FIDE_PROVEEDORES_TB_UPDATE_SP(
-    P_PROVEEDOR_ID IN FIDE_PROVEEDORES_TB.PROVEEDOR_ID%TYPE,
-    P_ESTADO_ID    IN FIDE_PROVEEDORES_TB.ESTADO_ID%TYPE,
-    P_TELEFONO_ID  IN FIDE_PROVEEDORES_TB.TELEFONO_ID%TYPE,
-    P_NOMBRE       IN FIDE_PROVEEDORES_TB.NOMBRE%TYPE,
-    P_CONTACTO     IN FIDE_PROVEEDORES_TB.CONTACTO%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE FIDE_PROVEEDORES_TB_DELETE_SP(
-    P_PROVEEDOR_ID IN FIDE_PROVEEDORES_TB.PROVEEDOR_ID%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  PROCEDURE FIDE_USUARIOS_MODIFICAR_SP (
+    p_usuario_id       IN FIDE_USUARIOS_TB.USUARIO_ID%TYPE,
+    p_rol_id           IN FIDE_USUARIOS_TB.ROL_ID%TYPE,
+    p_correo_id        IN FIDE_USUARIOS_TB.CORREO_ID%TYPE,
+    p_telefono_id      IN FIDE_USUARIOS_TB.TELEFONO_ID%TYPE,
+    p_estado_id        IN FIDE_USUARIOS_TB.ESTADO_ID%TYPE,
+    p_nombre           IN FIDE_USUARIOS_TB.NOMBRE%TYPE,
+    p_apellido_paterno IN FIDE_USUARIOS_TB.APELLIDO_PATERNO%TYPE,
+    p_apellido_materno IN FIDE_USUARIOS_TB.APELLIDO_MATERNO%TYPE,
+    p_fecha_registro   IN FIDE_USUARIOS_TB.FECHA_REGISTRO%TYPE
+  );
 
--- =========================
--- FIDE_PRODUCTOS_TB
--- =========================
-PROCEDURE FIDE_PRODUCTOS_TB_INSERT_SP(
-    P_PRODUCTO_ID IN FIDE_PRODUCTOS_TB.PRODUCTO_ID%TYPE,
-    P_CATEGORIA_ID IN FIDE_PRODUCTOS_TB.CATEGORIA_ID%TYPE,
-    P_ESTADO_ID    IN FIDE_PRODUCTOS_TB.ESTADO_ID%TYPE DEFAULT 1,
-    P_PROVEEDOR_ID IN FIDE_PRODUCTOS_TB.PROVEEDOR_ID%TYPE,
-    P_NOMBRE       IN FIDE_PRODUCTOS_TB.NOMBRE%TYPE,
-    P_DESCRIPCION  IN FIDE_PRODUCTOS_TB.DESCRIPCION%TYPE,
-    P_PRECIO       IN FIDE_PRODUCTOS_TB.PRECIO%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE FIDE_PRODUCTOS_TB_UPDATE_SP(
-    P_PRODUCTO_ID IN FIDE_PRODUCTOS_TB.PRODUCTO_ID%TYPE,
-    P_CATEGORIA_ID IN FIDE_PRODUCTOS_TB.CATEGORIA_ID%TYPE,
-    P_ESTADO_ID    IN FIDE_PRODUCTOS_TB.ESTADO_ID%TYPE,
-    P_PROVEEDOR_ID IN FIDE_PRODUCTOS_TB.PROVEEDOR_ID%TYPE,
-    P_NOMBRE       IN FIDE_PRODUCTOS_TB.NOMBRE%TYPE,
-    P_DESCRIPCION  IN FIDE_PRODUCTOS_TB.DESCRIPCION%TYPE,
-    P_PRECIO       IN FIDE_PRODUCTOS_TB.PRECIO%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE FIDE_PRODUCTOS_TB_DELETE_SP(
-    P_PRODUCTO_ID IN FIDE_PRODUCTOS_TB.PRODUCTO_ID%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  PROCEDURE FIDE_USUARIOS_ELIMINAR_SP (
+    p_usuario_id IN FIDE_USUARIOS_TB.USUARIO_ID%TYPE
+  );
 
--- =========================
--- FIDE_INVENTARIO_TB
--- =========================
-PROCEDURE FIDE_INVENTARIO_TB_INSERT_SP(
-    P_INVENTARIO_ID IN FIDE_INVENTARIO_TB.INVENTARIO_ID%TYPE,
-    P_PRODUCTO_ID   IN FIDE_INVENTARIO_TB.PRODUCTO_ID%TYPE,
-    P_ESTADO_ID     IN FIDE_INVENTARIO_TB.ESTADO_ID%TYPE DEFAULT 1,
-    P_CANTIDAD      IN FIDE_INVENTARIO_TB.CANTIDAD%TYPE,
-    P_FECHA_ACT     IN FIDE_INVENTARIO_TB.FECHA_ACTUALIZACION%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE FIDE_INVENTARIO_TB_UPDATE_SP(
-    P_INVENTARIO_ID IN FIDE_INVENTARIO_TB.INVENTARIO_ID%TYPE,
-    P_PRODUCTO_ID   IN FIDE_INVENTARIO_TB.PRODUCTO_ID%TYPE,
-    P_ESTADO_ID     IN FIDE_INVENTARIO_TB.ESTADO_ID%TYPE,
-    P_CANTIDAD      IN FIDE_INVENTARIO_TB.CANTIDAD%TYPE,
-    P_FECHA_ACT     IN FIDE_INVENTARIO_TB.FECHA_ACTUALIZACION%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE FIDE_INVENTARIO_TB_DELETE_SP(
-    P_INVENTARIO_ID IN FIDE_INVENTARIO_TB.INVENTARIO_ID%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  -- =========================
+  -- FIDE_CLIENTES_TB
+  -- =========================
+  PROCEDURE FIDE_CLIENTES_INSERTAR_SP (
+    p_cliente_id   IN FIDE_CLIENTES_TB.CLIENTE_ID%TYPE,
+    p_usuario_id   IN FIDE_CLIENTES_TB.USUARIO_ID%TYPE,
+    p_estado_id    IN FIDE_CLIENTES_TB.ESTADO_ID%TYPE DEFAULT 1, -- Activo
+    p_preferencias IN FIDE_CLIENTES_TB.PREFERENCIAS%TYPE,
+    p_historial    IN FIDE_CLIENTES_TB.HISTORIAL_TRATAMIENTOS%TYPE
+  );
 
--- =========================
--- FIDE_METODOS_PAGO_TB
--- =========================
-PROCEDURE FIDE_METODOS_PAGO_TB_INSERT_SP(
-    P_METODO_PAGO_ID IN FIDE_METODOS_PAGO_TB.METODO_PAGO_ID%TYPE,
-    P_ESTADO_ID      IN FIDE_METODOS_PAGO_TB.ESTADO_ID%TYPE DEFAULT 1,
-    P_NOMBRE_METODO  IN FIDE_METODOS_PAGO_TB.NOMBRE_METODO%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE FIDE_METODOS_PAGO_TB_UPDATE_SP(
-    P_METODO_PAGO_ID IN FIDE_METODOS_PAGO_TB.METODO_PAGO_ID%TYPE,
-    P_ESTADO_ID      IN FIDE_METODOS_PAGO_TB.ESTADO_ID%TYPE,
-    P_NOMBRE_METODO  IN FIDE_METODOS_PAGO_TB.NOMBRE_METODO%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE FIDE_METODOS_PAGO_TB_DELETE_SP(
-    P_METODO_PAGO_ID IN FIDE_METODOS_PAGO_TB.METODO_PAGO_ID%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  PROCEDURE FIDE_CLIENTES_MODIFICAR_SP (
+    p_cliente_id   IN FIDE_CLIENTES_TB.CLIENTE_ID%TYPE,
+    p_usuario_id   IN FIDE_CLIENTES_TB.USUARIO_ID%TYPE,
+    p_estado_id    IN FIDE_CLIENTES_TB.ESTADO_ID%TYPE,
+    p_preferencias IN FIDE_CLIENTES_TB.PREFERENCIAS%TYPE,
+    p_historial    IN FIDE_CLIENTES_TB.HISTORIAL_TRATAMIENTOS%TYPE
+  );
 
--- =========================
--- FIDE_FACTURAS_TB
--- =========================
-PROCEDURE FIDE_FACTURAS_TB_INSERT_SP(
-    P_FACTURA_ID     IN FIDE_FACTURAS_TB.FACTURA_ID%TYPE,
-    P_CLIENTE_ID     IN FIDE_FACTURAS_TB.CLIENTE_ID%TYPE,
-    P_ESTADO_ID      IN FIDE_FACTURAS_TB.ESTADO_ID%TYPE DEFAULT 8,
-    P_METODO_PAGO_ID IN FIDE_FACTURAS_TB.METODO_PAGO_ID%TYPE,
-    P_FECHA          IN FIDE_FACTURAS_TB.FECHA%TYPE,
-    P_IMPUESTOS      IN FIDE_FACTURAS_TB.IMPUESTOS%TYPE,
-    P_TOTAL          IN FIDE_FACTURAS_TB.TOTAL%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE FIDE_FACTURAS_TB_UPDATE_SP(
-    P_FACTURA_ID     IN FIDE_FACTURAS_TB.FACTURA_ID%TYPE,
-    P_CLIENTE_ID     IN FIDE_FACTURAS_TB.CLIENTE_ID%TYPE,
-    P_ESTADO_ID      IN FIDE_FACTURAS_TB.ESTADO_ID%TYPE,
-    P_METODO_PAGO_ID IN FIDE_FACTURAS_TB.METODO_PAGO_ID%TYPE,
-    P_FECHA          IN FIDE_FACTURAS_TB.FECHA%TYPE,
-    P_IMPUESTOS      IN FIDE_FACTURAS_TB.IMPUESTOS%TYPE,
-    P_TOTAL          IN FIDE_FACTURAS_TB.TOTAL%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE FIDE_FACTURAS_TB_DELETE_SP(
-    P_FACTURA_ID IN FIDE_FACTURAS_TB.FACTURA_ID%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  PROCEDURE FIDE_CLIENTES_ELIMINAR_SP (
+    p_cliente_id IN FIDE_CLIENTES_TB.CLIENTE_ID%TYPE
+  );
 
--- =========================
--- FIDE_DETALLES_FACTURA_TB
--- =========================
-PROCEDURE FIDE_DETALLES_FACTURA_TB_INSERT_SP(
-    P_DETALLE_ID    IN FIDE_DETALLES_FACTURA_TB.DETALLE_ID%TYPE,
-    P_FACTURA_ID    IN FIDE_DETALLES_FACTURA_TB.FACTURA_ID%TYPE,
-    P_SERVICIO_ID   IN FIDE_DETALLES_FACTURA_TB.SERVICIO_ID%TYPE,
-    P_PRODUCTO_ID   IN FIDE_DETALLES_FACTURA_TB.PRODUCTO_ID%TYPE,
-    P_ESTADO_ID     IN FIDE_DETALLES_FACTURA_TB.ESTADO_ID%TYPE DEFAULT 1,
-    P_PRECIO_UNIT   IN FIDE_DETALLES_FACTURA_TB.PRECIO_UNITARIO%TYPE,
-    P_CANTIDAD      IN FIDE_DETALLES_FACTURA_TB.CANTIDAD%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE FIDE_DETALLES_FACTURA_TB_UPDATE_SP(
-    P_DETALLE_ID    IN FIDE_DETALLES_FACTURA_TB.DETALLE_ID%TYPE,
-    P_FACTURA_ID    IN FIDE_DETALLES_FACTURA_TB.FACTURA_ID%TYPE,
-    P_SERVICIO_ID   IN FIDE_DETALLES_FACTURA_TB.SERVICIO_ID%TYPE,
-    P_PRODUCTO_ID   IN FIDE_DETALLES_FACTURA_TB.PRODUCTO_ID%TYPE,
-    P_ESTADO_ID     IN FIDE_DETALLES_FACTURA_TB.ESTADO_ID%TYPE,
-    P_PRECIO_UNIT   IN FIDE_DETALLES_FACTURA_TB.PRECIO_UNITARIO%TYPE,
-    P_CANTIDAD      IN FIDE_DETALLES_FACTURA_TB.CANTIDAD%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE FIDE_DETALLES_FACTURA_TB_DELETE_SP(
-    P_DETALLE_ID IN FIDE_DETALLES_FACTURA_TB.DETALLE_ID%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  -- =========================
+  -- FIDE_PROVINCIAS_TB
+  -- =========================
+  PROCEDURE FIDE_PROVINCIAS_INSERTAR_SP (
+    p_provincia_id IN FIDE_PROVINCIAS_TB.PROVINCIA_ID%TYPE,
+    p_estado_id    IN FIDE_PROVINCIAS_TB.ESTADO_ID%TYPE DEFAULT 1, -- Activo
+    p_nombre       IN FIDE_PROVINCIAS_TB.NOMBRE_PROVINCIA%TYPE
+  );
 
--- =========================
--- FIDE_DIRECCIONES_PROVEEDORES_TB
--- =========================
-PROCEDURE FIDE_DIRECCIONES_PROVEEDORES_TB_INSERT_SP(
-    P_PROVEEDOR_ID IN FIDE_DIRECCIONES_PROVEEDORES_TB.PROVEEDOR_ID%TYPE,
-    P_DISTRITO_ID  IN FIDE_DIRECCIONES_PROVEEDORES_TB.DISTRITO_ID%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE FIDE_DIRECCIONES_PROVEEDORES_TB_UPDATE_SP(
-    P_PROVEEDOR_ID IN FIDE_DIRECCIONES_PROVEEDORES_TB.PROVEEDOR_ID%TYPE,
-    P_DISTRITO_ID  IN FIDE_DIRECCIONES_PROVEEDORES_TB.DISTRITO_ID%TYPE,
-    P_NUEVO_PROVEEDOR_ID IN FIDE_DIRECCIONES_PROVEEDORES_TB.PROVEEDOR_ID%TYPE,
-    P_NUEVO_DISTRITO_ID  IN FIDE_DIRECCIONES_PROVEEDORES_TB.DISTRITO_ID%TYPE
-);
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  PROCEDURE FIDE_PROVINCIAS_MODIFICAR_SP (
+    p_provincia_id IN FIDE_PROVINCIAS_TB.PROVINCIA_ID%TYPE,
+    p_estado_id    IN FIDE_PROVINCIAS_TB.ESTADO_ID%TYPE,
+    p_nombre       IN FIDE_PROVINCIAS_TB.NOMBRE_PROVINCIA%TYPE
+  );
+
+  PROCEDURE FIDE_PROVINCIAS_ELIMINAR_SP (
+    p_provincia_id IN FIDE_PROVINCIAS_TB.PROVINCIA_ID%TYPE
+  );
+
+  -- =========================
+  -- FIDE_CANTONES_TB
+  -- =========================
+  PROCEDURE FIDE_CANTONES_INSERTAR_SP (
+    p_canton_id    IN FIDE_CANTONES_TB.CANTON_ID%TYPE,
+    p_provincia_id IN FIDE_CANTONES_TB.PROVINCIA_ID%TYPE,
+    p_estado_id    IN FIDE_CANTONES_TB.ESTADO_ID%TYPE DEFAULT 1, -- Activo
+    p_nombre       IN FIDE_CANTONES_TB.NOMBRE_CANTON%TYPE
+  );
+
+  PROCEDURE FIDE_CANTONES_MODIFICAR_SP (
+    p_canton_id    IN FIDE_CANTONES_TB.CANTON_ID%TYPE,
+    p_provincia_id IN FIDE_CANTONES_TB.PROVINCIA_ID%TYPE,
+    p_estado_id    IN FIDE_CANTONES_TB.ESTADO_ID%TYPE,
+    p_nombre       IN FIDE_CANTONES_TB.NOMBRE_CANTON%TYPE
+  );
+
+  PROCEDURE FIDE_CANTONES_ELIMINAR_SP (
+    p_canton_id IN FIDE_CANTONES_TB.CANTON_ID%TYPE
+  );
+
+  -- =========================
+  -- FIDE_DISTRITOS_TB
+  -- =========================
+  PROCEDURE FIDE_DISTRITOS_INSERTAR_SP (
+    p_distrito_id IN FIDE_DISTRITOS_TB.DISTRITO_ID%TYPE,
+    p_canton_id   IN FIDE_DISTRITOS_TB.CANTON_ID%TYPE,
+    p_estado_id   IN FIDE_DISTRITOS_TB.ESTADO_ID%TYPE DEFAULT 1, -- Activo
+    p_nombre      IN FIDE_DISTRITOS_TB.NOMBRE_DISTRITO%TYPE
+  );
+
+  PROCEDURE FIDE_DISTRITOS_MODIFICAR_SP (
+    p_distrito_id IN FIDE_DISTRITOS_TB.DISTRITO_ID%TYPE,
+    p_canton_id   IN FIDE_DISTRITOS_TB.CANTON_ID%TYPE,
+    p_estado_id   IN FIDE_DISTRITOS_TB.ESTADO_ID%TYPE,
+    p_nombre      IN FIDE_DISTRITOS_TB.NOMBRE_DISTRITO%TYPE
+  );
+
+  PROCEDURE FIDE_DISTRITOS_ELIMINAR_SP (
+    p_distrito_id IN FIDE_DISTRITOS_TB.DISTRITO_ID%TYPE
+  );
+
+  -- =========================
+  -- FIDE_DIRECCIONES_TB
+  -- =========================
+  PROCEDURE FIDE_DIRECCIONES_INSERTAR_SP (
+    p_usuario_id  IN FIDE_DIRECCIONES_TB.USUARIO_ID%TYPE,
+    p_distrito_id IN FIDE_DIRECCIONES_TB.DISTRITO_ID%TYPE,
+    p_estado_id   IN FIDE_DIRECCIONES_TB.ESTADO_ID%TYPE DEFAULT 1, -- Activo
+    p_descripcion IN FIDE_DIRECCIONES_TB.DESCRIPCION%TYPE
+  );
+
+  PROCEDURE FIDE_DIRECCIONES_MODIFICAR_SP (
+    p_usuario_id  IN FIDE_DIRECCIONES_TB.USUARIO_ID%TYPE,
+    p_distrito_id IN FIDE_DIRECCIONES_TB.DISTRITO_ID%TYPE,
+    p_estado_id   IN FIDE_DIRECCIONES_TB.ESTADO_ID%TYPE,
+    p_descripcion IN FIDE_DIRECCIONES_TB.DESCRIPCION%TYPE
+  );
+
+  PROCEDURE FIDE_DIRECCIONES_ELIMINAR_SP (
+    p_usuario_id  IN FIDE_DIRECCIONES_TB.USUARIO_ID%TYPE,
+    p_distrito_id IN FIDE_DIRECCIONES_TB.DISTRITO_ID%TYPE
+  );
+
+  -- =========================
+  -- FIDE_CATEGORIAS_TB
+  -- =========================
+  PROCEDURE FIDE_CATEGORIAS_INSERTAR_SP (
+    p_categoria_id IN FIDE_CATEGORIAS_TB.CATEGORIA_ID%TYPE,
+    p_estado_id    IN FIDE_CATEGORIAS_TB.ESTADO_ID%TYPE DEFAULT 1, -- Activo
+    p_nombre       IN FIDE_CATEGORIAS_TB.NOMBRE_CATEGORIA%TYPE
+  );
+
+  PROCEDURE FIDE_CATEGORIAS_MODIFICAR_SP (
+    p_categoria_id IN FIDE_CATEGORIAS_TB.CATEGORIA_ID%TYPE,
+    p_estado_id    IN FIDE_CATEGORIAS_TB.ESTADO_ID%TYPE,
+    p_nombre       IN FIDE_CATEGORIAS_TB.NOMBRE_CATEGORIA%TYPE
+  );
+
+  PROCEDURE FIDE_CATEGORIAS_ELIMINAR_SP (
+    p_categoria_id IN FIDE_CATEGORIAS_TB.CATEGORIA_ID%TYPE
+  );
+
+  -- =========================
+  -- FIDE_SERVICIOS_TB
+  -- =========================
+  PROCEDURE FIDE_SERVICIOS_INSERTAR_SP (
+    p_servicio_id  IN FIDE_SERVICIOS_TB.SERVICIO_ID%TYPE,
+    p_estado_id    IN FIDE_SERVICIOS_TB.ESTADO_ID%TYPE DEFAULT 1, -- Activo
+    p_categoria_id IN FIDE_SERVICIOS_TB.CATEGORIA_ID%TYPE,
+    p_nombre       IN FIDE_SERVICIOS_TB.NOMBRE%TYPE,
+    p_descripcion  IN FIDE_SERVICIOS_TB.DESCRIPCION%TYPE,
+    p_duracion     IN FIDE_SERVICIOS_TB.DURACION%TYPE,
+    p_precio       IN FIDE_SERVICIOS_TB.PRECIO%TYPE
+  );
+
+  PROCEDURE FIDE_SERVICIOS_MODIFICAR_SP (
+    p_servicio_id  IN FIDE_SERVICIOS_TB.SERVICIO_ID%TYPE,
+    p_estado_id    IN FIDE_SERVICIOS_TB.ESTADO_ID%TYPE,
+    p_categoria_id IN FIDE_SERVICIOS_TB.CATEGORIA_ID%TYPE,
+    p_nombre       IN FIDE_SERVICIOS_TB.NOMBRE%TYPE,
+    p_descripcion  IN FIDE_SERVICIOS_TB.DESCRIPCION%TYPE,
+    p_duracion     IN FIDE_SERVICIOS_TB.DURACION%TYPE,
+    p_precio       IN FIDE_SERVICIOS_TB.PRECIO%TYPE
+  );
+
+  PROCEDURE FIDE_SERVICIOS_ELIMINAR_SP (
+    p_servicio_id IN FIDE_SERVICIOS_TB.SERVICIO_ID%TYPE
+  );
+
+  -- =========================
+  -- FIDE_CITAS_TB
+  -- =========================
+  PROCEDURE FIDE_CITAS_INSERTAR_SP (
+    p_cita_id     IN FIDE_CITAS_TB.CITA_ID%TYPE,
+    p_cliente_id  IN FIDE_CITAS_TB.CLIENTE_ID%TYPE,
+    p_servicio_id IN FIDE_CITAS_TB.SERVICIO_ID%TYPE,
+    p_estado_id   IN FIDE_CITAS_TB.ESTADO_ID%TYPE DEFAULT 3, -- Pendiente
+    p_fecha_hora  IN FIDE_CITAS_TB.FECHA_HORA%TYPE,
+    p_notas       IN FIDE_CITAS_TB.NOTAS%TYPE
+  );
+
+  PROCEDURE FIDE_CITAS_MODIFICAR_SP (
+    p_cita_id     IN FIDE_CITAS_TB.CITA_ID%TYPE,
+    p_cliente_id  IN FIDE_CITAS_TB.CLIENTE_ID%TYPE,
+    p_servicio_id IN FIDE_CITAS_TB.SERVICIO_ID%TYPE,
+    p_estado_id   IN FIDE_CITAS_TB.ESTADO_ID%TYPE,
+    p_fecha_hora  IN FIDE_CITAS_TB.FECHA_HORA%TYPE,
+    p_notas       IN FIDE_CITAS_TB.NOTAS%TYPE
+  );
+
+  PROCEDURE FIDE_CITAS_ELIMINAR_SP (
+    p_cita_id IN FIDE_CITAS_TB.CITA_ID%TYPE
+  );
+
+  -- =========================
+  -- FIDE_PROVEEDORES_TB
+  -- =========================
+  PROCEDURE FIDE_PROVEEDORES_INSERTAR_SP (
+    p_proveedor_id IN FIDE_PROVEEDORES_TB.PROVEEDOR_ID%TYPE,
+    p_estado_id    IN FIDE_PROVEEDORES_TB.ESTADO_ID%TYPE DEFAULT 1, -- Activo
+    p_telefono_id  IN FIDE_PROVEEDORES_TB.TELEFONO_ID%TYPE,
+    p_nombre       IN FIDE_PROVEEDORES_TB.NOMBRE%TYPE,
+    p_contacto     IN FIDE_PROVEEDORES_TB.CONTACTO%TYPE
+  );
+
+  PROCEDURE FIDE_PROVEEDORES_MODIFICAR_SP (
+    p_proveedor_id IN FIDE_PROVEEDORES_TB.PROVEEDOR_ID%TYPE,
+    p_estado_id    IN FIDE_PROVEEDORES_TB.ESTADO_ID%TYPE,
+    p_telefono_id  IN FIDE_PROVEEDORES_TB.TELEFONO_ID%TYPE,
+    p_nombre       IN FIDE_PROVEEDORES_TB.NOMBRE%TYPE,
+    p_contacto     IN FIDE_PROVEEDORES_TB.CONTACTO%TYPE
+  );
+
+  PROCEDURE FIDE_PROVEEDORES_ELIMINAR_SP (
+    p_proveedor_id IN FIDE_PROVEEDORES_TB.PROVEEDOR_ID%TYPE
+  );
+
+  -- =========================
+  -- FIDE_PRODUCTOS_TB
+  -- =========================
+  PROCEDURE FIDE_PRODUCTOS_INSERTAR_SP (
+    p_producto_id  IN FIDE_PRODUCTOS_TB.PRODUCTO_ID%TYPE,
+    p_categoria_id IN FIDE_PRODUCTOS_TB.CATEGORIA_ID%TYPE,
+    p_estado_id    IN FIDE_PRODUCTOS_TB.ESTADO_ID%TYPE DEFAULT 1, -- Activo
+    p_proveedor_id IN FIDE_PRODUCTOS_TB.PROVEEDOR_ID%TYPE,
+    p_nombre       IN FIDE_PRODUCTOS_TB.NOMBRE%TYPE,
+    p_descripcion  IN FIDE_PRODUCTOS_TB.DESCRIPCION%TYPE,
+    p_precio       IN FIDE_PRODUCTOS_TB.PRECIO%TYPE
+  );
+
+  PROCEDURE FIDE_PRODUCTOS_MODIFICAR_SP (
+    p_producto_id  IN FIDE_PRODUCTOS_TB.PRODUCTO_ID%TYPE,
+    p_categoria_id IN FIDE_PRODUCTOS_TB.CATEGORIA_ID%TYPE,
+    p_estado_id    IN FIDE_PRODUCTOS_TB.ESTADO_ID%TYPE,
+    p_proveedor_id IN FIDE_PRODUCTOS_TB.PROVEEDOR_ID%TYPE,
+    p_nombre       IN FIDE_PRODUCTOS_TB.NOMBRE%TYPE,
+    p_descripcion  IN FIDE_PRODUCTOS_TB.DESCRIPCION%TYPE,
+    p_precio       IN FIDE_PRODUCTOS_TB.PRECIO%TYPE
+  );
+
+  PROCEDURE FIDE_PRODUCTOS_ELIMINAR_SP (
+    p_producto_id IN FIDE_PRODUCTOS_TB.PRODUCTO_ID%TYPE
+  );
+
+  -- =========================
+  -- FIDE_INVENTARIO_TB
+  -- =========================
+  PROCEDURE FIDE_INVENTARIO_INSERTAR_SP (
+    p_producto_id IN FIDE_INVENTARIO_TB.PRODUCTO_ID%TYPE,
+    p_estado_id   IN FIDE_INVENTARIO_TB.ESTADO_ID%TYPE DEFAULT 1, -- Activo
+    p_cantidad    IN FIDE_INVENTARIO_TB.CANTIDAD%TYPE,
+    p_fecha_act   IN FIDE_INVENTARIO_TB.FECHA_ACTUALIZACION%TYPE DEFAULT SYSDATE
+  );
+
+  PROCEDURE FIDE_INVENTARIO_MODIFICAR_SP (
+    p_producto_id IN FIDE_INVENTARIO_TB.PRODUCTO_ID%TYPE,
+    p_fecha_act   IN FIDE_INVENTARIO_TB.FECHA_ACTUALIZACION%TYPE,
+    p_estado_id   IN FIDE_INVENTARIO_TB.ESTADO_ID%TYPE,
+    p_cantidad    IN FIDE_INVENTARIO_TB.CANTIDAD%TYPE
+  );
+
+  PROCEDURE FIDE_INVENTARIO_ELIMINAR_SP (
+    p_producto_id IN FIDE_INVENTARIO_TB.PRODUCTO_ID%TYPE,
+    p_fecha_act   IN FIDE_INVENTARIO_TB.FECHA_ACTUALIZACION%TYPE
+  );
+
+  -- =========================
+  -- FIDE_METODOS_PAGO_TB
+  -- =========================
+  PROCEDURE FIDE_METODOS_PAGO_INSERTAR_SP (
+    p_metodo_pago_id IN FIDE_METODOS_PAGO_TB.METODO_PAGO_ID%TYPE,
+    p_estado_id      IN FIDE_METODOS_PAGO_TB.ESTADO_ID%TYPE DEFAULT 1, -- Activo
+    p_nombre_metodo  IN FIDE_METODOS_PAGO_TB.NOMBRE_METODO%TYPE
+  );
+
+  PROCEDURE FIDE_METODOS_PAGO_MODIFICAR_SP (
+    p_metodo_pago_id IN FIDE_METODOS_PAGO_TB.METODO_PAGO_ID%TYPE,
+    p_estado_id      IN FIDE_METODOS_PAGO_TB.ESTADO_ID%TYPE,
+    p_nombre_metodo  IN FIDE_METODOS_PAGO_TB.NOMBRE_METODO%TYPE
+  );
+
+  PROCEDURE FIDE_METODOS_PAGO_ELIMINAR_SP (
+    p_metodo_pago_id IN FIDE_METODOS_PAGO_TB.METODO_PAGO_ID%TYPE
+  );
+
+  -- =========================
+  -- FIDE_FACTURAS_TB
+  -- =========================
+  PROCEDURE FIDE_FACTURAS_INSERTAR_SP (
+    p_factura_id     IN FIDE_FACTURAS_TB.FACTURA_ID%TYPE,
+    p_cliente_id     IN FIDE_FACTURAS_TB.CLIENTE_ID%TYPE,
+    p_estado_id      IN FIDE_FACTURAS_TB.ESTADO_ID%TYPE DEFAULT 8, -- Facturado
+    p_metodo_pago_id IN FIDE_FACTURAS_TB.METODO_PAGO_ID%TYPE,
+    p_fecha          IN FIDE_FACTURAS_TB.FECHA%TYPE,
+    p_impuestos      IN FIDE_FACTURAS_TB.IMPUESTOS%TYPE,
+    p_total          IN FIDE_FACTURAS_TB.TOTAL%TYPE
+  );
+
+  PROCEDURE FIDE_FACTURAS_MODIFICAR_SP (
+    p_factura_id     IN FIDE_FACTURAS_TB.FACTURA_ID%TYPE,
+    p_cliente_id     IN FIDE_FACTURAS_TB.CLIENTE_ID%TYPE,
+    p_estado_id      IN FIDE_FACTURAS_TB.ESTADO_ID%TYPE,
+    p_metodo_pago_id IN FIDE_FACTURAS_TB.METODO_PAGO_ID%TYPE,
+    p_fecha          IN FIDE_FACTURAS_TB.FECHA%TYPE,
+    p_impuestos      IN FIDE_FACTURAS_TB.IMPUESTOS%TYPE,
+    p_total          IN FIDE_FACTURAS_TB.TOTAL%TYPE
+  );
+
+  PROCEDURE FIDE_FACTURAS_ELIMINAR_SP (
+    p_factura_id IN FIDE_FACTURAS_TB.FACTURA_ID%TYPE
+  );
+
+  -- =========================
+  -- FIDE_DETALLES_FACTURA_TB
+  -- =========================
+  PROCEDURE FIDE_DETALLES_FACTURA_INSERTAR_SP (
+    p_factura_id   IN FIDE_DETALLES_FACTURA_TB.FACTURA_ID%TYPE,
+    p_servicio_id  IN FIDE_DETALLES_FACTURA_TB.SERVICIO_ID%TYPE,
+    p_producto_id  IN FIDE_DETALLES_FACTURA_TB.PRODUCTO_ID%TYPE,
+    p_estado_id    IN FIDE_DETALLES_FACTURA_TB.ESTADO_ID%TYPE DEFAULT 1, -- Activo
+    p_precio_unit  IN FIDE_DETALLES_FACTURA_TB.PRECIO_UNITARIO%TYPE,
+    p_cantidad     IN FIDE_DETALLES_FACTURA_TB.CANTIDAD%TYPE
+  );
+
+  PROCEDURE FIDE_DETALLES_FACTURA_MODIFICAR_SP (
+    p_factura_id   IN FIDE_DETALLES_FACTURA_TB.FACTURA_ID%TYPE,
+    p_servicio_id  IN FIDE_DETALLES_FACTURA_TB.SERVICIO_ID%TYPE,
+    p_producto_id  IN FIDE_DETALLES_FACTURA_TB.PRODUCTO_ID%TYPE,
+    p_estado_id    IN FIDE_DETALLES_FACTURA_TB.ESTADO_ID%TYPE,
+    p_precio_unit  IN FIDE_DETALLES_FACTURA_TB.PRECIO_UNITARIO%TYPE,
+    p_cantidad     IN FIDE_DETALLES_FACTURA_TB.CANTIDAD%TYPE
+  );
+
+  PROCEDURE FIDE_DETALLES_FACTURA_ELIMINAR_SP (
+    p_factura_id   IN FIDE_DETALLES_FACTURA_TB.FACTURA_ID%TYPE,
+    p_servicio_id  IN FIDE_DETALLES_FACTURA_TB.SERVICIO_ID%TYPE,
+    p_producto_id  IN FIDE_DETALLES_FACTURA_TB.PRODUCTO_ID%TYPE
+  );
+
+  -- =========================
+  -- FIDE_DIRECCIONES_PROVEEDORES_TB
+  -- =========================
+  PROCEDURE FIDE_DIRECCIONES_PROVEEDORES_INSERTAR_SP (
+    p_proveedor_id IN FIDE_DIRECCIONES_PROVEEDORES_TB.PROVEEDOR_ID%TYPE,
+    p_distrito_id  IN FIDE_DIRECCIONES_PROVEEDORES_TB.DISTRITO_ID%TYPE
+  );
+
+  PROCEDURE FIDE_DIRECCIONES_PROVEEDORES_MODIFICAR_SP (
+    p_proveedor_id       IN FIDE_DIRECCIONES_PROVEEDORES_TB.PROVEEDOR_ID%TYPE,
+    p_distrito_id        IN FIDE_DIRECCIONES_PROVEEDORES_TB.DISTRITO_ID%TYPE,
+    p_nuevo_proveedor_id IN FIDE_DIRECCIONES_PROVEEDORES_TB.PROVEEDOR_ID%TYPE,
+    p_nuevo_distrito_id  IN FIDE_DIRECCIONES_PROVEEDORES_TB.DISTRITO_ID%TYPE
+  );
 
 END FIDE_ANGELUS_ESTETICA_PKG;
