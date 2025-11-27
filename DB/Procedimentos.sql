@@ -1399,3 +1399,353 @@ EXCEPTION
       FROM dual WHERE 1=0;
 END;
 /
+
+--Ofelia
+
+------------------------------------------------------------
+-- 65) FIDE_INVENTARIO_LISTAR_SP
+------------------------------------------------------------
+CREATE OR REPLACE PROCEDURE FIDE_INVENTARIO_LISTAR_SP (
+    p_cursor OUT SYS_REFCURSOR
+)
+IS
+BEGIN
+    OPEN p_cursor FOR
+        SELECT
+            PRODUCTO_ID,
+            ESTADO_ID,
+            CANTIDAD,
+            FECHA_ACTUALIZACION
+        FROM FIDE_INVENTARIO_TB
+        ORDER BY FECHA_ACTUALIZACION DESC;
+
+    DBMS_OUTPUT.PUT_LINE('Listado de inventario obtenido correctamente.');
+
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Error al listar inventario: ' || SQLERRM);
+
+        OPEN p_cursor FOR
+            SELECT
+                NULL PRODUCTO_ID,
+                NULL ESTADO_ID,
+                NULL CANTIDAD,
+                NULL FECHA_ACTUALIZACION
+            FROM dual WHERE 1=0;
+END;
+/
+------------------------------------------------------------
+-- 66) FIDE_INVENTARIO_OBTENER_SP
+------------------------------------------------------------
+CREATE OR REPLACE PROCEDURE FIDE_INVENTARIO_OBTENER_SP (
+    p_producto_id        IN  FIDE_INVENTARIO_TB.PRODUCTO_ID%TYPE,
+    p_fecha_actualizacion IN FIDE_INVENTARIO_TB.FECHA_ACTUALIZACION%TYPE,
+    p_estado_id          OUT FIDE_INVENTARIO_TB.ESTADO_ID%TYPE,
+    p_cantidad           OUT FIDE_INVENTARIO_TB.CANTIDAD%TYPE
+)
+IS
+BEGIN
+    SELECT
+        ESTADO_ID,
+        CANTIDAD
+    INTO
+        p_estado_id,
+        p_cantidad
+    FROM FIDE_INVENTARIO_TB
+    WHERE PRODUCTO_ID = p_producto_id
+      AND FECHA_ACTUALIZACION = p_fecha_actualizacion;
+
+    DBMS_OUTPUT.PUT_LINE('Inventario obtenido correctamente.');
+
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE(
+            'Inventario no encontrado: PRODUCTO_ID=' || p_producto_id ||
+            ', FECHA=' || p_fecha_actualizacion
+        );
+
+        p_estado_id := NULL;
+        p_cantidad  := NULL;
+
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Error al obtener inventario: ' || SQLERRM);
+
+        p_estado_id := NULL;
+        p_cantidad  := NULL;
+END;
+/
+
+---------------------------------------------------------------
+-- 67) FIDE_PROVEEDORES_LISTAR_SP
+---------------------------------------------------------------
+--Proveedores listar y obtener
+CREATE OR REPLACE PROCEDURE FIDE_PROVEEDORES_LISTAR_SP (
+    p_cursor OUT SYS_REFCURSOR
+)
+IS
+BEGIN
+    OPEN p_cursor FOR
+        SELECT
+            PROVEEDOR_ID,
+            ESTADO_ID,
+            TELEFONO_ID,
+            NOMBRE,
+            CONTACTO
+        FROM FIDE_PROVEEDORES_TB
+        ORDER BY NOMBRE;
+
+    DBMS_OUTPUT.PUT_LINE('Listado de proveedores obtenido correctamente.');
+
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Error al listar proveedores: ' || SQLERRM);
+
+        -- Cursor vacío para evitar errores en backend
+        OPEN p_cursor FOR
+            SELECT
+                NULL PROVEEDOR_ID,
+                NULL ESTADO_ID,
+                NULL TELEFONO_ID,
+                NULL NOMBRE,
+                NULL CONTACTO
+            FROM dual WHERE 1=0;
+END;
+/
+------------------------------------------------------------
+-- 68) FIDE_PROVEEDORES_OBTENER_SP
+------------------------------------------------------------
+CREATE OR REPLACE PROCEDURE FIDE_PROVEEDORES_OBTENER_SP (
+    p_proveedor_id   IN  FIDE_PROVEEDORES_TB.PROVEEDOR_ID%TYPE,
+    p_estado_id      OUT FIDE_PROVEEDORES_TB.ESTADO_ID%TYPE,
+    p_telefono_id    OUT FIDE_PROVEEDORES_TB.TELEFONO_ID%TYPE,
+    p_nombre         OUT FIDE_PROVEEDORES_TB.NOMBRE%TYPE,
+    p_contacto       OUT FIDE_PROVEEDORES_TB.CONTACTO%TYPE
+)
+IS
+BEGIN
+    SELECT
+        ESTADO_ID,
+        TELEFONO_ID,
+        NOMBRE,
+        CONTACTO
+    INTO
+        p_estado_id,
+        p_telefono_id,
+        p_nombre,
+        p_contacto
+    FROM FIDE_PROVEEDORES_TB
+    WHERE PROVEEDOR_ID = p_proveedor_id;
+
+    DBMS_OUTPUT.PUT_LINE('Proveedor obtenido correctamente.');
+
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('Proveedor no encontrado: ID=' || p_proveedor_id);
+
+        p_estado_id   := NULL;
+        p_telefono_id := NULL;
+        p_nombre      := NULL;
+        p_contacto    := NULL;
+
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Error al obtener proveedor: ' || SQLERRM);
+
+        p_estado_id   := NULL;
+        p_telefono_id := NULL;
+        p_nombre      := NULL;
+        p_contacto    := NULL;
+END;
+/
+
+-------------------------------------------------------------------------------
+-- 69) FIDE_PROVEEDORES_LISTAR_SP
+-------------------------------------------------------------------------------
+--Proveedores listar y obtener
+
+CREATE OR REPLACE PROCEDURE FIDE_PROVEEDORES_LISTAR_SP (
+    p_cursor OUT SYS_REFCURSOR
+)
+IS
+BEGIN
+    OPEN p_cursor FOR
+        SELECT
+            PROVEEDOR_ID,
+            ESTADO_ID,
+            TELEFONO_ID,
+            NOMBRE,
+            CONTACTO
+        FROM FIDE_PROVEEDORES_TB
+        ORDER BY NOMBRE;
+
+    DBMS_OUTPUT.PUT_LINE('Listado de proveedores obtenido correctamente.');
+
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Error al listar proveedores: ' || SQLERRM);
+
+        -- Cursor vacío para evitar errores en backend
+        OPEN p_cursor FOR
+            SELECT
+                NULL PROVEEDOR_ID,
+                NULL ESTADO_ID,
+                NULL TELEFONO_ID,
+                NULL NOMBRE,
+                NULL CONTACTO
+            FROM dual WHERE 1=0;
+END;
+/
+------------------------------------------------------------
+-- 70) FIDE_PROVEEDORES_OBTENER_SP
+------------------------------------------------------------
+CREATE OR REPLACE PROCEDURE FIDE_PROVEEDORES_OBTENER_SP (
+    p_proveedor_id   IN  FIDE_PROVEEDORES_TB.PROVEEDOR_ID%TYPE,
+    p_estado_id      OUT FIDE_PROVEEDORES_TB.ESTADO_ID%TYPE,
+    p_telefono_id    OUT FIDE_PROVEEDORES_TB.TELEFONO_ID%TYPE,
+    p_nombre         OUT FIDE_PROVEEDORES_TB.NOMBRE%TYPE,
+    p_contacto       OUT FIDE_PROVEEDORES_TB.CONTACTO%TYPE
+)
+IS
+BEGIN
+    SELECT
+        ESTADO_ID,
+        TELEFONO_ID,
+        NOMBRE,
+        CONTACTO
+    INTO
+        p_estado_id,
+        p_telefono_id,
+        p_nombre,
+        p_contacto
+    FROM FIDE_PROVEEDORES_TB
+    WHERE PROVEEDOR_ID = p_proveedor_id;
+
+    DBMS_OUTPUT.PUT_LINE('Proveedor obtenido correctamente.');
+
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('Proveedor no encontrado: ID=' || p_proveedor_id);
+
+        p_estado_id   := NULL;
+        p_telefono_id := NULL;
+        p_nombre      := NULL;
+        p_contacto    := NULL;
+
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Error al obtener proveedor: ' || SQLERRM);
+
+        p_estado_id   := NULL;
+        p_telefono_id := NULL;
+        p_nombre      := NULL;
+        p_contacto    := NULL;
+END;
+/
+
+-------------------------------------------------------------------------------
+-- 71) FIDE_USUARIOS_LISTAR_SP
+-------------------------------------------------------------------------------
+--Usuarios listar y obtener
+CREATE OR REPLACE PROCEDURE FIDE_USUARIOS_LISTAR_SP (
+    p_cursor OUT SYS_REFCURSOR
+)
+IS
+BEGIN
+    OPEN p_cursor FOR
+        SELECT
+            USUARIO_ID,
+            ROL_ID,
+            CORREO_ID,
+            TELEFONO_ID,
+            ESTADO_ID,
+            NOMBRE,
+            APELLIDO_PATERNO,
+            APELLIDO_MATERNO,
+            FECHA_REGISTRO
+        FROM FIDE_USUARIOS_TB
+        ORDER BY NOMBRE;
+
+    DBMS_OUTPUT.PUT_LINE('Listado de usuarios obtenido correctamente.');
+
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Error al listar usuarios: ' || SQLERRM);
+
+        -- Cursor vacío para evitar errores en backend
+        OPEN p_cursor FOR
+            SELECT
+                NULL USUARIO_ID,
+                NULL ROL_ID,
+                NULL CORREO_ID,
+                NULL TELEFONO_ID,
+                NULL ESTADO_ID,
+                NULL NOMBRE,
+                NULL APELLIDO_PATERNO,
+                NULL APELLIDO_MATERNO,
+                NULL FECHA_REGISTRO
+            FROM dual WHERE 1=0;
+END;
+/
+------------------------------------------------------------
+-- 72) FIDE_USUARIOS_OBTENER_SP
+------------------------------------------------------------
+CREATE OR REPLACE PROCEDURE FIDE_USUARIOS_OBTENER_SP (
+    p_usuario_id        IN  FIDE_USUARIOS_TB.USUARIO_ID%TYPE,
+    p_rol_id            OUT FIDE_USUARIOS_TB.ROL_ID%TYPE,
+    p_correo_id         OUT FIDE_USUARIOS_TB.CORREO_ID%TYPE,
+    p_telefono_id       OUT FIDE_USUARIOS_TB.TELEFONO_ID%TYPE,
+    p_estado_id         OUT FIDE_USUARIOS_TB.ESTADO_ID%TYPE,
+    p_nombre            OUT FIDE_USUARIOS_TB.NOMBRE%TYPE,
+    p_apellido_paterno  OUT FIDE_USUARIOS_TB.APELLIDO_PATERNO%TYPE,
+    p_apellido_materno  OUT FIDE_USUARIOS_TB.APELLIDO_MATERNO%TYPE,
+    p_fecha_registro    OUT FIDE_USUARIOS_TB.FECHA_REGISTRO%TYPE
+)
+IS
+BEGIN
+    SELECT
+        ROL_ID,
+        CORREO_ID,
+        TELEFONO_ID,
+        ESTADO_ID,
+        NOMBRE,
+        APELLIDO_PATERNO,
+        APELLIDO_MATERNO,
+        FECHA_REGISTRO
+    INTO
+        p_rol_id,
+        p_correo_id,
+        p_telefono_id,
+        p_estado_id,
+        p_nombre,
+        p_apellido_paterno,
+        p_apellido_materno,
+        p_fecha_registro
+    FROM FIDE_USUARIOS_TB
+    WHERE USUARIO_ID = p_usuario_id;
+
+    DBMS_OUTPUT.PUT_LINE('Usuario obtenido correctamente.');
+
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('Usuario no encontrado: ID=' || p_usuario_id);
+
+        p_rol_id           := NULL;
+        p_correo_id        := NULL;
+        p_telefono_id      := NULL;
+        p_estado_id        := NULL;
+        p_nombre           := NULL;
+        p_apellido_paterno := NULL;
+        p_apellido_materno := NULL;
+        p_fecha_registro   := NULL;
+
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Error al obtener usuario: ' || SQLERRM);
+
+        p_rol_id           := NULL;
+        p_correo_id        := NULL;
+        p_telefono_id      := NULL;
+        p_estado_id        := NULL;
+        p_nombre           := NULL;
+        p_apellido_paterno := NULL;
+        p_apellido_materno := NULL;
+        p_fecha_registro   := NULL;
+END;
+/
