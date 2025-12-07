@@ -76,7 +76,7 @@ https://templatemo.com/tm-559-zay-shop
                             <a class="nav-link" href="index.html">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="sobresnosotros.html">Servicios</a>
+                            <a class="nav-link" href="servicios.html">Servicios</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="productos.html">Productos</a>
@@ -150,48 +150,30 @@ https://templatemo.com/tm-559-zay-shop
             </p>
         </div>
     </div>
-    <div class="row">
 
-        <div class="col-md-6 col-lg-3 pb-5">
-            <div class="h-100 py-5 services-icon-wap shadow">
-                <div class="text-center">
-                    <img src="./assets/img/pestannas.png"  style="width:200px; height:200px;">
-                </div>
-                <h2 class="h5 mt-4 text-center">Pestañas</h2>
-              
-            </div>
-        </div>
-
-        <div class="col-md-6 col-lg-3 pb-5">
-            <div class="h-100 py-5 services-icon-wap shadow">
-                <div class="text-center">
-                    <img src="./assets/img/capilar.png"  style="width:200px; height:200px;">
-                </div>
-                <h2 class="h5 mt-4 text-center">Masaje Capilar</h2>
-            </div>
-        </div>
-
-        <div class="col-md-6 col-lg-3 pb-5">
-            <div class="h-100 py-5 services-icon-wap shadow">
-                <div class="text-center">
-                    <img src="./assets/img/cejas.jpg"  style="width:200px; height:200px;">
-                </div>
-                <h2 class="h5 mt-4 text-center">Diseño de cejas</h2>
-            </div>
-        </div>
-
-        <div class="col-md-6 col-lg-3 pb-5">
-            <div class="h-100 py-5 services-icon-wap shadow">
-                <div class="text-center">
-                    <img src="./assets/img/carrusel3.jpg"  style="width:200px; height:200px;">
-                </div>
-                <h2 class="h5 mt-4 text-center">Masaje</h2>
-            </div>
-        </div>
-
+    <!-- FILTROS -->
+    <div class="row mb-4">
+        <ul class="list-inline text-center">
+            <li class="list-inline-item">
+                <a class="h3 text-dark text-decoration-none filtro-servicio" data-filtro="todo">Todo</a>
+            </li>
+            <li class="list-inline-item">
+                <a class="h3 text-dark text-decoration-none filtro-servicio" data-filtro="1">Faciales</a>
+            </li>
+            <li class="list-inline-item">
+                <a class="h3 text-dark text-decoration-none filtro-servicio" data-filtro="3">Masajes</a>
+            </li>
+            <li class="list-inline-item">
+                <a class="h3 text-dark text-decoration-none filtro-servicio" data-filtro="5">Spa</a>
+            </li>
+        </ul>
     </div>
+
+    <!-- CONTENEDOR DINÁMICO -->
+    <div class="row" id="contenedor-servicios"></div>
 </section>
 <!-- End Section -->
+
 
     <!-- Start Featured Product -->
     <section class="bg-light">
@@ -378,6 +360,8 @@ https://templatemo.com/tm-559-zay-shop
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/templatemo.js"></script>
     <script src="assets/js/custom.js"></script>
+    <script src="assets/js/servicios.js"></script>
+
     <!-- End Script -->
 </body>
 

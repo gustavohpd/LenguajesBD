@@ -1,439 +1,482 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <title>Estetica Angelus</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!--<link rel="apple-touch-icon" href="assets/img/apple-icon.png">-->
-    <!-- <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">-->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/templatemo.css" />
+    <link rel="stylesheet" href="assets/css/custom.css" />
 
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/templatemo.css">
-    <link rel="stylesheet" href="assets/css/custom.css">
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap"
+    />
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css" />
+  </head>
 
-    <!-- Load fonts style after rendering the layout styles -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
-    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
-    <!--
-    
-TemplateMo 559 Zay Shop
-
-https://templatemo.com/tm-559-zay-shop
-
--->
-</head>
-
-<body>
-    <!-- Start Top Nav 
-    <nav class="navbar navbar-expand-lg bg-dark navbar-light d-none d-lg-block" id="templatemo_nav_top">
-        <div class="container text-light">
-            <div class="w-100 d-flex justify-content-between">
-                <div>
-                    <i class="fa fa-envelope mx-2"></i>
-                    <a class="navbar-sm-brand text-light text-decoration-none"
-                        href="mailto:info@company.com">info@company.com</a>
-                    <i class="fa fa-phone mx-2"></i>
-                    <a class="navbar-sm-brand text-light text-decoration-none" href="tel:010-020-0340">010-020-0340</a>
-                </div>
-                <div>
-                    <a class="text-light" href="https://fb.com/templatemo" target="_blank" rel="sponsored"><i
-                            class="fab fa-facebook-f fa-sm fa-fw me-2"></i></a>
-                    <a class="text-light" href="https://www.instagram.com/" target="_blank"><i
-                            class="fab fa-instagram fa-sm fa-fw me-2"></i></a>
-                    <a class="text-light" href="https://twitter.com/" target="_blank"><i
-                            class="fab fa-twitter fa-sm fa-fw me-2"></i></a>
-                    <a class="text-light" href="https://www.linkedin.com/" target="_blank"><i
-                            class="fab fa-linkedin fa-sm fa-fw"></i></a>
-                </div>
-            </div>
-        </div>
-    </nav>
-  Close Top Nav -->
-
-
-    <!-- Header -->
+  <body>
+    <!-- ====================== HEADER ====================== -->
     <nav class="navbar navbar-expand-lg navbar-light shadow">
-        <div class="container d-flex justify-content-between align-items-center">
+      <div class="container d-flex justify-content-between align-items-center">
+        <a
+          class="navbar-brand text-success logo h1 align-self-center"
+          href="index.html"
+        >
+          Angelus
+        </a>
 
-            <a class="navbar-brand text-success logo h1 align-self-center" href="index.html">
-                Angelus
+        <button
+          class="navbar-toggler border-0"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#templatemo_main_nav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div
+          class="align-self-center collapse navbar-collapse flex-fill d-lg-flex justify-content-lg-between"
+          id="templatemo_main_nav"
+        >
+          <!-- Menú -->
+          <div class="flex-fill">
+            <ul
+              class="nav navbar-nav d-flex justify-content-between mx-lg-auto"
+            >
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Inicio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="servicios.html">Servicios</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="productos.html">Productos</a>
+              </li>
+
+              <!-- Admin solo si rol 1 -->
+              <li id="nav-admin" class="nav-item" style="display: none">
+                <a class="nav-link" href="adminView.html">Admin</a>
+              </li>
+
+              <!-- Mis Citas solo si rol cliente -->
+              <li id="nav-mis-citas" class="nav-item" style="display: none">
+                <a class="nav-link" href="misCitas.html">Mis Citas</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Íconos de la derecha -->
+          <div class="navbar align-self-center d-flex">
+            <a
+              class="nav-icon d-none d-lg-inline"
+              href="#"
+              data-bs-toggle="modal"
+              data-bs-target="#templatemo_search"
+            >
+              <i class="fa fa-fw fa-search text-dark mr-2"></i>
             </a>
 
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
-                data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <!-- Carrito -->
+            <a
+              class="nav-icon position-relative text-decoration-none"
+              href="carrito.html"
+            >
+              <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+              <span
+                id="cart-count"
+                class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-success text-white"
+                style="display: none"
+              ></span>
+            </a>
 
-            <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between"
-                id="templatemo_main_nav">
-                <div class="flex-fill">
-                    <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.html">Inicio</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="sobresnosotros.html">Servicios</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="productos.html">Productos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="adminView.html">Admin</a>
-                        </li>
-                         <!--- <li class="nav-item">
-                            <a class="nav-link" href="contacto.html">Contacto</a>
-                        </li> -->
-                    </ul>
-                </div>
-                <div class="navbar align-self-center d-flex">
-                    <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
-                            <div class="input-group-text">
-                                <i class="fa fa-fw fa-search"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal"
-                        data-bs-target="#templatemo_search">
-                        <i class="fa fa-fw fa-search text-dark mr-2"></i>
-                    </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="#">
-                        <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
-                        <span
-                            class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
-                    </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="login.html">
-                        <i class="fa fa-fw fa-user text-dark mr-3"></i>
-                        <span
-                            class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
-                    </a>
-                </div>
-            </div>
+            <!-- Login -->
+            <a
+              id="nav-login"
+              class="nav-icon position-relative text-decoration-none"
+              href="login.html"
+            >
+              <i class="fa fa-fw fa-user text-dark mr-3"></i>
+            </a>
 
+            <!-- Nombre del usuario -->
+            <span
+              id="nav-user-name"
+              class="text-dark mx-3"
+              style="display: none; font-weight: bold"
+            ></span>
+
+            <!-- Logout -->
+            <a
+              id="nav-logout"
+              class="nav-link text-danger"
+              href="#"
+              style="display: none"
+              >Cerrar sesión</a
+            >
+          </div>
         </div>
+      </div>
     </nav>
-    <!-- Close Header -->
 
-    <!-- Modal -->
-    <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="w-100 pt-1 mb-5 text-right">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="" method="get" class="modal-content modal-body border-0 p-0">
-                <div class="input-group mb-2">
-                    <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
-                    <button type="submit" class="input-group-text bg-success text-light">
-                        <i class="fa fa-fw fa-search text-white"></i>
-                    </button>
-                </div>
-            </form>
+    <!-- ====================== MODAL BUSCADOR ====================== -->
+    <div
+      class="modal fade bg-white"
+      id="templatemo_search"
+      tabindex="-1"
+      role="dialog"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="w-100 pt-1 mb-5 text-right">
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+          ></button>
         </div>
+        <form class="modal-content modal-body border-0 p-0">
+          <div class="input-group mb-2">
+            <input type="text" class="form-control" placeholder="Buscar ..." />
+            <button class="input-group-text bg-success text-light">
+              <i class="fa fa-fw fa-search"></i>
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
 
+    <!-- ====================== CARRUSEL ====================== -->
+    <div
+      id="template-mo-zay-hero-carousel"
+      class="carousel slide"
+      data-bs-ride="carousel"
+    >
+      <ol class="carousel-indicators">
+        <li
+          data-bs-target="#template-mo-zay-hero-carousel"
+          data-bs-slide-to="0"
+          class="active"
+        ></li>
+        <li
+          data-bs-target="#template-mo-zay-hero-carousel"
+          data-bs-slide-to="1"
+        ></li>
+        <li
+          data-bs-target="#template-mo-zay-hero-carousel"
+          data-bs-slide-to="2"
+        ></li>
+      </ol>
 
-
-    <!-- Start Banner Hero -->
-    <div id="template-mo-zay-hero-carousel" class="carousel slide" data-bs-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="0" class="active"></li>
-            <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="1"></li>
-            <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div class="container">
-                    <div class="row p-5">
-                        <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-                            <img class="img-fluid" src="./assets/img/carrusel1.png" alt="">
-                        </div>
-                        <div class="col-lg-6 mb-0 d-flex align-items-center">
-                            <div class="text-align-left align-self-center">
-                                <h1 class="h1 ">Estética Angelus</h1>
-                                <h3 class="h2">Las mejores en faciales de Costa Rica</h3>
-                                <p>
-                                    En la estética Angelus podrás enontrar lo último en faciales
-                                    desde lo mejor para tú tipo de piel , hasta lo mejor en recuperacion de piel
-                                    maltratada
-                                    <!--<a rel="sponsored" class="text-success"
-                                        href="https://templatemo.com" target="_blank">TemplateMo</a> website.
-                                    Image credits go to <a rel="sponsored" class="text-success"
-                                        href="https://stories.freepik.com/" target="_blank">Freepik Stories</a>,
-                                    <a rel="sponsored" class="text-success" href="https://unsplash.com/"
-                                        target="_blank">Unsplash</a> and
-                                    <a rel="sponsored" class="text-success" href="https://icons8.com/"
-                                        target="_blank">Icons 8</a>.-->
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+      <div class="carousel-inner">
+        <!-- Slide 1 -->
+        <div class="carousel-item active">
+          <div class="container">
+            <div class="row p-5">
+              <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+                <img
+                  class="img-fluid"
+                  src="./assets/img/carrusel1.png"
+                  alt=""
+                />
+              </div>
+              <div class="col-lg-6 d-flex align-items-center">
+                <div>
+                  <h1 class="h1">Estética Angelus</h1>
+                  <h3 class="h2">Las mejores en faciales de Costa Rica</h3>
+                  <p>
+                    En Angelus encontrarás lo último en tratamientos faciales
+                    adaptados a tu tipo de piel.
+                  </p>
                 </div>
+              </div>
             </div>
-            <div class="carousel-item">
-                <div class="container">
-                    <div class="row p-5">
-                        <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-                            <img class="img-fluid" src="./assets/img/carrusel2.png" alt="">
-                        </div>
-                        <div class="col-lg-6 mb-0 d-flex align-items-center">
-                            <div class="text-align-left">
-                                <h1 class="h1">Comodidad</h1>
-                                <h3 class="h2">Lo mejor en instalaciones</h3>
-                                <p>
-                                    Para Angelus como comunidad es de suma importancia su comodidad, por eso encontraras
-                                    las mejores instalaciones con los mejores servicios
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="container">
-                    <div class="row p-5">
-                        <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-                            <img class="img-fluid" src="./assets/img/carrusel3.jpg" alt="">
-                        </div>
-                        <div class="col-lg-6 mb-0 d-flex align-items-center">
-                            <div class="text-align-left">
-                                <h1 class="h1">Masajes</h1>
-                                <h3 class="h2">¿Un día de spa?</h3>
-                                <p>
-                                    En la estética Angelus podras realizar uno de los mejores días de spa, con nuestro
-                                    mejor personal espacializado para que tengas el mejor dia de tu vida
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
-        <a class="carousel-control-prev text-decoration-none w-auto ps-3" href="#template-mo-zay-hero-carousel"
-            role="button" data-bs-slide="prev">
-            <i class="fas fa-chevron-left"></i>
-        </a>
-        <a class="carousel-control-next text-decoration-none w-auto pe-3" href="#template-mo-zay-hero-carousel"
-            role="button" data-bs-slide="next">
-            <i class="fas fa-chevron-right"></i>
-        </a>
+
+        <!-- Slide 2 -->
+        <div class="carousel-item">
+          <div class="container">
+            <div class="row p-5">
+              <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+                <img
+                  class="img-fluid"
+                  src="./assets/img/carrusel2.png"
+                  alt=""
+                />
+              </div>
+              <div class="col-lg-6 d-flex align-items-center">
+                <div>
+                  <h1 class="h1">Comodidad</h1>
+                  <h3 class="h2">Lo mejor en instalaciones</h3>
+                  <p>
+                    Nuestras instalaciones te ofrecen el mejor confort para tu
+                    bienestar.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="carousel-item">
+          <div class="container">
+            <div class="row p-5">
+              <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+                <img
+                  class="img-fluid"
+                  src="./assets/img/carrusel3.jpg"
+                  alt=""
+                />
+              </div>
+              <div class="col-lg-6 d-flex align-items-center">
+                <div>
+                  <h1 class="h1">Masajes</h1>
+                  <h3 class="h2">¿Un día de spa?</h3>
+                  <p>
+                    Relájate con un masaje profesional para revitalizar tu
+                    cuerpo y mente.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a
+        class="carousel-control-prev w-auto ps-3"
+        href="#template-mo-zay-hero-carousel"
+        data-bs-slide="prev"
+      >
+        <i class="fas fa-chevron-left"></i>
+      </a>
+      <a
+        class="carousel-control-next w-auto pe-3"
+        href="#template-mo-zay-hero-carousel"
+        data-bs-slide="next"
+      >
+        <i class="fas fa-chevron-right"></i>
+      </a>
     </div>
-    <!-- End Banner Hero -->
 
-
-    <!-- Start Categories of The Month -->
+    <!-- ====================== PRODUCTOS DEL MES ====================== -->
     <section class="container py-5">
-        <div class="row text-center pt-3">
-            <div class="col-lg-6 m-auto">
-                <h1 class="h1">Productos del mes</h1>
-                <p>
-                    ¡Encontrá los productos preferidos por nuestros clientes en la estética. Y utiliza los mismos en tú
-                    casa!
-                </p>
-            </div>
+      <div class="row text-center pt-3">
+        <div class="col-lg-6 m-auto">
+          <h1 class="h1">Productos del mes</h1>
+          <p>¡Encontrá los favoritos entre nuestros clientes!</p>
         </div>
-        <div class="row">
-            <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="#"><img src="./assets/img/mist.png" class="rounded-circle img-fluid border"></a>
-                <h5 class="text-center mt-3 mb-3">Mist Facial</h5>
-               <!--  <p class="text-center"><a class="btn btn-success">Adquirir</a></p>-->
-            </div>
-            <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="#"><img src="./assets/img/clenser.png" class="rounded-circle img-fluid border"></a>
-                <h2 class="h5 text-center mt-3 mb-3">Jabón Facial</h2>
-                 <!--  <p class="text-center"><a class="btn btn-success">Adquirir</a></p>-->
-            </div>
-            <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="#"><img src="./assets/img/bodyoil.png" class="rounded-circle img-fluid border"></a>
-                <h2 class="h5 text-center mt-3 mb-3">Aceite Corporal</h2>
-                  <!--  <p class="text-center"><a class="btn btn-success">Adquirir</a></p>-->
-            </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-md-4 p-5 mt-3">
+          <img
+            src="./assets/img/mist.png"
+            class="rounded-circle img-fluid border"
+          />
+          <h5 class="text-center mt-3">Mist Facial</h5>
         </div>
+
+        <div class="col-12 col-md-4 p-5 mt-3">
+          <img
+            src="./assets/img/clenser.png"
+            class="rounded-circle img-fluid border"
+          />
+          <h5 class="text-center mt-3">Jabón Facial</h5>
+        </div>
+
+        <div class="col-12 col-md-4 p-5 mt-3">
+          <img
+            src="./assets/img/bodyoil.png"
+            class="rounded-circle img-fluid border"
+          />
+          <h5 class="text-center mt-3">Aceite Corporal</h5>
+        </div>
+      </div>
     </section>
-    <!-- End Categories of The Month -->
 
-
-    <!-- Start Featured Product -->
+    <!-- ====================== SERVICIOS DESTACADOS ====================== -->
     <section class="bg-light">
-        <div class="container py-5">
-            <div class="row text-center py-3">
-                <div class="col-lg-6 m-auto">
-                    <h1 class="h1">Servicios destacados</h1>
-                    <p>
-                        Nuestros servicios más utilizados por nuestros clientes
-                    </p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 col-md-4 mb-4">
-                    <div class="card h-100">
-                        <a href="shop-single.html">
-                            <img src="./assets/img/pestannas.png" class="card-img-top" alt="...">
-                        </a>
-                        <div class="card-body">
-                            <ul class="list-unstyled d-flex justify-content-between">
-                                <li>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                </li>
-                                <li class="text-muted text-right">15.000 </li>
-                            </ul>
-                            <a href="shop-single.html" class="h2 text-decoration-none text-dark">Pestañas</a>
-                            <p class="card-text">
-                                Nuestros servicios de pestañas pelo a pelo.
-                            </p>
-                            <p class="text-muted">Reseñas (4)</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4 mb-4">
-                    <div class="card h-100">
-                        <a href="shop-single.html">
-                            <img src="./assets/img/capilar.png" class="card-img-top" alt="...">
-                        </a>
-                        <div class="card-body">
-                            <ul class="list-unstyled d-flex justify-content-between">
-                                <li>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                </li>
-                                <li class="text-muted text-right">40.000</li>
-                            </ul>
-                            <a href="shop-single.html" class="h2 text-decoration-none text-dark">Masaje Capilar</a>
-                            <p class="card-text">
-                                Recibe el mejor masaje capilar de una hora con los mejores tratameintos cailares.
-                            </p>
-                            <p class="text-muted">Reseñas (4)</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4 mb-4">
-                    <div class="card h-100">
-                        <a href="shop-single.html">
-                            <img src="./assets/img/cejas.jpg" class="card-img-top" alt="...">
-                        </a>
-                        <div class="card-body">
-                            <ul class="list-unstyled d-flex justify-content-between">
-                                <li>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                </li>
-                                <li class="text-muted text-right">15.000</li>
-                            </ul>
-                            <a href="shop-single.html" class="h2 text-decoration-none text-dark">Diseño de cejas</a>
-                            <p class="card-text">
-                                Los mejores diseñadores en cejas del país, con las mejores tecnicas.
-                            </p>
-                            <p class="text-muted">Reseñas (4)</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <div class="container py-5">
+        <div class="row text-center py-3">
+          <div class="col-lg-6 m-auto">
+            <h1 class="h1">Servicios destacados</h1>
+            <p>Nuestros servicios más solicitados.</p>
+          </div>
         </div>
-    </section>
-    <!-- End Featured Product -->
 
-    <div class="contacto-wrapper">
+        <div class="row">
+          <div class="col-12 col-md-4 mb-4">
+            <div class="card h-100">
+              <img src="./assets/img/pestannas.png" class="card-img-top" />
+              <div class="card-body">
+                <h2 class="h2 text-decoration-none text-dark">Pestañas</h2>
+                <p>Servicio de pestañas pelo a pelo.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-4 mb-4">
+            <div class="card h-100">
+              <img src="./assets/img/capilar.png" class="card-img-top" />
+              <div class="card-body">
+                <h2 class="h2 text-decoration-none text-dark">
+                  Masaje Capilar
+                </h2>
+                <p>Tratamiento capilar relajante.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-4 mb-4">
+            <div class="card h-100">
+              <img src="./assets/img/cejas.jpg" class="card-img-top" />
+              <div class="card-body">
+                <h2 class="h2 text-decoration-none text-dark">
+                  Diseño de cejas
+                </h2>
+                <p>Expertos en diseño de cejas.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================== CONTACTO ====================== -->
     <section class="container py-5" id="contacto">
-        <div class="row text-center pb-4">
-            <div class="col-lg-6 m-auto">
-                <h1 class="h1">Contáctanos</h1>
-                <p>
-                    Estamos aquí para ayudarte. Contáctanos por teléfono, correo o visítanos.
-                </p>
-            </div>
+      <div class="row text-center pb-4">
+        <div class="col-lg-6 m-auto">
+          <h1 class="h1">Contáctanos</h1>
+          <p>Estamos aquí para ayudarte.</p>
         </div>
-        <div class="row justify-content-center">
+      </div>
 
-            <div class="col-md-4 mb-4">
-                <div class="p-4 bg-light rounded shadow text-center">
-                    <h4>Teléfono</h4>
-                    <p>506 0000-0000</p>
-                </div>
-            </div>
-
-            <div class="col-md-4 mb-4">
-                <div class="p-4 bg-light rounded shadow text-center">
-                    <h4>Email</h4>
-                    <p>esteticangelus@gmail.com</p>
-                </div>
-            </div>
-
-            <div class="col-md-4 mb-4">
-                <div class="p-4 bg-light rounded shadow text-center">
-                    <h4>Dirección</h4>
-                    <p>San Jose , Costa Rica</p>
-                </div>
-            </div>
-
-          
+      <div class="row justify-content-center">
+        <div class="col-md-4 mb-4">
+          <div class="p-4 bg-light rounded shadow text-center">
+            <h4>Teléfono</h4>
+            <p>506 0000-0000</p>
+          </div>
         </div>
+
+        <div class="col-md-4 mb-4">
+          <div class="p-4 bg-light rounded shadow text-center">
+            <h4>Email</h4>
+            <p>esteticangelus@gmail.com</p>
+          </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+          <div class="p-4 bg-light rounded shadow text-center">
+            <h4>Dirección</h4>
+            <p>San José , Costa Rica</p>
+          </div>
+        </div>
+      </div>
     </section>
-</div>
-<!-- End Contact Section -->
 
-    <!--Start Footer -->
+    <!-- ====================== FOOTER ====================== -->
     <footer class="bg-dark" id="tempaltemo_footer">
-        <div class="container">
-            <div class="row">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 pt-5">
+            <h2 class="h2 text-success border-bottom pb-3 border-light logo">
+              Estética Angelus
+            </h2>
+            <ul class="list-unstyled text-light footer-link-list">
+              <li>
+                <i class="fas fa-map-marker-alt fa-fw"></i> San Jose, Costa Rica
+              </li>
+              <li><i class="fa fa-phone fa-fw"></i> 506 0000-0000</li>
+              <li>
+                <i class="fa fa-envelope fa-fw"></i> esteticangelus@gmail.com
+              </li>
+            </ul>
+          </div>
 
-                <div class="col-md-4 pt-5">
-                    <h2 class="h2 text-success border-bottom pb-3 border-light logo">Estética Angelus</h2>
-                    <ul class="list-unstyled text-light footer-link-list">
-                        <li>
-                            <i class="fas fa-map-marker-alt fa-fw"></i>
-                            San Jose , Costa Rica
-                        </li>
-                        <li>
-                            <i class="fa fa-phone fa-fw"></i>
-                            <a class="text-decoration-none" href="tel:010-020-0340">506 0000-0000</a>
-                        </li>
-                        <li>
-                            <i class="fa fa-envelope fa-fw"></i>
-                            <a class="text-decoration-none" href="mailto:info@company.com">esteticangelus@gmail.com</a>
-                        </li>
-                    </ul>
-                </div>
-
-              
-                <div class="w-100 bg-black py-3">
-                    <div class="container">
-                        <div class="row pt-2">
-                            <div class="col-12">
-                                <p class="text-left text-light">
-                                    Copyright &copy; Estética Angelus
-                                    | Designed by <a rel="sponsored" href="https://templatemo.com"
-                                        target="_blank">TemplateMo</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+          <div class="w-100 bg-black py-3">
+            <div class="container">
+              <p class="text-left text-light">
+                Copyright © Estética Angelus | Designed by
+                <a href="https://templatemo.com" target="_blank">TemplateMo</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </footer>
-    <!-- End Footer -->
 
-    <!-- Start Script -->
+    <!-- ====================== SCRIPTS ====================== -->
     <script src="assets/js/jquery-1.11.0.min.js"></script>
     <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/templatemo.js"></script>
     <script src="assets/js/custom.js"></script>
-    <!-- End Script -->
-</body>
 
+    <!-- Contador del carrito -->
+    <script>
+      function actualizarContadorCarrito() {
+        let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+        let total = carrito.reduce((sum, item) => sum + item.cantidad, 0);
+
+        if (total > 0) {
+          $("#cart-count").text(total).show();
+        } else {
+          $("#cart-count").hide();
+        }
+      }
+      $(document).ready(actualizarContadorCarrito);
+    </script>
+
+    <!-- Control de login dinámico -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const usuario = JSON.parse(localStorage.getItem("usuario"));
+
+        const loginBtn = document.getElementById("nav-login");
+        const logoutBtn = document.getElementById("nav-logout");
+        const userName = document.getElementById("nav-user-name");
+        const misCitas = document.getElementById("nav-mis-citas");
+        const adminBtn = document.getElementById("nav-admin");
+
+        if (usuario) {
+          // Ocultar login
+          loginBtn.style.display = "none";
+
+          // Mostrar nombre
+          userName.style.display = "block";
+          userName.innerText = "Hola, " + usuario.nombre;
+
+          // Mostrar logout
+          logoutBtn.style.display = "block";
+
+          // Rol cliente (7)
+          if (usuario.rol_id == 7) {
+            misCitas.style.display = "block";
+          }
+
+          // Rol admin (1)
+          if (usuario.rol_id == 1) {
+            adminBtn.style.display = "block";
+          }
+        } else {
+          loginBtn.style.display = "block";
+          logoutBtn.style.display = "none";
+          userName.style.display = "none";
+          misCitas.style.display = "none";
+          adminBtn.style.display = "none";
+        }
+
+        // Logout
+        logoutBtn.addEventListener("click", () => {
+          localStorage.removeItem("usuario");
+          alert("Sesión cerrada.");
+          window.location.href = "login.html";
+        });
+      });
+    </script>
+  </body>
 </html>

@@ -54,7 +54,7 @@ https://templatemo.com/tm-559-zay-shop
   Close Top Nav -->
 
 
-       <!-- Header -->
+    <!-- Header -->
     <nav class="navbar navbar-expand-lg navbar-light shadow">
         <div class="container d-flex justify-content-between align-items-center">
 
@@ -76,12 +76,12 @@ https://templatemo.com/tm-559-zay-shop
                             <a class="nav-link" href="index.html">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="sobresnosotros.html">Servicios</a>
+                            <a class="nav-link" href="servicios.html">Servicios</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="productos.html">Productos</a>
                         </li>
-                         <!--- <li class="nav-item">
+                        <!--- <li class="nav-item">
                             <a class="nav-link" href="contacto.html">Contacto</a>
                         </li> -->
                     </ul>
@@ -99,11 +99,17 @@ https://templatemo.com/tm-559-zay-shop
                         data-bs-target="#templatemo_search">
                         <i class="fa fa-fw fa-search text-dark mr-2"></i>
                     </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="#">
+
+                    <!-- CARRITO CORREGIDO -->
+                    <a class="nav-icon position-relative text-decoration-none" href="carrito.html">
                         <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
                         <span
-                            class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
+                            id="cart-count"
+                            class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-success text-white"
+                            style="display:none"
+                        ></span>
                     </a>
+
                     <a class="nav-icon position-relative text-decoration-none" href="login.html">
                         <i class="fa fa-fw fa-user text-dark mr-3"></i>
                         <span
@@ -140,827 +146,33 @@ https://templatemo.com/tm-559-zay-shop
     <div class="container py-5">
         <div class="row">
 
-            <div class="col-lg-3">
-                <h1 class="h2 pb-4">Categorias</h1>
-                <ul class="list-unstyled templatemo-accordion">
-                    <li class="pb-3">
-                        <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-                            Cuidado facial
-                            <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
-                        </a>
-                        <ul class="collapse show list-unstyled pl-3">
-                            <li><a class="text-decoration-none" href="#">Todo tipo de Piel</a></li>
-                            <li><a class="text-decoration-none" href="#">Piel Mixta</a></li>
-                        </ul>
-                    </li>
-                    <li class="pb-3">
-                        <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-                            Descuanto
-                            <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
-                        </a>
-                        <ul id="collapseTwo" class="collapse list-unstyled pl-3">
-                            <li><a class="text-decoration-none" href="#">Facial</a></li>
-                            <li><a class="text-decoration-none" href="#">Corporal</a></li>
-                        </ul>
-                    </li>
-                    <li class="pb-3">
-                        <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-                            Productos mas vendidos
-                            <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
-                        </a>
-                        <ul id="collapseThree" class="collapse list-unstyled pl-3">
-                            <li><a class="text-decoration-none" href="#">Mist Facial</a></li>
-                            <li><a class="text-decoration-none" href="#">Jabon Corporal</a></li>
-                            <li><a class="text-decoration-none" href="#">Aceite Corporal</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="col-lg-9">
+            <div class="col-12">
                 <div class="row">
                     <div class="col-md-6">
                         <ul class="list-inline shop-top-menu pb-3 pt-1">
                             <li class="list-inline-item">
-                                <a class="h3 text-dark text-decoration-none mr-3" href="#">Todo</a>
+                                <a class="h3 text-dark text-decoration-none mr-3 filtro-producto" data-filtro="todo">Todo</a>
                             </li>
                             <li class="list-inline-item">
-                                <a class="h3 text-dark text-decoration-none mr-3" href="#">Facial</a>
+                                <a class="h3 text-dark text-decoration-none mr-3 filtro-producto" data-filtro="facial">Facial</a>
                             </li>
                             <li class="list-inline-item">
-                                <a class="h3 text-dark text-decoration-none" href="#">Corporal</a>
+                                <a class="h3 text-dark text-decoration-none filtro-producto" data-filtro="corporal">Corporal</a>
                             </li>
                         </ul>
                     </div>
                 </div>
 
-                  <!--   <div class="col-md-6 pb-4">
-                        <div class="d-flex">
-                            <select class="form-control">
-                                <option>Featured</option>
-                                <option>A to Z</option>
-                                <option>Item</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                -->
-
-                <div class="row">
-
-    <!-- ===================== PRODUCTO 1 ===================== -->
-    <div class="col-md-4">
-        <div class="card mb-4 product-wap rounded-0">
-            <div class="card rounded-0">
-                <img class="card-img rounded-0 img-fluid" src="assets/img/cremahidratante.jpg">
-                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                    <ul class="list-unstyled">
-                        <li><a class="btn btn-success text-white" href="productoIndv.html?id=1"><i class="far fa-heart"></i></a></li>
-                        <li><a class="btn btn-success text-white mt-2" href="productoIndv.html?id=1"><i class="far fa-eye"></i></a></li>
-                        <li><a class="btn btn-success text-white mt-2" href="productoIndv.html?id=1"><i class="fas fa-cart-plus"></i></a></li>
-                    </ul>
-                </div>
+                <!-- PRODUCTOS CENTRADOS -->
+                <div class="row justify-content-center" id="contenedor-productos"></div>
             </div>
-            <div class="card-body">
-                <a href="productoIndv.html?id=1" class="h3 text-decoration-none">Crema Hidratante Intensa </a>
-                <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-                    <li>Neutrogena</li>
-                    <li class="pt-2">
-                        <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
-                    </li>
-                </ul>
-                <ul class="list-unstyled d-flex justify-content-center mb-1">
-                    <li>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                    </li>
-                </ul>
-                <p class="text-center mb-0">10,000</p>
-            </div>
+
         </div>
     </div>
-
-    <!-- ===================== PRODUCTO 2 ===================== -->
-    <div class="col-md-4">
-        <div class="card mb-4 product-wap rounded-0">
-            <div class="card rounded-0">
-                <img class="card-img rounded-0 img-fluid" src="assets/img/serumvc.png">
-                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                    <ul class="list-unstyled">
-                        <li><a class="btn btn-success text-white" href="productoIndv.html?id=2"><i class="far fa-heart"></i></a></li>
-                        <li><a class="btn btn-success text-white mt-2" href="productoIndv.html?id=2"><i class="far fa-eye"></i></a></li>
-                        <li><a class="btn btn-success text-white mt-2" href="productoIndv.html?id=2"><i class="fas fa-cart-plus"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card-body">
-                <a href="productoIndv.html?id=2" class="h3 text-decoration-none">Serum Vitamina C</a>
-                <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-                    <li>Serum antioxidante</li>
-                    <li class="pt-2">
-                        <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
-                    </li>
-                </ul>
-                <ul class="list-unstyled d-flex justify-content-center mb-1">
-                    <li>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                    </li>
-                </ul>
-                <p class="text-center mb-0">15,000</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- ===================== PRODUCTO 3 ===================== -->
-    <div class="col-md-4">
-        <div class="card mb-4 product-wap rounded-0">
-            <div class="card rounded-0">
-                <img class="card-img rounded-0 img-fluid" src="assets/img/protectorsolar.png">
-                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                    <ul class="list-unstyled">
-                        <li><a class="btn btn-success text-white" href="productoIndv.html?id=3"><i class="far fa-heart"></i></a></li>
-                        <li><a class="btn btn-success text-white mt-2" href="productoIndv.html?id=3"><i class="far fa-eye"></i></a></li>
-                        <li><a class="btn btn-success text-white mt-2" href="productoIndv.html?id=3"><i class="fas fa-cart-plus"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card-body">
-                <a href="productoIndv.html?id=3" class="h3 text-decoration-none">Protector Solar FPS 50</a>
-                <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-                    <li>Protector solar mineral para piel</li>
-                    <li class="pt-2">
-                        <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
-                    </li>
-                </ul>
-                <ul class="list-unstyled d-flex justify-content-center mb-1">
-                    <li>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                    </li>
-                </ul>
-                <p class="text-center mb-0">20,000</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- ===================== PRODUCTO 4 ===================== -->
-    <div class="col-md-4">
-        <div class="card mb-4 product-wap rounded-0">
-            <div class="card rounded-0">
-                <img class="card-img rounded-0 img-fluid" src="assets/img/gelfacial.png">
-                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                    <ul class="list-unstyled">
-                        <li><a class="btn btn-success text-white" href="productoIndv.html?id=4"><i class="far fa-heart"></i></a></li>
-                        <li><a class="btn btn-success text-white mt-2" href="productoIndv.html?id=4"><i class="far fa-eye"></i></a></li>
-                        <li><a class="btn btn-success text-white mt-2" href="productoIndv.html?id=4"><i class="fas fa-cart-plus"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card-body">
-                <a href="productoIndv.html?id=4" class="h3 text-decoration-none">Gel Limpiador Suave</a>
-                <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-                    <li>Gel limpiador para todo tipo de piel</li>
-                    <li class="pt-2">
-                        <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
-                    </li>
-                </ul>
-                <ul class="list-unstyled d-flex justify-content-center mb-1">
-                    <li>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                    </li>
-                </ul>
-                <p class="text-center mb-0">9,000</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- ===================== PRODUCTO 5 ===================== -->
-    <div class="col-md-4">
-        <div class="card mb-4 product-wap rounded-0">
-            <div class="card rounded-0">
-                <img class="card-img rounded-0 img-fluid" src="assets/img/antiarrugas.png">
-                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                    <ul class="list-unstyled">
-                        <li><a class="btn btn-success text-white" href="productoIndv.html?id=5"><i class="far fa-heart"></i></a></li>
-                        <li><a class="btn btn-success text-white mt-2" href="productoIndv.html?id=5"><i class="far fa-eye"></i></a></li>
-                        <li><a class="btn btn-success text-white mt-2" href="productoIndv.html?id=5"><i class="fas fa-cart-plus"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card-body">
-                <a href="productoIndv.html?id=5" class="h3 text-decoration-none">Crema Anti-Arrugas</a>
-                <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-                    <li>Tratamiento contra las arrugas</li>
-                    <li class="pt-2">
-                        <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
-                    </li>
-                </ul>
-                <ul class="list-unstyled d-flex justify-content-center mb-1">
-                    <li>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                    </li>
-                </ul>
-                <p class="text-center mb-0">16,000</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- ===================== PRODUCTO 6 ===================== -->
-    <div class="col-md-4">
-        <div class="card mb-4 product-wap rounded-0">
-            <div class="card rounded-0">
-                <img class="card-img rounded-0 img-fluid" src="assets/img/arcilla.png">
-                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                    <ul class="list-unstyled">
-                        <li><a class="btn btn-success text-white" href="productoIndv.html?id=6"><i class="far fa-heart"></i></a></li>
-                        <li><a class="btn btn-success text-white mt-2" href="productoIndv.html?id=6"><i class="far fa-eye"></i></a></li>
-                        <li><a class="btn btn-success text-white mt-2" href="productoIndv.html?id=6"><i class="fas fa-cart-plus"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card-body">
-                <a href="productoIndv.html?id=6" class="h3 text-decoration-none">Mascarilla de Arcilla</a>
-                <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-                    <li>Mascarilla purificante</li>
-                    <li class="pt-2">
-                        <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
-                    </li>
-                </ul>
-                <ul class="list-unstyled d-flex justify-content-center mb-1">
-                    <li>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                    </li>
-                </ul>
-                <p class="text-center mb-0">7,000</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- ===================== PRODUCTO 7 ===================== -->
-    <div class="col-md-4">
-        <div class="card mb-4 product-wap rounded-0">
-            <div class="card rounded-0">
-                <img class="card-img rounded-0 img-fluid" src="assets/img/tonicofacial.png">
-                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                    <ul class="list-unstyled">
-                        <li><a class="btn btn-success text-white" href="productoIndv.html?id=7"><i class="far fa-heart"></i></a></li>
-                        <li><a class="btn btn-success text-white mt-2" href="productoIndv.html?id=7"><i class="far fa-eye"></i></a></li>
-                        <li><a class="btn btn-success text-white mt-2" href="productoIndv.html?id=7"><i class="fas fa-cart-plus"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card-body">
-                <a href="productoIndv.html?id=7" class="h3 text-decoration-none">Tónico Facial</a>
-                <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-                    <li>Tónico equilibrante con extractos naturales</li>
-                    <li class="pt-2">
-                        <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
-                    </li>
-                </ul>
-                <ul class="list-unstyled d-flex justify-content-center mb-1">
-                    <li>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                    </li>
-                </ul>
-                <p class="text-center mb-0">12,500</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- ===================== PRODUCTO 8 ===================== -->
-    <div class="col-md-4">
-        <div class="card mb-4 product-wap rounded-0">
-            <div class="card rounded-0">
-                <img class="card-img rounded-0 img-fluid" src="assets/img/contornoojos.png">
-                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                    <ul class="list-unstyled">
-                        <li><a class="btn btn-success text-white" href="productoIndv.html?id=8"><i class="far fa-heart"></i></a></li>
-                        <li><a class="btn btn-success text-white mt-2" href="productoIndv.html?id=8"><i class="far fa-eye"></i></a></li>
-                        <li><a class="btn btn-success text-white mt-2" href="productoIndv.html?id=8"><i class="fas fa-cart-plus"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card-body">
-                <a href="productoIndv.html?id=8" class="h3 text-decoration-none">Contorno de ojos</a>
-                <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-                    <li>Crema para contorno de ojos</li>
-                    <li class="pt-2">
-                        <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
-                    </li>
-                </ul>
-                <ul class="list-unstyled d-flex justify-content-center mb-1">
-                    <li>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                    </li>
-                </ul>
-                <p class="text-center mb-0">9,500</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- ===================== PRODUCTO 9 ===================== -->
-    <div class="col-md-4">
-        <div class="card mb-4 product-wap rounded-0">
-            <div class="card rounded-0">
-                <img class="card-img rounded-0 img-fluid" src="assets/img/exfoliantequimico.jpeg">
-                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                    <ul class="list-unstyled">
-                        <li><a class="btn btn-success text-white" href="productoIndv.html?id=9"><i class="far fa-heart"></i></a></li>
-                        <li><a class="btn btn-success text-white mt-2" href="productoIndv.html?id=9"><i class="far fa-eye"></i></a></li>
-                        <li><a class="btn btn-success text-white mt-2" href="productoIndv.html?id=9"><i class="fas fa-cart-plus"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card-body">
-                <a href="productoIndv.html?id=9" class="h3 text-decoration-none">Exfoliante Químico</a>
-                <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-                    <li>Exfoliante con AHA para renovación celular</li>
-                    <li class="pt-2">
-                        <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
-                    </li>
-                </ul>
-                <ul class="list-unstyled d-flex justify-content-center mb-1">
-                    <li>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                    </li>
-                </ul>
-                <p class="text-center mb-0">15,000</p>
-            </div>
-        </div>
-    </div>
-
-   
-
-    <!-- 10 -->
-    <div class="col-md-4">
-        <div class="card mb-4 product-wap rounded-0">
-            <div class="card rounded-0">
-                <img class="card-img rounded-0 img-fluid" src="assets/img/aceitefacial.jpg">
-                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                    <ul class="list-unstyled">
-                        <li><a class="btn btn-success text-white" href="productoIndv.html?id=10"><i class="far fa-heart"></i></a></li>
-                        <li><a class="btn btn-success text-white mt-2" href="productoIndv.html?id=10"><i class="far fa-eye"></i></a></li>
-                        <li><a class="btn btn-success text-white mt-2" href="productoIndv.html?id=10"><i class="fas fa-cart-plus"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card-body">
-                <a href="productoIndv.html?id=10" class="h3 text-decoration-none">Aceite Facial</a>
-                <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-                    <li>Aceite nutritivo para piel seca</li>
-                    <li class="pt-2">
-                        <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
-                    </li>
-                </ul>
-                <ul class="list-unstyled d-flex justify-content-center mb-1">
-                    <li>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                    </li>
-                </ul>
-                <p class="text-center mb-0">18,000</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- 11-->
-    <div class="col-md-4">
-        <div class="card mb-4 product-wap rounded-0">
-            <div class="card rounded-0">
-                <img class="card-img rounded-0 img-fluid" src="assets/img/cremacorporal.png">
-                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                    <ul class="list-unstyled">
-                        <li><a class="btn btn-success text-white" href="productoIndv.html?id=11"><i class="far fa-heart"></i></a></li>
-                        <li><a class="btn btn-success text-white mt-2" href="productoIndv.html?id=11"><i class="far fa-eye"></i></a></li>
-                        <li><a class="btn btn-success text-white mt-2" href="productoIndv.html?id=11"><i class="fas fa-cart-plus"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card-body">
-                <a href="productoIndv.html?id=11" class="h3 text-decoration-none">Crema Corporal</a>
-                <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-                    <li>Hidratación avanzada</li>
-                    <li class="pt-2">
-                        <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
-                    </li>
-                </ul>
-                <ul class="list-unstyled d-flex justify-content-center mb-1">
-                    <li>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                    </li>
-                </ul>
-                <p class="text-center mb-0">11,500</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- 12-->
-    <div class="col-md-4">
-        <div class="card mb-4 product-wap rounded-0">
-            <div class="card rounded-0">
-                <img class="card-img rounded-0 img-fluid" src="assets/img/bodyoil.png">
-                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                    <ul class="list-unstyled">
-                        <li><a class="btn btn-success text-white" href="productoIndv.html?id=12"><i class="far fa-heart"></i></a></li>
-                        <li><a class="btn btn-success text-white mt-2" href="productoIndv.html?id=12"><i class="far fa-eye"></i></a></li>
-                        <li><a class="btn btn-success text-white mt-2" href="productoIndv.html?id=12"><i class="fas fa-cart-plus"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card-body">
-                <a href="productoIndv.html?id=12" class="h3 text-decoration-none">Aceite de masaje</a>
-                <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-                    <li>Aceite esencial para masajes relajantes</li>
-                    <li class="pt-2">
-                        <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
-                    </li>
-                </ul>
-                <ul class="list-unstyled d-flex justify-content-center mb-1">
-                    <li>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                    </li>
-                </ul>
-                <p class="text-center mb-0">17,000</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- 13-->
-    <div class="col-md-4">
-        <div class="card mb-4 product-wap rounded-0">
-            <div class="card rounded-0">
-                <img class="card-img rounded-0 img-fluid" src="assets/img/gelreductor.png">
-                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                    <ul class="list-unstyled">
-                        <li><a class="btn btn-success text-white" href="productoIndv.html?id=13"><i class="far fa-heart"></i></a></li>
-                        <li><a class="btn btn-success text-white mt-2" href="productoIndv.html?id=13"><i class="far fa-eye"></i></a></li>
-                        <li><a class="btn btn-success text-white mt-2" href="productoIndv.html?id=13"><i class="fas fa-cart-plus"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card-body">
-                <a href="productoIndv.html?id=13" class="h3 text-decoration-none">Gel reductor</a>
-                <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-                    <li>Gel para masajes reductor de celulitis</li>
-                    <li class="pt-2">
-                        <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
-                    </li>
-                </ul>
-                <ul class="list-unstyled d-flex justify-content-center mb-1">
-                    <li>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                    </li>
-                </ul>
-                <p class="text-center mb-0">8,500</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- 14-->
-    <div class="col-md-4">
-        <div class="card mb-4 product-wap rounded-0">
-            <div class="card rounded-0">
-                <img class="card-img rounded-0 img-fluid" src="assets/img/creamestrias.png">
-                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                    <ul class="list-unstyled">
-                        <li><a class="btn btn-success text-white" href="productoIndv.html?id=14"><i class="far fa-heart"></i></a></li>
-                        <li><a class="btn btn-success text-white mt-2" href="productoIndv.html?id=14"><i class="far fa-eye"></i></a></li>
-                        <li><a class="btn btn-success text-white mt-2" href="productoIndv.html?id=14"><i class="fas fa-cart-plus"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card-body">
-                <a href="productoIndv.html?id=14" class="h3 text-decoration-none">Crema para Estrías</a>
-                <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-                    <li>Tratamiento intensivo para estrías</li>
-                    <li class="pt-2">
-                        <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
-                    </li>
-                </ul>
-                <ul class="list-unstyled d-flex justify-content-center mb-1">
-                    <li>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                    </li>
-                </ul>
-                <p class="text-center mb-0">22,000</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- 15 -->
-    <div class="col-md-4">
-        <div class="card mb-4 product-wap rounded-0">
-            <div class="card rounded-0">
-                <img class="card-img rounded-0 img-fluid" src="assets/img/kitmani.png">
-                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                    <ul class="list-unstyled">
-                        <li><a class="btn btn-success text-white" href="productoIndv.html?id=15"><i class="far fa-heart"></i></a></li>
-                        <li><a class="btn btn-success text-white mt-2" href="productoIndv.html?id=15"><i class="far fa-eye"></i></a></li>
-                        <li><a class="btn btn-success text-white mt-2" href="productoIndv.html?id=15"><i class="fas fa-cart-plus"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card-body">
-                <a href="productoIndv.html?id=15" class="h3 text-decoration-none">Kit Manicura</a>
-                <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-                    <li>Kit completo para manicura profesiona</li>
-                    <li class="pt-2">
-                        <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
-                    </li>
-                </ul>
-                <ul class="list-unstyled d-flex justify-content-center mb-1">
-                    <li>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                    </li>
-                </ul>
-                <p class="text-center mb-0">10,500</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- 16 -->
-    <div class="col-md-4">
-        <div class="card mb-4 product-wap rounded-0">
-            <div class="card rounded-0">
-                <img class="card-img rounded-0 img-fluid" src="assets/img/esmalte.png">
-                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                    <ul class="list-unstyled">
-                        <li><a class="btn btn-success text-white" href="productoIndv.html?id=16"><i class="far fa-heart"></i></a></li>
-                        <li><a class="btn btn-success text-white mt-2" href="productoIndv.html?id=16"><i class="far fa-eye"></i></a></li>
-                        <li><a class="btn btn-success text-white mt-2" href="productoIndv.html?id=16"><i class="fas fa-cart-plus"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card-body">
-                <a href="productoIndv.html?id=16" class="h3 text-decoration-none">Esmaltes Premium</a>
-                <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-                    <li>Set de esmaltes de larga duración</li>
-                    <li class="pt-2">
-                        <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
-                    </li>
-                </ul>
-                <ul class="list-unstyled d-flex justify-content-center mb-1">
-                    <li>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                    </li>
-                </ul>
-                <p class="text-center mb-0">9,800</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- 17 -->
-    <div class="col-md-4">
-        <div class="card mb-4 product-wap rounded-0">
-            <div class="card rounded-0">
-                <img class="card-img rounded-0 img-fluid" src="assets/img/cremadepiladora.jpg">
-                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                    <ul class="list-unstyled">
-                        <li><a class="btn btn-success text-white" href="productoIndv.html?id=17"><i class="far fa-heart"></i></a></li>
-                        <li><a class="btn btn-success text-white mt-2" href="productoIndv.html?id=17"><i class="far fa-eye"></i></a></li>
-                        <li><a class="btn btn-success text-white mt-2" href="productoIndv.html?id=17"><i class="fas fa-cart-plus"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card-body">
-                <a href="productoIndv.html?id=17" class="h3 text-decoration-none">Crema Depilatoria</a>
-                <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-                    <li>Crema depilatoria para piel sensible</li>
-                    <li class="pt-2">
-                        <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
-                    </li>
-                </ul>
-                <ul class="list-unstyled d-flex justify-content-center mb-1">
-                    <li>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                    </li>
-                </ul>
-                <p class="text-center mb-0">10,200</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- 18 -->
-    <div class="col-md-4">
-        <div class="card mb-4 product-wap rounded-0">
-            <div class="card rounded-0">
-                <img class="card-img rounded-0 img-fluid" src="assets/img/ceradepi.png">
-                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                    <ul class="list-unstyled">
-                        <li><a class="btn btn-success text-white" href="productoIndv.html?id=18"><i class="far fa-heart"></i></a></li>
-                        <li><a class="btn btn-success text-white mt-2" href="productoIndv.html?id=18"><i class="far fa-eye"></i></a></li>
-                        <li><a class="btn btn-success text-white mt-2" href="productoIndv.html?id=18"><i class="fas fa-cart-plus"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card-body">
-                <a href="productoIndv.html?id=18" class="h3 text-decoration-none">Cera Depilatoria</a>
-                <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-                    <li>Cera fría para depilación profesional</li>
-                    <li class="pt-2">
-                        <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
-                    </li>
-                </ul>
-                <ul class="list-unstyled d-flex justify-content-center mb-1">
-                    <li>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                    </li>
-                </ul>
-                <p class="text-center mb-0">19,500</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- 19 -->
-    <div class="col-md-4">
-        <div class="card mb-4 product-wap rounded-0">
-            <div class="card rounded-0">
-                <img class="card-img rounded-0 img-fluid" src="assets/img/shampooprof.jpg">
-                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                    <ul class="list-unstyled">
-                        <li><a class="btn btn-success text-white" href="productoIndv.html?id=19"><i class="far fa-heart"></i></a></li>
-                        <li><a class="btn btn-success text-white mt-2" href="productoIndv.html?id=19"><i class="far fa-eye"></i></a></li>
-                        <li><a class="btn btn-success text-white mt-2" href="productoIndv.html?id=19"><i class="fas fa-cart-plus"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card-body">
-                <a href="productoIndv.html?id=19" class="h3 text-decoration-none">Shampoo Profesional</a>
-                <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-                    <li>Shampoo para tratamientos capilares</li>
-                    <li class="pt-2">
-                        <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
-                        <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
-                    </li>
-                </ul>
-                <ul class="list-unstyled d-flex justify-content-center mb-1">
-                    <li>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                    </li>
-                </ul>
-                <p class="text-center mb-0">8,000</p>
-            </div>
-        </div>
-    </div>
-
-</div> 
-            </div>
-        </div>
-    </div>
+    <!-- End Content -->
 
 
-<!-- End Content -->
-
-
-<!-- Start Categories of The Month -->
+    <!-- Start Categories of The Month -->
     <section class="container py-5">
         <div class="row text-center pt-3">
             <div class="col-lg-6 m-auto">
@@ -973,25 +185,25 @@ https://templatemo.com/tm-559-zay-shop
         </div>
         <div class="row">
             <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="#"><img src="./assets/img/mist.png" class="rounded-circle img-fluid border"></a>
-                <h5 class="text-center mt-3 mb-3">Mist Facial</h5>
-               <!--  <p class="text-center"><a class="btn btn-success">Adquirir</a></p>-->
-            </div>
-            <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="#"><img src="./assets/img/clenser.png" class="rounded-circle img-fluid border"></a>
-                <h2 class="h5 text-center mt-3 mb-3">Jabón Facial</h2>
-                 <!--  <p class="text-center"><a class="btn btn-success">Adquirir</a></p>-->
-            </div>
-            <div class="col-12 col-md-4 p-5 mt-3">
                 <a href="#"><img src="./assets/img/bodyoil.png" class="rounded-circle img-fluid border"></a>
-                <h2 class="h5 text-center mt-3 mb-3">Aceite Corporal</h2>
-                  <!--  <p class="text-center"><a class="btn btn-success">Adquirir</a></p>-->
+                <h5 class="text-center mt-3 mb-3">Aceite de masaje</h5>
+                <!--  <p class="text-center"><a class="btn btn-success">Adquirir</a></p>-->
+            </div>
+            <div class="col-12 col-md-4 p-5 mt-3">
+                <a href="#"><img src="./assets/img/antiarrugas.png" class="rounded-circle img-fluid border"></a>
+                <h2 class="h5 text-center mt-3 mb-3">Crema Anti-Arrugas</h2>
+                <!--  <p class="text-center"><a class="btn btn-success">Adquirir</a></p>-->
+            </div>
+            <div class="col-12 col-md-4 p-5 mt-3">
+                <a href="#"><img src="./assets/img/arcilla.png" class="rounded-circle img-fluid border"></a>
+                <h2 class="h5 text-center mt-3 mb-3">Mascarilla de arcilla</h2>
+                <!--  <p class="text-center"><a class="btn btn-success">Adquirir</a></p>-->
             </div>
         </div>
     </section>
     <!-- End Categories of The Month -->
 
-         <!--Start Footer -->
+    <!--Start Footer -->
     <footer class="bg-dark" id="tempaltemo_footer">
         <div class="container">
             <div class="row">
@@ -1014,7 +226,7 @@ https://templatemo.com/tm-559-zay-shop
                     </ul>
                 </div>
 
-              
+
                 <div class="w-100 bg-black py-3">
                     <div class="container">
                         <div class="row pt-2">
@@ -1038,6 +250,26 @@ https://templatemo.com/tm-559-zay-shop
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/templatemo.js"></script>
     <script src="assets/js/custom.js"></script>
+    <script src="assets/js/productos.js"></script>
+    <script src="assets/js/carrito.js"></script>
+
+    <!-- Script para actualizar el contador del carrito (igual que en index.html) -->
+    <script>
+        function actualizarContadorCarrito() {
+            let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+            let cantidadTotal = carrito.reduce((sum, item) => sum + item.cantidad, 0);
+
+            if (cantidadTotal > 0) {
+                $("#cart-count").text(cantidadTotal).show();
+            } else {
+                $("#cart-count").hide();
+            }
+        }
+
+        $(document).ready(function () {
+            actualizarContadorCarrito();
+        });
+    </script>
     <!-- End Script -->
 </body>
 

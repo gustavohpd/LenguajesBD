@@ -17,15 +17,13 @@ try {
     echo json_encode(['error' => $e->getMessage()]);
 }
 
-
-
-// ================================
-//     OBTENER TODOS LOS SERVICIOS
-// ================================
+/* ============================================================
+    OBTENER TODOS LOS SERVICIOS
+   ============================================================ */
 function getServicios() {
     global $conn;
 
-    $sql = 'BEGIN FIDE_SERVICIOS_OBTENER_TODOS_SP(:cursor); END;';
+    $sql = 'BEGIN FIDE_ANGELUS_ESTETICA_PKG.FIDE_SERVICIOS_OBTENER_TODOS_SP(:cursor); END;';
     $stid = oci_parse($conn, $sql);
 
     $cursor = oci_new_cursor($conn);
@@ -37,8 +35,11 @@ function getServicios() {
     $servicios = [];
 
     while ($row = oci_fetch_array($cursor, OCI_ASSOC + OCI_RETURN_NULLS)) {
+
+        // Convertir a minúsculas
         $row = array_change_key_case($row, CASE_LOWER);
 
+        // Procesar LOBs y UTF-8
         foreach ($row as $key => $value) {
             if ($value instanceof OCI_Lob) {
                 $row[$key] = $value->read($value->size());
@@ -54,15 +55,13 @@ function getServicios() {
     echo json_encode($servicios, JSON_UNESCAPED_UNICODE);
 }
 
-
-
-// ===================================
-//     OBTENER SERVICIO POR ID
-// ===================================
+/* ============================================================
+    OBTENER SERVICIO POR ID
+   ============================================================ */
 function getServicioById($id) {
     global $conn;
 
-    $sql = 'BEGIN FIDE_SERVICIOS_OBTENER_POR_ID_SP(:p_servicio_id, :cursor); END;';
+    $sql = 'BEGIN FIDE_ANGELUS_ESTETICA_PKG.FIDE_SERVICIOS_OBTENER_POR_ID_SP(:p_servicio_id, :cursor); END;';
     $stid = oci_parse($conn, $sql);
 
     $cursor = oci_new_cursor($conn);
@@ -81,6 +80,7 @@ function getServicioById($id) {
         return;
     }
 
+    // Procesar campos
     foreach ($row as $key => $value) {
         if ($value instanceof OCI_Lob) {
             $row[$key] = $value->load();
@@ -95,11 +95,9 @@ function getServicioById($id) {
     echo json_encode($row, JSON_UNESCAPED_UNICODE);
 }
 
-
-
-// ================================
-//     INSERTAR SERVICIO
-// ================================
+/* ============================================================
+    INSERTAR SERVICIO (YA CON IMAGEN_URL)
+   ============================================================ */
 function createServicio() {
     global $conn;
 
@@ -107,8 +105,9 @@ function createServicio() {
 
     if (
         isset($input['servicio_id'], $input['categoria_id'], $input['nombre'],
-              $input['descripcion'], $input['duracion'], $input['precio'])
+              $input['descripcion'], $input['duracion'], $input['precio'], $input['imagen_url'])
     ) {
+
         $servicio_id  = $input['servicio_id'];
         $estado_id    = $input['estado_id'] ?? 1;
         $categoria_id = $input['categoria_id'];
@@ -116,21 +115,24 @@ function createServicio() {
         $descripcion  = $input['descripcion'];
         $duracion     = $input['duracion'];
         $precio       = $input['precio'];
+        $imagen_url   = $input['imagen_url'];
 
         $stid = oci_parse($conn, '
             BEGIN 
-              FIDE_SERVICIOS_INSERTAR_SP(
+              FIDE_ANGELUS_ESTETICA_PKG.FIDE_SERVICIOS_INSERTAR_SP(
                 :servicio_id,
                 :estado_id,
                 :categoria_id,
                 :nombre,
                 :descripcion,
                 :duracion,
-                :precio
-              );
+                :precio,
+                :imagen_url
+              ); 
             END;
         ');
 
+        // Vincular parámetros
         oci_bind_by_name($stid, ":servicio_id",  $servicio_id);
         oci_bind_by_name($stid, ":estado_id",    $estado_id);
         oci_bind_by_name($stid, ":categoria_id", $categoria_id);
@@ -138,8 +140,10 @@ function createServicio() {
         oci_bind_by_name($stid, ":descripcion",  $descripcion);
         oci_bind_by_name($stid, ":duracion",     $duracion);
         oci_bind_by_name($stid, ":precio",       $precio);
+        oci_bind_by_name($stid, ":imagen_url",   $imagen_url);
 
         if (oci_execute($stid)) {
+            oci_commit($conn);
             echo json_encode(['message' => 'Servicio creado exitosamente']);
         } else {
             $e = oci_error($stid);
@@ -153,11 +157,9 @@ function createServicio() {
     }
 }
 
-
-
-// ================================
-//     ACTUALIZAR SERVICIO
-// ================================
+/* ============================================================
+    ACTUALIZAR SERVICIO (YA CON IMAGEN_URL)
+   ============================================================ */
 function updateServicio($id) {
     global $conn;
 
@@ -165,7 +167,7 @@ function updateServicio($id) {
 
     if (
         isset($input['estado_id'], $input['categoria_id'], $input['nombre'],
-              $input['descripcion'], $input['duracion'], $input['precio'])
+              $input['descripcion'], $input['duracion'], $input['precio'], $input['imagen_url'])
     ) {
 
         $estado_id    = $input['estado_id'];
@@ -174,17 +176,19 @@ function updateServicio($id) {
         $descripcion  = $input['descripcion'];
         $duracion     = $input['duracion'];
         $precio       = $input['precio'];
+        $imagen_url   = $input['imagen_url'];
 
         $stid = oci_parse($conn, '
             BEGIN 
-              FIDE_SERVICIOS_MODIFICAR_SP(
+              FIDE_ANGELUS_ESTETICA_PKG.FIDE_SERVICIOS_MODIFICAR_SP(
                 :servicio_id,
                 :estado_id,
                 :categoria_id,
                 :nombre,
                 :descripcion,
                 :duracion,
-                :precio
+                :precio,
+                :imagen_url
               );
             END;
         ');
@@ -196,6 +200,7 @@ function updateServicio($id) {
         oci_bind_by_name($stid, ":descripcion",  $descripcion);
         oci_bind_by_name($stid, ":duracion",     $duracion);
         oci_bind_by_name($stid, ":precio",       $precio);
+        oci_bind_by_name($stid, ":imagen_url",   $imagen_url);
 
         if (oci_execute($stid)) {
             echo json_encode(['message' => 'Servicio actualizado exitosamente']);
@@ -211,15 +216,13 @@ function updateServicio($id) {
     }
 }
 
-
-
-// ================================
-//     ELIMINAR SERVICIO (ESTADO=2)
-// ================================
+/* ============================================================
+    ELIMINAR SERVICIO
+   ============================================================ */
 function deleteServicio($id) {
     global $conn;
 
-    $stid = oci_parse($conn, 'BEGIN FIDE_SERVICIOS_ELIMINAR_SP(:id); END;');
+    $stid = oci_parse($conn, 'BEGIN FIDE_ANGELUS_ESTETICA_PKG.FIDE_SERVICIOS_ELIMINAR_SP(:id); END;');
     oci_bind_by_name($stid, ":id", $id);
 
     if (oci_execute($stid)) {

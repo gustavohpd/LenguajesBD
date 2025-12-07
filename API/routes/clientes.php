@@ -25,7 +25,7 @@ try {
 function getClientes() {
     global $conn;
 
-    $sql = 'BEGIN FIDE_CLIENTES_LISTAR_SP(:cursor); END;';
+    $sql = 'BEGIN FIDE_ANGELUS_ESTETICA_PKG.FIDE_CLIENTES_LISTAR_SP(:cursor); END;';
     $stid = oci_parse($conn, $sql);
 
     $cursor = oci_new_cursor($conn);
@@ -66,7 +66,7 @@ function getClientes() {
 function getClienteById($cliente_id) {
     global $conn;
 
-    $sql = 'BEGIN FIDE_CLIENTES_OBTENER_SP(:p_cliente_id, :cursor); END;';
+    $sql = 'BEGIN FIDE_ANGELUS_ESTETICA_PKG.FIDE_CLIENTES_OBTENER_SP(:p_cliente_id, :cursor); END;';
     $stid = oci_parse($conn, $sql);
 
     $cursor = oci_new_cursor($conn);
@@ -121,7 +121,7 @@ function createCliente() {
 
         $stid = oci_parse($conn, '
             BEGIN 
-              FIDE_CLIENTES_INSERTAR_SP(
+              FIDE_ANGELUS_ESTETICA_PKG.FIDE_CLIENTES_INSERTAR_SP(
                 :cliente_id, 
                 :usuario_id, 
                 :estado_id, 
@@ -172,7 +172,7 @@ function updateCliente($id) {
 
         $stid = oci_parse($conn, '
             BEGIN 
-              FIDE_CLIENTES_MODIFICAR_SP(
+              FIDE_ANGELUS_ESTETICA_PKG.FIDE_CLIENTES_MODIFICAR_SP(
                 :cliente_id,
                 :usuario_id,
                 :estado_id,
@@ -208,7 +208,7 @@ function updateCliente($id) {
 function deleteCliente($id) {
     global $conn;
 
-    $stid = oci_parse($conn, 'BEGIN FIDE_CLIENTES_ELIMINAR_SP(:id); END;');
+    $stid = oci_parse($conn, 'BEGIN FIDE_ANGELUS_ESTETICA_PKG.FIDE_CLIENTES_ELIMINAR_SP(:id); END;');
     oci_bind_by_name($stid, ":id", $id, -1, SQLT_INT);
 
     // Ejecutar procedimiento

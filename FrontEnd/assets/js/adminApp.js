@@ -10,6 +10,7 @@ const BASE_API = "http://localhost/LenguajesBD/API/public/index.php";
 const ENDPOINT_CLIENTES = BASE_API + "/api/clientes";
 const ENDPOINT_SERVICIOS = BASE_API + "/api/servicios";
 const ENDPOINT_PRODUCTOS = BASE_API + "/api/productos";
+const ENDPOINT_CITAS = BASE_API + "/api/citas";
 
 $(function () {
   // Bootstrap modals
@@ -22,11 +23,13 @@ $(function () {
   const productoModal = new bootstrap.Modal(
     document.getElementById("productoModal")
   );
+  const citaModal = new bootstrap.Modal(document.getElementById("citaModal"));
 
   // Modes
   let clienteMode = "create";
   let servicioMode = "create";
   let productoMode = "create";
+  let citaMode = "create";
 
   /* ------------------ EVENT BINDING ------------------ */
   // Clientes
@@ -71,10 +74,23 @@ $(function () {
     else updateProducto();
   });
 
+  // Citas
+  $("#btn-new-cita").on("click", openCitaCreate);
+  $("#btn-refresh-citas").on("click", () =>
+    loadCitas($("#search-citas").val())
+  );
+  $("#search-citas").on("input", () => loadCitas($("#search-citas").val()));
+  $("#citaForm").on("submit", function (e) {
+    e.preventDefault();
+    if (citaMode === "create") createCita();
+    else updateCita();
+  });
+
   // Initial load
   loadClientes();
   loadServicios();
   loadProductos();
+  loadCitas();
 
   /* ------------------ CLIENTES ------------------ */
   function setStatusClientes(txt) {
@@ -715,16 +731,194 @@ $(function () {
         )
       );
   }
+  /* ------------------ CITAS ------------------ */
+  function setStatusCitas(txt) {
+    $("#status-citas").text("Estado: " + txt);
+  }
+
+  function loadCitas(filter = "") {
+    setStatusCitas("Cargando citas...");
+
+    $.ajax({ url: ENDPOINT_CITAS, method: "GET", dataType: "json" })
+      .done((data) => {
+        const list = Array.isArray(data) ? data : data.data || [];
+        renderCitas(list, filter);
+        setStatusCitas("Citas cargadas: " + list.length);
+      })
+      .fail((xhr) => {
+        setStatusCitas("Error al cargar citas");
+        $("#citas-tbody").html(
+          '<tr><td colspan="7" class="text-center">No se pudo cargar la lista</td></tr>'
+        );
+      });
+  }
+
+  function renderCitas(list, filter = "") {
+    const q = (filter || "").toLowerCase();
+    const tbody = $("#citas-tbody").empty();
+
+    const filtered = list.filter((c) => {
+      return (
+        String(c.cita_id).includes(q) ||
+        String(c.cliente_id).includes(q) ||
+        String(c.servicio_id).includes(q)
+      );
+    });
+
+    if (filtered.length === 0) {
+      tbody.html(
+        '<tr><td colspan="7" class="text-center">No hay citas</td></tr>'
+      );
+      return;
+    }
+
+    filtered.forEach((c) => {
+      const tr = $("<tr>");
+      tr.append($("<td>").text(c.cita_id));
+      tr.append($("<td>").text(c.cliente_id));
+      tr.append($("<td>").text(c.servicio_id));
+      tr.append($("<td>").text(c.estado_id));
+      tr.append($("<td>").text(c.fecha_hora));
+      tr.append($("<td>").text(c.notas));
+
+      const actions = $('<td class="text-end">');
+      actions.append(
+        $('<button class="btn btn-sm btn-info me-1">Editar</button>').on(
+          "click",
+          () => openCitaEdit(c.cita_id)
+        )
+      );
+      actions.append(
+        $('<button class="btn btn-sm btn-danger">Eliminar</button>').on(
+          "click",
+          () => confirmDeleteCita(c.cita_id)
+        )
+      );
+
+      tr.append(actions);
+      tbody.append(tr);
+    });
+  }
+
+  function openCitaCreate() {
+    citaMode = "create";
+    $("#citaModalTitle").text("Nueva cita");
+    $("#citaForm")[0].reset();
+    $("#cita-form-error").addClass("d-none").text("");
+    this.citaModal.show();
+  }
+
+  function openCitaEdit(id) {
+    citaMode = "edit";
+    setStatusCitas("Cargando cita " + id + "...");
+
+    $.ajax({
+      url: ENDPOINT_CITAS + "/" + encodeURIComponent(id),
+      method: "GET",
+      dataType: "json",
+    })
+      .done((data) => {
+        const c = Array.isArray(data) ? data[0] : data.data || data;
+        if (!c) return;
+
+        $("#citaModalTitle").text("Editar cita " + id);
+        $("#cita_id").val(c.cita_id);
+        $("#cita_cliente_id").val(c.cliente_id);
+        $("#cita_servicio_id").val(c.servicio_id);
+        $("#cita_estado_id").val(c.estado_id);
+        $("#fecha_hora").val(c.fecha_hora.replace(" ", "T"));
+        $("#notas").val(c.notas);
+
+        citaModal.show();
+      })
+      .fail(() => setStatusCitas("Error cargando cita"));
+  }
+
+  function readCitaFormAlwaysSendId() {
+    $("#cita-form-error").addClass("d-none").text("");
+
+    return {
+      cita_id: Number($("#cita_id").val()),
+      cliente_id: Number($("#cita_cliente_id").val()),
+      servicio_id: Number($("#cita_servicio_id").val()),
+      estado_id: Number($("#cita_estado_id").val()),
+      fecha_hora: $("#fecha_hora").val(),
+      notas: $("#notas").val() || "",
+    };
+  }
+
+  function createCita() {
+    const payload = readCitaFormAlwaysSendId();
+    setStatusCitas("Creando cita...");
+
+    $.ajax({
+      url: ENDPOINT_CITAS,
+      method: "POST",
+      contentType: "application/json",
+      data: JSON.stringify(payload),
+      dataType: "json",
+    })
+      .done(() => {
+        citaModal.hide();
+        loadCitas();
+        setStatusCitas("Cita creada");
+      })
+      .fail((xhr) =>
+        $("#cita-form-error")
+          .removeClass("d-none")
+          .text("Error creando cita: " + xhr.statusText)
+      );
+  }
+
+  function updateCita() {
+    const payload = readCitaFormAlwaysSendId();
+    const id = payload.cita_id;
+
+    setStatusCitas("Actualizando cita...");
+
+    $.ajax({
+      url: ENDPOINT_CITAS + "/" + encodeURIComponent(id),
+      method: "PUT",
+      contentType: "application/json",
+      data: JSON.stringify(payload),
+      dataType: "json",
+    })
+      .done(() => {
+        citaModal.hide();
+        loadCitas();
+        setStatusCitas("Cita actualizada");
+      })
+      .fail((xhr) =>
+        $("#cita-form-error")
+          .removeClass("d-none")
+          .text("Error actualizando cita: " + xhr.statusText)
+      );
+  }
+
+  function confirmDeleteCita(id) {
+    if (!confirm("¿Eliminar cita " + id + " ?")) return;
+
+    $.ajax({
+      url: ENDPOINT_CITAS + "/" + encodeURIComponent(id),
+      method: "DELETE",
+      dataType: "json",
+    })
+      .done(() => {
+        loadCitas();
+        setStatusCitas("Cita eliminada");
+      })
+      .fail(() => setStatusCitas("Error al eliminar cita"));
+  }
 });
 
-$('#clienteModal').on('hidden.bs.modal', function () {
-    $('#openModalButton').focus(); // move focus back to trigger
+$("#clienteModal").on("hidden.bs.modal", function () {
+  $("#openModalButton").focus(); // move focus back to trigger
 });
 
-$('#servicioModal').on('hidden.bs.modal', function () {
-    $('#openServicioModalButton').focus(); // move focus back to trigger
+$("#servicioModal").on("hidden.bs.modal", function () {
+  $("#openServicioModalButton").focus(); // move focus back to trigger
 });
 
-$('#productoModal').on('hidden.bs.modal', function () {
-    $('#openProductoModalButton').focus(); // return focus to trigger
+$("#productoModal").on("hidden.bs.modal", function () {
+  $("#openProductoModalButton").focus(); // return focus to trigger
 });

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carrito | Estética Angelus</title>
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/templatemo.css" />
+    <link rel="stylesheet" href="assets/css/custom.css" />
+
+    <style>
+      /* Sticky Footer */
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+      }
+      .main-content {
+        flex: 1; /* Permite empujar el footer hacia abajo */
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- ================= HEADER ================= -->
+    <nav class="navbar navbar-expand-lg navbar-light shadow">
+      <div class="container d-flex justify-content-between align-items-center">
+        <a
+          class="navbar-brand text-success logo h1 align-self-center"
+          href="index.html"
+        >
+          Angelus
+        </a>
+
+        <button
+          class="navbar-toggler border-0"
+          data-bs-toggle="collapse"
+          data-bs-target="#templatemo_main_nav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div
+          class="collapse navbar-collapse flex-fill justify-content-lg-between"
+          id="templatemo_main_nav"
+        >
+          <ul class="nav navbar-nav mx-lg-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="servicios.html">Servicios</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="productos.html">Productos</a>
+            </li>
+          </ul>
+
+          <div class="navbar align-self-center d-flex">
+            <a
+              class="nav-icon position-relative text-decoration-none"
+              href="carrito.html"
+            >
+              <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+              <span
+                id="cart-count"
+                class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-success text-white"
+              >
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ==================== CONTENIDO DEL CARRITO ==================== -->
+    <div class="main-content">
+      <div class="container py-5">
+        <h2 class="mb-4">Carrito de Compras</h2>
+
+        <div id="carrito-vacio" class="alert alert-info" style="display: none">
+          Tu carrito está vacío.
+        </div>
+
+        <div id="carrito-contenido" style="display: none">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cant.</th>
+                <th>Total</th>
+                <th></th>
+              </tr>
+            </thead>
+
+            <tbody id="carrito-tabla"></tbody>
+          </table>
+
+          <div class="text-end">
+            <h3>
+              Total general:
+              <span id="carrito-total" class="text-success"></span>
+            </h3>
+            <button class="btn btn-success mt-3">Finalizar compra</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="bg-dark" id="tempaltemo_footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 pt-5">
+            <h2 class="h2 text-success border-bottom pb-3 border-light logo">
+              Estética Angelus
+            </h2>
+            <ul class="list-unstyled text-light footer-link-list">
+              <li>
+                <i class="fas fa-map-marker-alt fa-fw"></i> San Jose , Costa
+                Rica
+              </li>
+              <li><i class="fa fa-phone fa-fw"></i> 506 0000-0000</li>
+              <li>
+                <i class="fa fa-envelope fa-fw"></i> esteticangelus@gmail.com
+              </li>
+            </ul>
+          </div>
+
+          <div class="w-100 bg-black py-3 mt-4">
+            <div class="container">
+              <p class="text-left text-light">
+                Copyright &copy; Estética Angelus
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script src="assets/js/jquery-1.11.0.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/carrito.js"></script>
+  </body>
+</html>

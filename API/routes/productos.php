@@ -27,7 +27,7 @@ try {
 function getProductos() {
     global $conn;
 
-    $sql = 'BEGIN FIDE_PRODUCTOS_LISTAR_SP(:cursor); END;';
+    $sql = 'BEGIN FIDE_ANGELUS_ESTETICA_PKG.FIDE_PRODUCTOS_LISTAR_SP(:cursor); END;';
     $stid = oci_parse($conn, $sql);
 
     $cursor = oci_new_cursor($conn);
@@ -69,27 +69,28 @@ function getProductos() {
 function getProductoById($producto_id) {
     global $conn;
 
-    $sql = 'BEGIN FIDE_PRODUCTOS_OBTENER_SP(
+    $sql = 'BEGIN FIDE_ANGELUS_ESTETICA_PKG.FIDE_PRODUCTOS_OBTENER_SP(
                 :p_producto_id,
                 :p_categoria_id,
                 :p_estado_id,
                 :p_proveedor_id,
                 :p_nombre,
                 :p_descripcion,
-                :p_precio
+                :p_precio,
+                :p_imagen_url
             ); END;';
 
     $stid = oci_parse($conn, $sql);
 
     oci_bind_by_name($stid, ":p_producto_id", $producto_id);
 
-    // Variables OUT
     oci_bind_by_name($stid, ":p_categoria_id", $categoria_id, 255);
     oci_bind_by_name($stid, ":p_estado_id", $estado_id, 255);
     oci_bind_by_name($stid, ":p_proveedor_id", $proveedor_id, 255);
     oci_bind_by_name($stid, ":p_nombre", $nombre, 255);
     oci_bind_by_name($stid, ":p_descripcion", $descripcion, 4000);
     oci_bind_by_name($stid, ":p_precio", $precio, 255);
+    oci_bind_by_name($stid, ":p_imagen_url", $imagen_url, 500);
 
     oci_execute($stid);
 
@@ -106,7 +107,8 @@ function getProductoById($producto_id) {
         'proveedor_id' => $proveedor_id,
         'nombre'       => utf8_encode($nombre),
         'descripcion'  => utf8_encode($descripcion),
-        'precio'       => $precio
+        'precio'       => $precio,
+        'imagen_url'   => $imagen_url
     ];
 
     echo json_encode($row, JSON_UNESCAPED_UNICODE);
@@ -126,7 +128,8 @@ function createProducto() {
               $input['proveedor_id'],
               $input['nombre'],
               $input['descripcion'],
-              $input['precio'])
+              $input['precio'],
+              $input['imagen_url'])
     ) {
         $producto_id  = $input['producto_id'];
         $categoria_id = $input['categoria_id'];
@@ -135,17 +138,19 @@ function createProducto() {
         $nombre       = $input['nombre'];
         $descripcion  = $input['descripcion'];
         $precio       = $input['precio'];
+        $imagen_url   = $input['imagen_url'];
 
         $stid = oci_parse($conn, '
             BEGIN 
-              FIDE_PRODUCTOS_INSERTAR_SP(
+              FIDE_ANGELUS_ESTETICA_PKG.FIDE_PRODUCTOS_INSERTAR_SP(
                 :producto_id,
                 :categoria_id,
                 :estado_id,
                 :proveedor_id,
                 :nombre,
                 :descripcion,
-                :precio
+                :precio,
+                :imagen_url
               ); 
             END;
         ');
@@ -157,6 +162,7 @@ function createProducto() {
         oci_bind_by_name($stid, ":nombre",       $nombre);
         oci_bind_by_name($stid, ":descripcion",  $descripcion);
         oci_bind_by_name($stid, ":precio",       $precio);
+        oci_bind_by_name($stid, ":imagen_url",   $imagen_url);
 
         if (oci_execute($stid)) {
             echo json_encode(['message' => 'Producto creado exitosamente']);
@@ -186,7 +192,8 @@ function updateProducto($id) {
               $input['proveedor_id'],
               $input['nombre'], 
               $input['descripcion'], 
-              $input['precio'])
+              $input['precio'],
+              $input['imagen_url'])
     ) {
 
         $categoria_id = $input['categoria_id'];
@@ -195,17 +202,19 @@ function updateProducto($id) {
         $nombre       = $input['nombre'];
         $descripcion  = $input['descripcion'];
         $precio       = $input['precio'];
+        $imagen_url   = $input['imagen_url'];
 
         $stid = oci_parse($conn, '
             BEGIN 
-              FIDE_PRODUCTOS_MODIFICAR_SP(
+              FIDE_ANGELUS_ESTETICA_PKG.FIDE_PRODUCTOS_MODIFICAR_SP(
                 :producto_id,
                 :categoria_id,
                 :estado_id,
                 :proveedor_id,
                 :nombre,
                 :descripcion,
-                :precio
+                :precio,
+                :imagen_url
               ); 
             END;
         ');
@@ -217,6 +226,7 @@ function updateProducto($id) {
         oci_bind_by_name($stid, ":nombre",       $nombre);
         oci_bind_by_name($stid, ":descripcion",  $descripcion);
         oci_bind_by_name($stid, ":precio",       $precio);
+        oci_bind_by_name($stid, ":imagen_url",   $imagen_url);
 
         if (oci_execute($stid)) {
             echo json_encode(['message' => 'Producto actualizado exitosamente']);
@@ -233,13 +243,14 @@ function updateProducto($id) {
 }
 
 
+
 // ===========================================================
 // ELIMINAR PRODUCTO
 // ===========================================================
 function deleteProducto($id) {
     global $conn;
 
-    $stid = oci_parse($conn, 'BEGIN FIDE_PRODUCTOS_ELIMINAR_SP(:id); END;');
+    $stid = oci_parse($conn, 'BEGIN FIDE_ANGELUS_ESTETICA_PKG.FIDE_PRODUCTOS_ELIMINAR_SP(:id); END;');
     oci_bind_by_name($stid, ":id", $id, -1, SQLT_INT);
 
     if (oci_execute($stid)) {

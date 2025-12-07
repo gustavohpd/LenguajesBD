@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agendar Cita | Estética Angelus</title>
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/templatemo.css" />
+    <link rel="stylesheet" href="assets/css/custom.css" />
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css" />
+  </head>
+
+  <body>
+    <!-- ========== HEADER ========== -->
+    <nav class="navbar navbar-expand-lg navbar-light shadow">
+      <div class="container d-flex justify-content-between align-items-center">
+        <a
+          class="navbar-brand text-success logo h1 align-self-center"
+          href="index.html"
+        >
+          Angelus
+        </a>
+
+        <button
+          class="navbar-toggler border-0"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#templatemo_main_nav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div
+          class="align-self-center collapse navbar-collapse flex-fill d-lg-flex justify-content-lg-between"
+          id="templatemo_main_nav"
+        >
+          <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="servicios.html">Servicios</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="productos.html">Productos</a>
+            </li>
+          </ul>
+
+          <div class="navbar align-self-center d-flex">
+            <a
+              class="nav-icon position-relative text-decoration-none"
+              href="carrito.html"
+            >
+              <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+              <span
+                id="cart-count"
+                class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-success text-white"
+                style="display: none"
+              ></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ========== CONTENIDO PRINCIPAL ========== -->
+    <div class="container py-5">
+      <h2 class="mb-4">Agendar Cita</h2>
+
+      <!-- Info servicio -->
+      <div class="card shadow p-4 mb-4">
+        <h4 class="mb-3">Servicio Seleccionado</h4>
+
+        <div class="row align-items-center">
+          <div class="col-md-3 text-center">
+            <img
+              id="serv-img"
+              src="assets/img/default.png"
+              class="img-fluid rounded"
+              style="max-height: 150px; object-fit: cover"
+            />
+          </div>
+
+          <div class="col-md-9">
+            <h3 id="serv-nombre"></h3>
+            <p class="text-success h5" id="serv-precio"></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulario -->
+      <div class="card shadow p-4">
+        <h4 class="mb-3">Datos de la Cita</h4>
+
+        <form id="form-cita">
+          <div class="mb-3">
+            <label class="form-label">Fecha de la cita</label>
+            <input type="date" class="form-control" id="cita-fecha" required />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Hora de la cita</label>
+            <input type="time" class="form-control" id="cita-hora" required />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Notas (opcional)</label>
+            <textarea
+              class="form-control"
+              id="cita-notas"
+              rows="3"
+              placeholder="Ej. Prefiero terapeuta mujer, piel sensible, etc."
+            ></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-success w-100 mt-3">
+            Confirmar Cita
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="bg-dark" id="tempaltemo_footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 pt-5">
+            <h2 class="h2 text-success border-bottom pb-3 border-light logo">
+              Estética Angelus
+            </h2>
+            <ul class="list-unstyled text-light footer-link-list">
+              <li>
+                <i class="fas fa-map-marker-alt fa-fw"></i> San José, Costa Rica
+              </li>
+              <li><i class="fa fa-phone fa-fw"></i> 506 0000-0000</li>
+              <li>
+                <i class="fa fa-envelope fa-fw"></i> esteticangelus@gmail.com
+              </li>
+            </ul>
+          </div>
+
+          <div class="w-100 bg-black py-3">
+            <div class="container">
+              <p class="text-light text-center m-0">
+                © Estética Angelus | Designed by TemplateMo
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery-1.11.0.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+
+    <!-- citas.js -->
+    <script src="assets/js/citas.js"></script>
+  </body>
+</html>

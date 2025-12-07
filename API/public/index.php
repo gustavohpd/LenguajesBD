@@ -2,14 +2,18 @@
 require_once __DIR__ . '/../src/Database.php';
 require_once __DIR__ . '/../routes/clientes.php';
 require_once __DIR__ . '/../routes/productos.php';
-require_once __DIR__ . '/../routes/servicios.php'; // ← NUEVO
+require_once __DIR__ . '/../routes/servicios.php';
+require_once __DIR__ . '/../routes/citas.php';
+require_once __DIR__ . '/../routes/login.php'; // ← AGREGADO
 
-// CORS básico
+// ======================
+//        CORS
+// ======================
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
-// Manejo del preflight OPTIONS para CORS
+// Preflight OPTIONS
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     header("HTTP/1.1 200 OK");
     exit();
@@ -23,6 +27,15 @@ $base = '/LenguajesBD/API/public/index.php';
 $endpoint = substr($uri, strlen($base));
 
 $method = $_SERVER['REQUEST_METHOD'];
+
+
+// =====================================================
+//                       LOGIN
+// =====================================================
+if ($endpoint === '/api/login' && $method === 'POST') {
+    loginUsuario();
+    exit;
+}
 
 
 // =====================================================
@@ -118,6 +131,42 @@ if (preg_match('/^\/api\/servicios\/(\d+)$/', $endpoint, $matches) && $method ==
 // DELETE (estado=2)
 if (preg_match('/^\/api\/servicios\/(\d+)$/', $endpoint, $matches) && $method === 'DELETE') {
     deleteServicio($matches[1]);
+    exit;
+}
+
+
+
+// =====================================================
+//                       CITAS
+// =====================================================
+
+// GET todos
+if ($endpoint === '/api/citas' && $method === 'GET') {
+    getCitas();
+    exit;
+}
+
+// POST crear
+if ($endpoint === '/api/citas' && $method === 'POST') {
+    createCita();
+    exit;
+}
+
+// GET por ID
+if (preg_match('/^\/api\/citas\/(\d+)$/', $endpoint, $matches) && $method === 'GET') {
+    getCitaById($matches[1]);
+    exit;
+}
+
+// PUT modificar
+if (preg_match('/^\/api\/citas\/(\d+)$/', $endpoint, $matches) && $method === 'PUT') {
+    updateCita($matches[1]);
+    exit;
+}
+
+// DELETE (estado=2)
+if (preg_match('/^\/api\/citas\/(\d+)$/', $endpoint, $matches) && $method === 'DELETE') {
+    deleteCita($matches[1]);
     exit;
 }
 

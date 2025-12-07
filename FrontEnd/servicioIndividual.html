@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Servicio | Estética Angelus</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/templatemo.css" />
+    <link rel="stylesheet" href="assets/css/custom.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap"
+    />
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css" />
+  </head>
+
+  <body>
+    <!-- HEADER -->
+    <nav class="navbar navbar-expand-lg navbar-light shadow">
+      <div class="container d-flex justify-content-between align-items-center">
+        <a
+          class="navbar-brand text-success logo h1 align-self-center"
+          href="index.html"
+        >
+          Angelus
+        </a>
+
+        <button
+          class="navbar-toggler border-0"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#templatemo_main_nav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div
+          class="collapse navbar-collapse flex-fill justify-content-lg-between"
+          id="templatemo_main_nav"
+        >
+          <ul class="nav navbar-nav mx-lg-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="servicios.html">Servicios</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="productos.html">Productos</a>
+            </li>
+          </ul>
+
+          <div class="navbar align-self-center d-flex">
+            <!-- ICONO CARRITO -->
+            <a
+              class="nav-icon position-relative text-decoration-none"
+              href="carrito.html"
+            >
+              <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+              <span
+                id="cart-count"
+                class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-success text-white"
+                style="display: none"
+              ></span>
+            </a>
+
+            <!-- USUARIO -->
+            <a
+              class="nav-icon position-relative text-decoration-none"
+              href="login.html"
+            >
+              <i class="fa fa-fw fa-user text-dark mr-3"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- END HEADER -->
+
+    <!-- ==============================
+      DETALLE DEL SERVICIO
+================================ -->
+    <div class="container py-5">
+      <div class="row" id="servicio-detalle">
+        <!-- IMAGEN -->
+        <div class="col-md-6 text-center">
+          <img
+            id="serv-img"
+            src="assets/img/default-servicio.png"
+            class="img-fluid rounded"
+            alt="Servicio"
+            style="max-height: 350px; object-fit: cover"
+          />
+        </div>
+
+        <!-- INFORMACIÓN -->
+        <div class="col-md-6">
+          <h1 id="serv-nombre" class="h2"></h1>
+          <h3 id="serv-precio" class="text-success mt-3"></h3>
+
+          <p id="serv-desc" class="mt-4"></p>
+
+          <p class="mt-3">
+            <strong>Duración: </strong>
+            <span id="serv-duracion"></span> minutos
+          </p>
+
+          <a href="citas.html" class="btn btn-success mt-4"> Agendar cita </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark text-light mt-auto">
+      <div class="container py-4">
+        <h2 class="h2 text-success border-bottom pb-3">Estética Angelus</h2>
+
+        <p><i class="fas fa-map-marker-alt"></i> San José, Costa Rica</p>
+        <p><i class="fa fa-phone"></i> 506 0000-0000</p>
+        <p><i class="fa fa-envelope"></i> esteticangelus@gmail.com</p>
+      </div>
+
+      <div class="w-100 bg-black py-3 text-center">
+        <small>© Estética Angelus | TemplateMo</small>
+      </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="assets/js/jquery-1.11.0.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+
+    <!-- CONTADOR CARRITO -->
+    <script src="assets/js/carrito.js"></script>
+
+    <!-- LÓGICA DEL SERVICIO INDIVIDUAL -->
+    <script src="assets/js/servicioIndividual.js"></script>
+  </body>
+</html>
