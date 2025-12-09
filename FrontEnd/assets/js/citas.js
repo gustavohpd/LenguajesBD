@@ -2,23 +2,25 @@ $(document).ready(function () {
   const serv = JSON.parse(localStorage.getItem("servicioSeleccionado"));
   const usuario = JSON.parse(localStorage.getItem("usuario"));
 
+  // Validación de usuario
   if (!usuario) {
     alert("Debe iniciar sesión para agendar una cita.");
     window.location.href = "login.html";
     return;
   }
 
+  // Validar servicio seleccionado
   if (!serv) {
     alert("No seleccionaste un servicio.");
     window.location.href = "servicios.html";
     return;
   }
 
-  // Pintar datos en la vista
+  // Mostrar datos del servicio
   $("#serv-nombre").text(serv.nombre);
   $("#serv-precio").text("₡" + Number(serv.precio).toLocaleString("es-CR"));
-  $("#serv-img").attr("src", serv.imagen_url); // <--- corregido
 
+  // Enviar cita
   $("#form-cita").submit(function (e) {
     e.preventDefault();
 
@@ -35,7 +37,7 @@ $(document).ready(function () {
 
     const payload = {
       cliente_id: usuario.cliente_id,
-      servicio_id: serv.servicio_id, // <--- CORREGIDO
+      servicio_id: serv.servicio_id,
       fecha_hora: fechaHora,
       notas: notas,
     };
@@ -45,13 +47,15 @@ $(document).ready(function () {
       method: "POST",
       contentType: "application/json",
       data: JSON.stringify(payload),
+
       success: function () {
         alert("Cita agendada exitosamente.");
         localStorage.removeItem("servicioSeleccionado");
         window.location.href = "misCitas.html";
       },
+
       error: function (xhr) {
-        console.error(xhr.responseText);
+        console.error("ERROR AL CREAR CITA:", xhr.responseText);
         alert("Error al agendar cita.");
       },
     });

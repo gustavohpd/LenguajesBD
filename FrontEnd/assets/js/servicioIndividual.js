@@ -1,5 +1,4 @@
 $(document).ready(function () {
-  // Obtener el servicio guardado en localStorage
   const servicio = JSON.parse(localStorage.getItem("servicioDetalle"));
 
   if (!servicio) {
@@ -8,39 +7,26 @@ $(document).ready(function () {
     return;
   }
 
-  // =============================
-  // Pintar información del servicio
-  // =============================
+  // Mostrar información del servicio
   $("#serv-img").attr(
     "src",
-    servicio.imagen_url || servicio.imagen || "assets/img/default-servicio.png"
+    servicio.imagen_url || "assets/img/default-servicio.png"
   );
   $("#serv-nombre").text(servicio.nombre);
-  $("#serv-precio").text(
-    "₡" + Number(servicio.precio || 0).toLocaleString("es-CR")
-  );
+  $("#serv-precio").text("₡" + Number(servicio.precio).toLocaleString("es-CR"));
   $("#serv-desc").text(servicio.descripcion || "Sin descripción.");
   $("#serv-duracion").text(servicio.duracion || 60);
 
-  // =============================
-  // Preparar objeto para agendar cita
-  // (compatible con citas.js que usa serv.id)
-  // =============================
+  // Objeto correcto para citas.js
   const servicioParaAgendar = {
-    // aseguramos que siempre haya "id"
-    id: servicio.id || servicio.servicio_id,
-    // y también dejamos "servicio_id" por si lo necesitas después
-    servicio_id: servicio.servicio_id || servicio.id,
+    servicio_id: servicio.servicio_id, //  EL ÚNICO ID CORRECTO
     nombre: servicio.nombre,
     precio: servicio.precio,
-    imagen: servicio.imagen_url || servicio.imagen,
+    imagen_url: servicio.imagen_url,
     descripcion: servicio.descripcion,
     duracion: servicio.duracion,
   };
 
-  // =============================
-  // Guardar el servicio antes de ir a citas.html
-  // =============================
   $("a[href='citas.html']").on("click", function () {
     localStorage.setItem(
       "servicioSeleccionado",
