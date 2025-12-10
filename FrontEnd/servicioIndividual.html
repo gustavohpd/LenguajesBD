@@ -17,7 +17,7 @@
   </head>
 
   <body>
-    <!-- HEADER -->
+    <!-- ====================== HEADER GLOBAL DINÁMICO ====================== -->
     <nav class="navbar navbar-expand-lg navbar-light shadow">
       <div class="container d-flex justify-content-between align-items-center">
         <a
@@ -40,6 +40,7 @@
           class="collapse navbar-collapse flex-fill justify-content-lg-between"
           id="templatemo_main_nav"
         >
+          <!-- MENÚ CENTRAL -->
           <ul class="nav navbar-nav mx-lg-auto">
             <li class="nav-item">
               <a class="nav-link" href="index.html">Inicio</a>
@@ -50,10 +51,20 @@
             <li class="nav-item">
               <a class="nav-link" href="productos.html">Productos</a>
             </li>
+
+            <!-- Dinámicos -->
+            <li id="nav-mis-citas" class="nav-item" style="display: none">
+              <a class="nav-link" href="misCitas.html">Mis Citas</a>
+            </li>
+
+            <li id="nav-admin" class="nav-item" style="display: none">
+              <a class="nav-link" href="adminView.html">Admin</a>
+            </li>
           </ul>
 
+          <!-- ICONOS DERECHA -->
           <div class="navbar align-self-center d-flex">
-            <!-- ICONO CARRITO -->
+            <!-- Carrito -->
             <a
               class="nav-icon position-relative text-decoration-none"
               href="carrito.html"
@@ -66,22 +77,39 @@
               ></span>
             </a>
 
-            <!-- USUARIO -->
+            <!-- Login -->
             <a
+              id="nav-login"
               class="nav-icon position-relative text-decoration-none"
               href="login.html"
             >
               <i class="fa fa-fw fa-user text-dark mr-3"></i>
             </a>
+
+            <!-- Nombre -->
+            <span
+              id="nav-user-name"
+              class="text-dark mx-3"
+              style="display: none; font-weight: bold"
+            ></span>
+
+            <!-- Logout -->
+            <a
+              id="nav-logout"
+              class="nav-link text-danger"
+              href="#"
+              style="display: none"
+              >Cerrar sesión</a
+            >
           </div>
         </div>
       </div>
     </nav>
-    <!-- END HEADER -->
+    <!-- ====================== FIN HEADER ====================== -->
 
     <!-- ==============================
       DETALLE DEL SERVICIO
-================================ -->
+    ================================ -->
     <div class="container py-5">
       <div class="row" id="servicio-detalle">
         <!-- IMAGEN -->
@@ -112,7 +140,7 @@
       </div>
     </div>
 
-    <!-- FOOTER -->
+    <!-- ====================== FOOTER ====================== -->
     <footer class="bg-dark text-light mt-auto">
       <div class="container py-4">
         <h2 class="h2 text-success border-bottom pb-3">Estética Angelus</h2>
@@ -127,14 +155,14 @@
       </div>
     </footer>
 
-    <!-- SCRIPTS -->
+    <!-- ====================== SCRIPTS ====================== -->
     <script src="assets/js/jquery-1.11.0.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
 
-    <!-- CONTADOR CARRITO -->
-    <script src="assets/js/carrito.js"></script>
+    <!-- Header dinámico -->
+    <script src="assets/js/header.js"></script>
 
-    <!-- LÓGICA DEL SERVICIO INDIVIDUAL -->
+    <!-- Lógica del servicio individual -->
     <script src="assets/js/servicioIndividual.js"></script>
   </body>
 </html>

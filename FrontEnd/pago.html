@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Pagar | Estética Angelus</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+  </head>
+
+  <body class="p-4">
+    <h2>Pago con Tarjeta</h2>
+
+    <form id="form-pago">
+      <label>Nombre en la tarjeta</label>
+      <input id="nombre-tarjeta" class="form-control mb-2" required />
+
+      <label>Número tarjeta</label>
+      <input
+        id="num-tarjeta"
+        class="form-control mb-2"
+        maxlength="16"
+        required
+      />
+
+      <label>Expiración</label>
+      <input id="exp" type="month" class="form-control mb-2" required />
+
+      <label>CVV</label>
+      <input id="cvv" class="form-control mb-2" maxlength="3" required />
+
+      <button class="btn btn-success w-100 mt-3">Pagar</button>
+    </form>
+
+    <script src="assets/js/jquery-1.11.0.min.js"></script>
+    <script src="assets/js/pago.js"></script>
+  </body>
+</html>

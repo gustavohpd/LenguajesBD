@@ -25,6 +25,9 @@ $(document).ready(function () {
   cargarCarrito();
   actualizarContadorCarrito();
 
+  // ============================
+  // CARGAR CARRITO
+  // ============================
   function cargarCarrito() {
     let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
@@ -76,7 +79,9 @@ $(document).ready(function () {
     $("#carrito-total").text("₡" + totalGeneral.toLocaleString("es-CR"));
   }
 
-  // Sumar cantidad
+  // ============================
+  // SUMAR CANTIDAD
+  // ============================
   $(document).on("click", ".btn-sumar", function () {
     let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
     let index = $(this).data("index");
@@ -88,7 +93,9 @@ $(document).ready(function () {
     actualizarContadorCarrito();
   });
 
-  // Restar cantidad
+  // ============================
+  // RESTAR CANTIDAD
+  // ============================
   $(document).on("click", ".btn-restar", function () {
     let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
     let index = $(this).data("index");
@@ -103,7 +110,9 @@ $(document).ready(function () {
     actualizarContadorCarrito();
   });
 
-  // Eliminar producto
+  // ============================
+  // ELIMINAR PRODUCTO
+  // ============================
   $(document).on("click", ".btn-eliminar", function () {
     let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
     let index = $(this).data("index");
@@ -115,7 +124,33 @@ $(document).ready(function () {
     actualizarContadorCarrito();
   });
 
-  // Contador del carrito
+  // ============================
+  // FINALIZAR COMPRA (IR A PAGO)
+  // ============================
+  $(document).on("click", "#btn-finalizar", function () {
+    const usuario = JSON.parse(localStorage.getItem("usuario"));
+    const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+    // Validar login
+    if (!usuario) {
+      alert("Debe iniciar sesión para continuar con el pago.");
+      window.location.href = "login.html";
+      return;
+    }
+
+    // Validar carrito lleno
+    if (carrito.length === 0) {
+      alert("El carrito está vacío.");
+      return;
+    }
+
+    // Redirigir a pasarela de pago
+    window.location.href = "pago.html";
+  });
+
+  // ============================
+  // ACTUALIZAR CONTADOR DEL CARRITO
+  // ============================
   function actualizarContadorCarrito() {
     let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
     let cantidadTotal = carrito.reduce((sum, item) => sum + item.cantidad, 0);

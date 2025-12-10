@@ -12,7 +12,7 @@
   </head>
 
   <body>
-    <!-- ========== HEADER ========== -->
+    <!-- ====================== HEADER GLOBAL DINÁMICO ====================== -->
     <nav class="navbar navbar-expand-lg navbar-light shadow">
       <div class="container d-flex justify-content-between align-items-center">
         <a
@@ -35,6 +35,7 @@
           class="align-self-center collapse navbar-collapse flex-fill d-lg-flex justify-content-lg-between"
           id="templatemo_main_nav"
         >
+          <!-- Menú principal -->
           <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
             <li class="nav-item">
               <a class="nav-link" href="index.html">Inicio</a>
@@ -45,26 +46,68 @@
             <li class="nav-item">
               <a class="nav-link" href="productos.html">Productos</a>
             </li>
+
+            <!-- Se activa si el usuario está logueado -->
+            <li id="nav-mis-citas" class="nav-item" style="display: none">
+              <a class="nav-link" href="misCitas.html">Mis Citas</a>
+            </li>
+
+            <!-- Se activa si es admin -->
+            <li id="nav-admin" class="nav-item" style="display: none">
+              <a class="nav-link" href="adminView.html">Admin</a>
+            </li>
           </ul>
 
+          <!-- Íconos -->
           <div class="navbar align-self-center d-flex">
+            <!-- Carrito -->
             <a
               class="nav-icon position-relative text-decoration-none"
               href="carrito.html"
             >
               <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+
               <span
                 id="cart-count"
                 class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-success text-white"
                 style="display: none"
-              ></span>
+              >
+              </span>
+            </a>
+
+            <!-- Login -->
+            <a
+              id="nav-login"
+              class="nav-icon position-relative text-decoration-none"
+              href="login.html"
+            >
+              <i class="fa fa-fw fa-user text-dark mr-3"></i>
+            </a>
+
+            <!-- Nombre del usuario -->
+            <span
+              id="nav-user-name"
+              class="text-dark mx-3"
+              style="display: none; font-weight: bold"
+            >
+            </span>
+
+            <!-- Cerrar sesión -->
+            <a
+              id="nav-logout"
+              class="nav-link text-danger"
+              href="#"
+              style="display: none"
+            >
+              Cerrar sesión
             </a>
           </div>
         </div>
       </div>
     </nav>
+    <!-- ====================== FIN HEADER ====================== -->
 
-    <!-- ========== CONTENIDO PRINCIPAL ========== -->
+    <!-- ====================== CONTENIDO ====================== -->
     <div class="container py-5">
       <h2 class="mb-4">Agendar Cita</h2>
 
@@ -112,8 +155,8 @@
       </div>
     </div>
 
-    <!-- ========== FOOTER ========== -->
-    <footer class="bg-dark" id="tempaltemo_footer">
+    <!-- ====================== FOOTER ====================== -->
+    <footer class="bg-dark mt-4" id="tempaltemo_footer">
       <div class="container">
         <div class="row">
           <div class="col-md-4 pt-5">
@@ -131,22 +174,21 @@
             </ul>
           </div>
 
-          <div class="w-100 bg-black py-3">
-            <div class="container">
-              <p class="text-light text-center m-0">
-                © Estética Angelus | Designed by TemplateMo
-              </p>
-            </div>
+          <div class="w-100 bg-black py-3 text-center">
+            <p class="text-light m-0">© Estética Angelus | TemplateMo</p>
           </div>
         </div>
       </div>
     </footer>
 
-    <!-- Scripts -->
+    <!-- ====================== SCRIPTS ====================== -->
     <script src="assets/js/jquery-1.11.0.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Archivo JS corregido -->
+    <!-- Lógica de citas -->
     <script src="assets/js/citas.js"></script>
+
+    <!-- Header dinámico -->
+    <script src="assets/js/header.js"></script>
   </body>
 </html>

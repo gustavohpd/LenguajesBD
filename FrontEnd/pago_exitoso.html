@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Pago Exitoso</title>
+  </head>
+
+  <body class="p-4">
+    <h2>¡Pago realizado con éxito! 🎉</h2>
+    <p>Factura #: <span id="factura"></span></p>
+    <a class="btn btn-primary" href="index.html">Volver al inicio</a>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      document.getElementById("factura").textContent = params.get("factura");
+    </script>
+  </body>
+</html>

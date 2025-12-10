@@ -17,7 +17,7 @@
   </head>
 
   <body>
-    <!-- Header -->
+    <!-- ====================== HEADER GLOBAL ====================== -->
     <nav class="navbar navbar-expand-lg navbar-light shadow">
       <div class="container d-flex justify-content-between align-items-center">
         <a
@@ -40,22 +40,28 @@
           class="align-self-center collapse navbar-collapse flex-fill d-lg-flex justify-content-lg-between"
           id="templatemo_main_nav"
         >
-          <div class="flex-fill">
-            <ul
-              class="nav navbar-nav d-flex justify-content-between mx-lg-auto"
-            >
-              <li class="nav-item">
-                <a class="nav-link" href="index.html">Inicio</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="servicios.html">Servicios</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="productos.html">Productos</a>
-              </li>
-            </ul>
-          </div>
+          <!-- MENÚ -->
+          <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="servicios.html">Servicios</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="productos.html">Productos</a>
+            </li>
 
+            <li id="nav-mis-citas" class="nav-item" style="display: none">
+              <a class="nav-link" href="misCitas.html">Mis Citas</a>
+            </li>
+
+            <li id="nav-admin" class="nav-item" style="display: none">
+              <a class="nav-link" href="adminView.html">Admin</a>
+            </li>
+          </ul>
+
+          <!-- DERECHA -->
           <div class="navbar align-self-center d-flex">
             <!-- Buscar -->
             <a
@@ -67,13 +73,12 @@
               <i class="fa fa-fw fa-search text-dark mr-2"></i>
             </a>
 
-            <!-- CARRITO CORREGIDO -->
+            <!-- Carrito -->
             <a
               class="nav-icon position-relative text-decoration-none"
               href="carrito.html"
             >
               <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
-
               <span
                 id="cart-count"
                 class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-success text-white"
@@ -81,22 +86,64 @@
               ></span>
             </a>
 
-            <!-- Usuario -->
+            <!-- Login -->
             <a
+              id="nav-login"
               class="nav-icon position-relative text-decoration-none"
               href="login.html"
             >
               <i class="fa fa-fw fa-user text-dark mr-3"></i>
             </a>
+
+            <!-- Usuario -->
+            <span
+              id="nav-user-name"
+              class="text-dark mx-3"
+              style="display: none; font-weight: bold"
+            ></span>
+
+            <!-- Logout -->
+            <a
+              id="nav-logout"
+              class="nav-link text-danger"
+              href="#"
+              style="display: none"
+            >
+              Cerrar sesión
+            </a>
           </div>
         </div>
       </div>
     </nav>
-    <!-- Close Header -->
+    <!-- ====================== FIN HEADER ====================== -->
 
-    <!-- PRODUCTO INDIVIDUAL -->
+    <!-- MODAL BUSCAR -->
+    <div class="modal fade bg-white" id="templatemo_search" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="w-100 pt-1 mb-5 text-right">
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+          ></button>
+        </div>
+        <form class="modal-content modal-body border-0 p-0">
+          <div class="input-group mb-2">
+            <input type="text" class="form-control" placeholder="Buscar..." />
+            <button class="input-group-text bg-success text-light">
+              <i class="fa fa-fw fa-search"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ===========================
+        PRODUCTO INDIVIDUAL
+    ============================ -->
     <div class="container py-5">
       <div class="row" id="producto-detalle">
+        <!-- IMAGEN -->
         <div class="col-md-6 text-center">
           <img
             id="prod-img"
@@ -106,6 +153,7 @@
           />
         </div>
 
+        <!-- DETALLES -->
         <div class="col-md-6">
           <h1 id="prod-nombre" class="h2"></h1>
           <h3 id="prod-precio" class="text-success mt-3"></h3>
@@ -125,7 +173,9 @@
       </div>
     </div>
 
-    <!-- Footer -->
+    <!-- ===========================
+        FOOTER
+    ============================ -->
     <footer class="bg-dark" id="tempaltemo_footer">
       <div class="container">
         <div class="row">
@@ -135,7 +185,7 @@
             </h2>
             <ul class="list-unstyled text-light footer-link-list">
               <li>
-                <i class="fas fa-map-marker-alt fa-fw"></i> San Jose, Costa Rica
+                <i class="fas fa-map-marker-alt fa-fw"></i> San José, Costa Rica
               </li>
               <li><i class="fa fa-phone fa-fw"></i> 506 0000-0000</li>
               <li>
@@ -147,7 +197,7 @@
           <div class="w-100 bg-black py-3">
             <div class="container">
               <p class="text-left text-light">
-                Copyright © Estética Angelus | Designed by
+                © Estética Angelus | Designed by
                 <a href="https://templatemo.com" target="_blank">TemplateMo</a>
               </p>
             </div>
@@ -156,36 +206,17 @@
       </div>
     </footer>
 
-    <!-- Scripts -->
+    <!-- ===========================
+        SCRIPTS
+    ============================ -->
     <script src="assets/js/jquery-1.11.0.min.js"></script>
     <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Carrito: necesario para agregar productos -->
     <script src="assets/js/carrito.js"></script>
-
-    <!-- Lógica del producto individual -->
     <script src="assets/js/productoIndividual.js"></script>
 
-    <!-- Script para actualizar contador del carrito -->
-    <script>
-      function actualizarContadorCarrito() {
-        let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-        let cantidadTotal = carrito.reduce(
-          (sum, item) => sum + item.cantidad,
-          0
-        );
-
-        if (cantidadTotal > 0) {
-          $("#cart-count").text(cantidadTotal).show();
-        } else {
-          $("#cart-count").hide();
-        }
-      }
-
-      $(document).ready(function () {
-        actualizarContadorCarrito();
-      });
-    </script>
+    <!-- HEADER DINÁMICO -->
+    <script src="assets/js/header.js"></script>
   </body>
 </html>

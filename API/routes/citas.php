@@ -99,13 +99,17 @@ function createCita() {
     if (oci_execute($stid)) {
         oci_commit($conn);
         echo json_encode(['message' => 'Cita creada exitosamente']);
-    } else {
-        $e = oci_error($stid);
-        http_response_code(500);
-        echo json_encode(['error' => 'Error al crear cita', 'detalle' => $e['message']]);
-    }
-}
+  } else {
+    $e = oci_error($stid);
 
+    http_response_code(500);
+
+    echo json_encode([
+        'error' => 'Error al crear cita',
+        'detalle' => $e['message']
+    ]);
+}
+}
 /* ============================================================
    ACTUALIZAR CITA
    ============================================================ */

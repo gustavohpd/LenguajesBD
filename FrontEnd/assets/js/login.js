@@ -14,32 +14,34 @@ $(document).ready(function () {
       correo: correo,
       password: password,
     };
+    console.clear();
+    console.log("CLICK LOGIN ENVIADO SOLO UNA VEZ");
 
     $.ajax({
       url: "http://localhost/LenguajesBD/API/public/index.php/api/login",
       method: "POST",
       contentType: "application/json",
       data: JSON.stringify(payload),
+
       success: function (resp) {
+        console.log("LOGIN RESPONSE =>", resp);
         if (!resp.success) {
           alert("Credenciales incorrectas.");
           return;
         }
 
-        // Guardar sesión
         localStorage.setItem("usuario", JSON.stringify(resp));
 
-        // Redirecciones según rol
         if (resp.rol_id == 1) {
           window.location.href = "adminView.html";
-        } else if (resp.rol_id == 7) {
-          window.location.href = "index.html";
         } else {
           window.location.href = "index.html";
         }
       },
+
       error: function (xhr) {
-        console.error(xhr.responseText);
+        console.error("LOGIN ERROR =>", xhr.responseText);
+        console.error("STATUS =>", xhr.status);
         alert("Error al iniciar sesión.");
       },
     });

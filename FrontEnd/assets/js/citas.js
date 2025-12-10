@@ -55,8 +55,18 @@ $(document).ready(function () {
       },
 
       error: function (xhr) {
+        let detalle =
+          "Error al agendar cita, ya hay un servicio agendado a esa hora.";
+
+        if (xhr.responseJSON?.detalle) {
+          detalle = xhr.responseJSON.detalle;
+
+          // Limpia formato ORA-xxxx:
+          detalle = detalle.replace(/ORA-\d+: /, "");
+        }
+
+        alert(detalle);
         console.error("ERROR AL CREAR CITA:", xhr.responseText);
-        alert("Error al agendar cita.");
       },
     });
   });
