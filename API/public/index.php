@@ -24,6 +24,8 @@ require_once __DIR__ . '/../routes/citas.php';
 require_once __DIR__ . '/../routes/login.php';
 require_once __DIR__ . '/../routes/registro.php';
 require_once __DIR__ . '/../routes/pago.php';   // <<------------------ AGREGADO
+require_once __DIR__ . '/../routes/proveedores.php';
+
 
 // ===============================================
 //  NORMALIZE ROUTE
@@ -127,6 +129,25 @@ if (preg_match('/^\/api\/citas\/(\d+)$/', $endpoint, $id)) {
     if ($method === 'PUT') { updateCita($id[1]); exit; }
     if ($method === 'DELETE') { deleteCita($id[1]); exit; }
 }
+// ===============================================
+//               PROVEEDORES
+// ===============================================
+if ($endpoint === '/api/proveedores' && $method === 'GET') {
+    getProveedores();
+    exit;
+}
+
+if ($endpoint === '/api/proveedores' && $method === 'POST') {
+    createProveedor();
+    exit;
+}
+
+if (preg_match('/^\/api\/proveedores\/(\d+)$/', $endpoint, $id)) {
+    if ($method === 'GET') { getProveedorById($id[1]); exit; }
+    if ($method === 'PUT') { updateProveedor($id[1]); exit; }
+    if ($method === 'DELETE') { deleteProveedor($id[1]); exit; }
+}
+
 
 // ===============================================
 //                      PAGOS

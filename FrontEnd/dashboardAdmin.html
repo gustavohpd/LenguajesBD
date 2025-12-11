@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Panel Administrativo | Estética Angelus</title>
+
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/css/templatemo.css" />
+    <link rel="stylesheet" href="../assets/css/custom.css" />
+
+    <style>
+      body {
+        background: #f4f5f7;
+        font-family: "Roboto", sans-serif;
+      }
+
+      .admin-sidebar {
+        width: 250px;
+        min-height: 100vh;
+        background: #0f5132;
+        color: white;
+        padding: 20px 15px;
+        position: fixed;
+        top: 0;
+        left: 0;
+      }
+
+      .admin-sidebar h3 {
+        font-weight: 800;
+        text-align: center;
+        margin-bottom: 25px;
+      }
+
+      .admin-sidebar a {
+        display: block;
+        padding: 10px 15px;
+        color: #ffffffd8;
+        text-decoration: none;
+        border-radius: 6px;
+        margin-bottom: 5px;
+        transition: 0.2s;
+      }
+
+      .admin-sidebar a:hover,
+      .admin-sidebar .active {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+      }
+
+      .admin-content {
+        margin-left: 270px;
+        padding: 40px;
+      }
+
+      .section-card {
+        padding: 30px;
+        border-radius: 12px;
+        background: white;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- SIDEBAR -->
+    <div class="admin-sidebar">
+      <h3>Angelus Admin</h3>
+
+      <a href="dashboardAdmin.html" class="active">📊 Dashboard</a>
+      <a href="clientesAdmin.html">👥 Clientes</a>
+      <a href="serviciosAdmin.html">💆 Servicios</a>
+      <a href="productosAdmin.html">🛍 Productos</a>
+      <a href="citasAdmin.html">📅 Citas</a>
+      <a href="proveedoresAdmin.html">🏭 Proveedores</a>
+      <a href="../index.html">← Volver al sitio</a>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="admin-content">
+      <h1 class="h3 mb-4">Panel Administrativo</h1>
+
+      <div class="section-card">
+        <h4 class="mb-3">Bienvenida, administradora</h4>
+        <p>
+          Selecciona una sección en el menú lateral para gestionar la
+          información del sistema.
+        </p>
+
+        <hr />
+
+        <div class="row text-center">
+          <div class="col-md-3">
+            <div class="p-3 bg-light rounded shadow-sm">
+              <h2 id="countClientes" class="text-success">0</h2>
+              <p>Clientes</p>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="p-3 bg-light rounded shadow-sm">
+              <h2 id="countServicios" class="text-success">0</h2>
+              <p>Servicios</p>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="p-3 bg-light rounded shadow-sm">
+              <h2 id="countProductos" class="text-success">0</h2>
+              <p>Productos</p>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="p-3 bg-light rounded shadow-sm">
+              <h2 id="countCitas" class="text-success">0</h2>
+              <p>Citas</p>
+            </div>
+          </div>
+
+          <div class="col-md-3 mt-4">
+            <div class="p-3 bg-light rounded shadow-sm">
+              <h2 id="countProveedores" class="text-success">0</h2>
+              <p>Proveedores</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JS -->
+    <script src="../assets/js/jquery-1.11.0.min.js"></script>
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <script src="js/dashboard.js"></script>
+  </body>
+</html>

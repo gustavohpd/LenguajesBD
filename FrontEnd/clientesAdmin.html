@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin - Clientes | Estética Angelus</title>
+
+    <!-- CSS CORRECTO -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/templatemo.css" />
+    <link rel="stylesheet" href="assets/css/custom.css" />
+
+    <style>
+      body {
+        background: #f4f5f7;
+      }
+      .admin-sidebar {
+        width: 250px;
+        min-height: 100vh;
+        background: #0f5132;
+        color: white;
+        padding: 20px 15px;
+        position: fixed;
+        top: 0;
+        left: 0;
+      }
+      .admin-sidebar h3 {
+        font-weight: 800;
+        text-align: center;
+        margin-bottom: 25px;
+      }
+      .admin-sidebar a {
+        display: block;
+        padding: 10px 15px;
+        color: #ffffffd8;
+        border-radius: 6px;
+        margin-bottom: 5px;
+        text-decoration: none;
+      }
+      .admin-sidebar a:hover,
+      .active {
+        background: rgba(255, 255, 255, 0.2);
+        color: white !important;
+      }
+      .admin-content {
+        margin-left: 270px;
+        padding: 40px;
+      }
+
+      .table-container {
+        max-height: 60vh;
+        overflow: auto;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- SIDEBAR -->
+    <div class="admin-sidebar">
+      <h3>Angelus Admin</h3>
+      <a href="dashboardAdmin.html">📊 Dashboard</a>
+      <a href="clientesAdmin.html" class="active">👥 Clientes</a>
+      <a href="serviciosAdmin.html">💆 Servicios</a>
+      <a href="productosAdmin.html">🛍 Productos</a>
+      <a href="citasAdmin.html">📅 Citas</a>
+      <a href="index.html">← Volver al sitio</a>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="admin-content">
+      <h2 class="mb-1">Gestión de Clientes</h2>
+      <p class="text-muted">
+        Administra los clientes registrados en el sistema.
+      </p>
+
+      <!-- Filtros -->
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <input
+          id="search-clientes"
+          type="search"
+          class="form-control"
+          placeholder="Buscar por ID, usuario, preferencia..."
+          style="max-width: 350px"
+        />
+        <div>
+          <button
+            id="btn-refresh-clientes"
+            class="btn btn-outline-success me-2"
+          >
+            Recargar
+          </button>
+          <button id="btn-new-client" class="btn btn-success">
+            + Nuevo Cliente
+          </button>
+        </div>
+      </div>
+
+      <div id="status-clientes" class="text-muted mb-2">
+        Estado: esperando acción...
+      </div>
+
+      <!-- Tabla -->
+      <div class="table-container bg-white rounded shadow-sm p-2 border">
+        <table class="table table-hover mb-0">
+          <thead class="table-light">
+            <tr>
+              <th>ID</th>
+              <th>Usuario</th>
+              <th>Estado</th>
+              <th>Preferencias</th>
+              <th>Historial</th>
+              <th class="text-end">Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="clientes-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- MODAL -->
+    <div class="modal fade" id="clienteModal" tabindex="-1">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <form id="clienteForm">
+            <div class="modal-header">
+              <h5 class="modal-title" id="clienteModalTitle">Nuevo Cliente</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+              ></button>
+            </div>
+
+            <div class="modal-body">
+              <div
+                id="cliente-form-error"
+                class="alert alert-danger d-none"
+              ></div>
+
+              <div class="row g-3">
+                <div class="col-md-4">
+                  <label class="form-label">cliente_id</label>
+                  <input type="number" id="cliente_id" class="form-control" />
+                </div>
+
+                <div class="col-md-4">
+                  <label class="form-label">usuario_id</label>
+                  <input type="number" id="usuario_id" class="form-control" />
+                </div>
+
+                <div class="col-md-4">
+                  <label class="form-label">estado_id</label>
+                  <select id="estado_id" class="form-select">
+                    <option value="1">1 - Activo</option>
+                    <option value="2">2 - Inactivo</option>
+                  </select>
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label">preferencias</label>
+                  <input id="preferencias" class="form-control" />
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label">historial</label>
+                  <input id="historial" class="form-control" />
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button class="btn btn-secondary" data-bs-dismiss="modal">
+                Cerrar
+              </button>
+              <button class="btn btn-success" type="submit">Guardar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCRIPTS CORRECTOS -->
+    <script src="assets/js/jquery-1.11.0.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/clientesAdmin.js"></script>
+  </body>
+</html>

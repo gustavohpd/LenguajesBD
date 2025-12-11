@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin - Productos | Estética Angelus</title>
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/templatemo.css" />
+    <link rel="stylesheet" href="assets/css/custom.css" />
+
+    <style>
+      body {
+        background: #f4f5f7;
+      }
+      .admin-sidebar {
+        width: 250px;
+        min-height: 100vh;
+        background: #0f5132;
+        color: white;
+        padding: 20px 15px;
+        position: fixed;
+        top: 0;
+        left: 0;
+      }
+      .admin-sidebar h3 {
+        font-weight: 800;
+        text-align: center;
+        margin-bottom: 25px;
+      }
+      .admin-sidebar a {
+        display: block;
+        padding: 10px 15px;
+        color: #ffffffd8;
+        border-radius: 6px;
+        margin-bottom: 5px;
+        text-decoration: none;
+      }
+      .admin-sidebar a:hover,
+      .active {
+        background: rgba(255, 255, 255, 0.2);
+        color: white !important;
+      }
+      .admin-content {
+        margin-left: 270px;
+        padding: 40px;
+      }
+
+      .table-container {
+        max-height: 60vh;
+        overflow-y: auto;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- SIDEBAR -->
+    <div class="admin-sidebar">
+      <h3>Angelus Admin</h3>
+      <a href="dashboardAdmin.html">📊 Dashboard</a>
+      <a href="clientesAdmin.html">👥 Clientes</a>
+      <a href="serviciosAdmin.html">💆 Servicios</a>
+      <a href="productosAdmin.html" class="active">🛍 Productos</a>
+      <a href="citasAdmin.html">📅 Citas</a>
+      <a href="index.html">← Volver al sitio</a>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="admin-content">
+      <h2 class="mb-1">Gestión de Productos</h2>
+      <p class="text-muted">
+        Administra los productos disponibles en el sistema.
+      </p>
+
+      <!-- Filtros -->
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <input
+          id="search-productos"
+          type="search"
+          class="form-control"
+          placeholder="Buscar por ID, nombre o categoría..."
+          style="max-width: 350px"
+        />
+        <div>
+          <button
+            id="btn-refresh-productos"
+            class="btn btn-outline-success me-2"
+          >
+            Recargar
+          </button>
+          <button id="btn-new-product" class="btn btn-success">
+            + Nuevo Producto
+          </button>
+        </div>
+      </div>
+
+      <div id="status-productos" class="text-muted mb-2">
+        Estado: esperando acción...
+      </div>
+
+      <!-- Tabla -->
+      <div class="table-container bg-white rounded shadow-sm p-2 border">
+        <table class="table table-hover mb-0">
+          <thead class="table-light">
+            <tr>
+              <th>ID</th>
+              <th>Categoría</th>
+              <th>Estado</th>
+              <th>Nombre</th>
+              <th>Descripción</th>
+              <th>Precio</th>
+              <th class="text-end">Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="productos-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- MODAL -->
+    <div class="modal fade" id="productoModal" tabindex="-1">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <form id="productoForm">
+            <div class="modal-header">
+              <h5 class="modal-title" id="productoModalTitle">
+                Nuevo Producto
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+              ></button>
+            </div>
+
+            <div class="modal-body">
+              <div
+                id="producto-form-error"
+                class="alert alert-danger d-none"
+              ></div>
+
+              <div class="row g-3">
+                <div class="col-md-3">
+                  <label class="form-label">producto_id</label>
+                  <input type="number" id="producto_id" class="form-control" />
+                </div>
+
+                <div class="col-md-3">
+                  <label class="form-label">categoria_id</label>
+                  <input type="number" id="categoria_id" class="form-control" />
+                </div>
+
+                <div class="col-md-3">
+                  <label class="form-label">estado_id</label>
+                  <select id="estado_id" class="form-select">
+                    <option value="1">1 - Activo</option>
+                    <option value="2">2 - Inactivo</option>
+                  </select>
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label">Nombre</label>
+                  <input id="nombre" class="form-control" />
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label">Descripción</label>
+                  <input id="descripcion" class="form-control" />
+                </div>
+
+                <div class="col-md-4">
+                  <label class="form-label">Precio</label>
+                  <input
+                    id="precio"
+                    type="number"
+                    step="0.01"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button class="btn btn-secondary" data-bs-dismiss="modal">
+                Cerrar
+              </button>
+              <button class="btn btn-success" type="submit">Guardar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="assets/js/jquery-1.11.0.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/productosAdmin.js"></script>
+  </body>
+</html>
