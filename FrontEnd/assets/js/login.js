@@ -14,6 +14,7 @@ $(document).ready(function () {
       correo: correo,
       password: password,
     };
+
     console.clear();
     console.log("CLICK LOGIN ENVIADO SOLO UNA VEZ");
 
@@ -25,16 +26,21 @@ $(document).ready(function () {
 
       success: function (resp) {
         console.log("LOGIN RESPONSE =>", resp);
+
         if (!resp.success) {
           alert("Credenciales incorrectas.");
           return;
         }
 
+        // Guardar datos del usuario
         localStorage.setItem("usuario", JSON.stringify(resp));
 
+        // Redirección según rol
         if (resp.rol_id == 1) {
-          window.location.href = "adminView.html";
+          // ADMIN -> Dashboard
+          window.location.href = "dashboardAdmin.html";
         } else {
+          // CLIENTE -> Página principal
           window.location.href = "index.html";
         }
       },

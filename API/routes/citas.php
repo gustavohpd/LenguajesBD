@@ -116,27 +116,43 @@ function createCita() {
 function updateCita($id) {
     global $conn;
     $input = json_decode(file_get_contents("php://input"), true);
-    if (!isset($input['estado_id'], $input['fecha_hora'])) {
+
+    if (
+        !isset($input['cliente_id']) ||
+        !isset($input['servicio_id']) ||
+        !isset($input['estado_id']) ||
+        !isset($input['fecha_hora'])
+    ) {
         http_response_code(400);
         echo json_encode(['error' => 'Datos incompletos']);
         return;
     }
 
-    $cita_id    = intval($id);
-    $estado_id  = intval($input['estado_id']);
-    $fecha_hora = $input['fecha_hora'];
-    $notas      = $input['notas'] ?? null;
+    $cita_id     = intval($id);
+    $cliente_id  = intval($input['cliente_id']);
+    $servicio_id = intval($input['servicio_id']);
+    $estado_id   = intval($input['estado_id']);
+    $fecha_hora  = $input['fecha_hora'];  // "YYYY-MM-DD HH:MM:SS"
+    $notas       = $input['notas'] ?? null;
 
     $stid = oci_parse($conn, "
         BEGIN 
           FIDE_ANGELUS_ESTETICA_PKG.FIDE_CITAS_MODIFICAR_SP(
-            :cita_id, :estado_id, TO_TIMESTAMP(:fecha_hora, ''YYYY-MM-DD HH24:MI:SS''), :notas
+            :cita_id,
+            :cliente_id,
+            :servicio_id,
+            :estado_id,
+            TO_TIMESTAMP(:fecha_hora, 'YYYY-MM-DD HH24:MI:SS'),
+            :notas
           ); 
         END;");
-    oci_bind_by_name($stid, ":cita_id",    $cita_id);
-    oci_bind_by_name($stid, ":estado_id",  $estado_id);
-    oci_bind_by_name($stid, ":fecha_hora", $fecha_hora);
-    oci_bind_by_name($stid, ":notas",      $notas, 4000);
+
+    oci_bind_by_name($stid, ":cita_id",     $cita_id);
+    oci_bind_by_name($stid, ":cliente_id",  $cliente_id);
+    oci_bind_by_name($stid, ":servicio_id", $servicio_id);
+    oci_bind_by_name($stid, ":estado_id",   $estado_id);
+    oci_bind_by_name($stid, ":fecha_hora",  $fecha_hora);
+    oci_bind_by_name($stid, ":notas",       $notas, 4000);
 
     if (oci_execute($stid)) {
         oci_commit($conn);
@@ -144,9 +160,13 @@ function updateCita($id) {
     } else {
         $e = oci_error($stid);
         http_response_code(500);
-        echo json_encode(['error' => 'Error al actualizar cita', 'detalle' => $e['message']]);
+        echo json_encode([
+            'error' => 'Error al actualizar cita',
+            'detalle' => $e['message']
+        ]);
     }
 }
+
 
 /* ============================================================
    ELIMINAR CITA (soft delete)

@@ -12,6 +12,7 @@
       body {
         background: #f4f5f7;
       }
+
       .admin-sidebar {
         width: 250px;
         min-height: 100vh;
@@ -22,6 +23,7 @@
         top: 0;
         left: 0;
       }
+
       .admin-sidebar a {
         display: block;
         padding: 10px;
@@ -30,10 +32,13 @@
         text-decoration: none;
         border-radius: 6px;
       }
+
       .admin-sidebar a:hover,
       .active {
-        background: rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.23);
+        color: white;
       }
+
       .admin-content {
         margin-left: 270px;
         padding: 40px;
@@ -50,7 +55,6 @@
     <!-- SIDEBAR -->
     <div class="admin-sidebar">
       <h3 class="text-center fw-bold mb-3">Angelus Admin</h3>
-
       <a href="dashboardAdmin.html">📊 Dashboard</a>
       <a href="clientesAdmin.html">👥 Clientes</a>
       <a href="serviciosAdmin.html">💆 Servicios</a>
@@ -62,7 +66,7 @@
     <!-- CONTENT -->
     <div class="admin-content">
       <h2 class="mb-1">Gestión de Citas</h2>
-      <p class="text-muted">Administra todas las citas del sistema.</p>
+      <p class="text-muted">Administra todas las citas registradas.</p>
 
       <!-- Filtros -->
       <div class="d-flex justify-content-between align-items-center mb-3">
@@ -70,7 +74,7 @@
           id="search-citas"
           type="search"
           class="form-control"
-          placeholder="Buscar por cita_id, cliente, servicio..."
+          placeholder="Buscar por ID, cliente, servicio..."
           style="max-width: 350px"
         />
 
@@ -102,14 +106,18 @@
       </div>
     </div>
 
-    <!-- MODAL -->
-    <div class="modal fade" id="citaModal" tabindex="-1">
+    <!-- MODAL (SOLO PARA EDITAR) -->
+    <div class="modal fade" id="citaModal" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
           <form id="citaForm">
             <div class="modal-header">
-              <h5 class="modal-title" id="citaModalTitle">Editar cita</h5>
-              <button class="btn-close" data-bs-dismiss="modal"></button>
+              <h5 class="modal-title" id="citaModalTitle">Editar Cita</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+              ></button>
             </div>
 
             <div class="modal-body">
@@ -139,9 +147,9 @@
                 <div class="col-md-3">
                   <label class="form-label">estado_id</label>
                   <select id="estado_id" class="form-select">
-                    <option value="1">1 - Activa</option>
-                    <option value="2">2 - Cancelada</option>
-                    <option value="3">3 - Finalizada</option>
+                    <option value="1">Activa</option>
+                    <option value="2">Cancelada</option>
+                    <option value="3">Finalizada</option>
                   </select>
                 </div>
 
@@ -162,17 +170,20 @@
             </div>
 
             <div class="modal-footer">
-              <button class="btn btn-secondary" data-bs-dismiss="modal">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
                 Cerrar
               </button>
-              <button class="btn btn-success" type="submit">Guardar</button>
+              <button type="submit" class="btn btn-success">Guardar</button>
             </div>
           </form>
         </div>
       </div>
     </div>
 
-    <!-- SCRIPTS -->
     <script src="assets/js/jquery-1.11.0.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/citasAdmin.js"></script>

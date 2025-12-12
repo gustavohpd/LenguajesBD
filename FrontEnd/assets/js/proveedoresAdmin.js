@@ -7,10 +7,12 @@ $(function () {
   const proveedorModal = new bootstrap.Modal(
     document.getElementById("proveedorModal")
   );
-  let mode = "create";
+
+  let mode = "create"; // create | edit
 
   $("#btn-new-proveedor").on("click", openCreate);
   $("#btn-refresh-proveedores").on("click", loadProveedores);
+
   $("#search-proveedores").on("input", () =>
     loadProveedores($("#search-proveedores").val())
   );
@@ -22,7 +24,9 @@ $(function () {
 
   loadProveedores();
 
-  /* ---------------- LOAD ---------------- */
+  /* ================================
+       LOAD PROVEEDORES
+  =================================*/
   function loadProveedores(filter = "") {
     $("#status-proveedores").text("Cargando proveedores...");
 
@@ -38,9 +42,11 @@ $(function () {
       .fail(() => $("#status-proveedores").text("Error cargando proveedores"));
   }
 
-  /* ---------------- RENDER ---------------- */
+  /* ================================
+       RENDER TABLE
+  =================================*/
   function renderProveedores(list, filter = "") {
-    const q = filter.toLowerCase();
+    const q = (filter || "").toLowerCase();
     const tbody = $("#proveedores-tbody").empty();
 
     const filtered = list.filter(
@@ -51,9 +57,9 @@ $(function () {
     );
 
     if (filtered.length === 0) {
-      tbody.html(`
-        <tr><td colspan="6" class="text-center">No hay proveedores</td></tr>
-      `);
+      tbody.html(
+        `<tr><td colspan="6" class="text-center">No hay proveedores</td></tr>`
+      );
       return;
     }
 
@@ -69,28 +75,39 @@ $(function () {
           <td class="text-end">
             <button class="btn btn-sm btn-info me-1" onclick="editProveedor(${
               p.proveedor_id
-            })">Editar</button>
+            })">
+              Editar
+            </button>
             <button class="btn btn-sm btn-danger" onclick="deleteProveedor(${
               p.proveedor_id
-            })">Eliminar</button>
+            })">
+              Eliminar
+            </button>
           </td>
         </tr>
       `);
     });
   }
 
-  /* ---------------- FORM HELPERS ---------------- */
+  /* ================================
+       FORM VALIDATION
+  =================================*/
   function readForm() {
     const err = $("#proveedor-form-error").addClass("d-none").text("");
 
-    const id = $("#proveedor_id").val();
-    const estado = $("#estado_id").val();
-    const telefono = $("#telefono_id").val();
-    const nombre = $("#nombre").val();
+    const id = Number($("#proveedor_id").val());
+    const estado = Number($("#estado_id").val());
+    const telefono = Number($("#telefono_id").val());
+    const nombre = $("#nombre").val().trim();
+    const contacto = $("#contacto").val().trim();
 
-    if (!id || isNaN(id)) return error("proveedor_id inválido");
-    if (!telefono || isNaN(telefono)) return error("telefono_id inválido");
-    if (!nombre) return error("El nombre es requerido");
+    if (!id || isNaN(id) || id <= 0)
+      return error("El proveedor_id debe ser un número válido y mayor que 0.");
+
+    if (!telefono || isNaN(telefono) || telefono <= 0)
+      return error("El teléfono_id debe ser un número válido.");
+
+    if (!nombre) return error("El nombre es obligatorio.");
 
     function error(msg) {
       err.removeClass("d-none").text(msg);
@@ -98,15 +115,17 @@ $(function () {
     }
 
     return {
-      proveedor_id: Number(id),
-      estado_id: Number(estado),
-      telefono_id: Number(telefono),
-      nombre: nombre,
-      contacto: $("#contacto").val() || "",
+      proveedor_id: id,
+      estado_id: estado,
+      telefono_id: telefono,
+      nombre,
+      contacto,
     };
   }
 
-  /* ---------------- CREATE ---------------- */
+  /* ================================
+       CREATE
+  =================================*/
   function openCreate() {
     mode = "create";
     $("#proveedorModalTitle").text("Nuevo Proveedor");
@@ -136,7 +155,9 @@ $(function () {
       });
   }
 
-  /* ---------------- EDIT ---------------- */
+  /* ================================
+       EDIT
+  =================================*/
   window.editProveedor = function (id) {
     mode = "edit";
 
@@ -148,11 +169,11 @@ $(function () {
       .done((p) => {
         $("#proveedorModalTitle").text("Editar Proveedor");
 
-        $("#proveedor_id").val(p.proveedor_id);
-        $("#estado_id").val(p.estado_id);
-        $("#telefono_id").val(p.telefono_id);
-        $("#nombre").val(p.nombre);
-        $("#contacto").val(p.contacto);
+        $("#prov_proveedor_id").val(p.proveedor_id);
+        $("#prov_estado_id").val(p.estado_id);
+        $("#prov_telefono_id").val(p.telefono_id);
+        $("#prov_nombre").val(p.nombre);
+        $("#prov_contacto").val(p.contacto);
 
         $("#proveedor-form-error").addClass("d-none").text("");
         proveedorModal.show();
@@ -160,7 +181,9 @@ $(function () {
       .fail(() => alert("Error cargando proveedor"));
   };
 
-  /* ---------------- UPDATE ---------------- */
+  /* ================================
+       UPDATE
+  =================================*/
   function updateProveedor() {
     const data = readForm();
     if (!data) return;
@@ -182,7 +205,9 @@ $(function () {
       });
   }
 
-  /* ---------------- DELETE ---------------- */
+  /* ================================
+       DELETE
+  =================================*/
   window.deleteProveedor = function (id) {
     if (!confirm(`¿Eliminar proveedor ${id}?`)) return;
 

@@ -9,7 +9,7 @@ $(function () {
   );
   let mode = "create";
 
-  // EVENTOS
+  // EVENTS
   $("#btn-new-product").on("click", openCreate);
   $("#btn-refresh-productos").on("click", loadProductos);
   $("#search-productos").on("input", () =>
@@ -67,8 +67,8 @@ $(function () {
           <td>${p.producto_id}</td>
           <td>${p.categoria_id}</td>
           <td>${p.estado_id}</td>
+          <td>${p.proveedor_id}</td>
           <td>${p.nombre}</td>
-          <td>${p.descripcion || ""}</td>
           <td>₡${Number(p.precio).toFixed(2)}</td>
 
           <td class="text-end">
@@ -91,11 +91,16 @@ $(function () {
     const id = $("#producto_id").val();
     const categoria = $("#categoria_id").val();
     const estado = $("#estado_id").val();
+    const proveedor = $("#proveedor_id").val();
     const nombre = $("#nombre").val();
+    const descripcion = $("#descripcion").val();
     const precio = $("#precio").val();
+    const imagen_url = $("#imagen_url").val();
 
     if (!id || isNaN(id)) return error("producto_id inválido");
     if (!categoria || isNaN(categoria)) return error("categoria_id inválido");
+    if (!estado || isNaN(estado)) return error("estado_id inválido");
+    if (!proveedor || isNaN(proveedor)) return error("proveedor_id inválido");
     if (!nombre) return error("El nombre es obligatorio");
     if (!precio || isNaN(precio)) return error("precio inválido");
 
@@ -108,9 +113,11 @@ $(function () {
       producto_id: Number(id),
       categoria_id: Number(categoria),
       estado_id: Number(estado),
+      proveedor_id: Number(proveedor),
       nombre,
-      descripcion: $("#descripcion").val() || "",
+      descripcion: descripcion || "",
       precio: Number(precio),
+      imagen_url: imagen_url || "",
     };
   }
 
@@ -119,6 +126,7 @@ $(function () {
     mode = "create";
     $("#productoModalTitle").text("Nuevo Producto");
     $("#productoForm")[0].reset();
+    $("#producto-form-error").addClass("d-none");
     productoModal.show();
   }
 
@@ -161,9 +169,11 @@ $(function () {
         $("#producto_id").val(p.producto_id);
         $("#categoria_id").val(p.categoria_id);
         $("#estado_id").val(p.estado_id);
+        $("#proveedor_id").val(p.proveedor_id);
         $("#nombre").val(p.nombre);
         $("#descripcion").val(p.descripcion);
         $("#precio").val(p.precio);
+        $("#imagen_url").val(p.imagen_url);
 
         productoModal.show();
       })

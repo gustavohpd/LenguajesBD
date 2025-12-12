@@ -104,7 +104,7 @@ $(function () {
       usuario_id: Number(usuario),
       estado_id: Number(estado),
       preferencias: $("#preferencias").val() || "",
-      historial: $("#historial").val() || "",
+      historial: $("#historial").val() || "", // <- ESTE ES EL CORRECTO
     };
   }
 
@@ -113,6 +113,7 @@ $(function () {
     mode = "create";
     $("#clienteModalTitle").text("Nuevo Cliente");
     $("#clienteForm")[0].reset();
+    $("#cliente-form-error").addClass("d-none");
     clienteModal.show();
   }
 
@@ -140,7 +141,6 @@ $(function () {
   /* ---------------- EDIT ---------------- */
   window.editCliente = function (id) {
     mode = "edit";
-    $("#status-clientes").text("Cargando cliente...");
 
     $.ajax({
       url: ENDPOINT_CLIENTES + "/" + id,

@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <title>Admin - Proveedores | Estética Angelus</title>
 
-    <!-- CSS (mismas rutas que clientesAdmin / productosAdmin) -->
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../assets/css/templatemo.css" />
-    <link rel="stylesheet" href="../assets/css/custom.css" />
+    <!-- CSS (rutas corregidas) -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/templatemo.css" />
+    <link rel="stylesheet" href="assets/css/custom.css" />
 
     <style>
       body {
@@ -64,7 +64,7 @@
       <a href="productosAdmin.html">🛍 Productos</a>
       <a href="citasAdmin.html">📅 Citas</a>
       <a href="proveedoresAdmin.html" class="active">🏭 Proveedores</a>
-      <a href="../index.html">← Volver al sitio</a>
+      <a href="index.html">← Volver al sitio</a>
     </div>
 
     <!-- CONTENT -->
@@ -72,6 +72,7 @@
       <h2 class="mb-1">Gestión de Proveedores</h2>
       <p class="text-muted">Administra los proveedores del sistema.</p>
 
+      <!-- SEARCH + BUTTONS -->
       <div class="d-flex justify-content-between align-items-center mb-3">
         <input
           id="search-proveedores"
@@ -98,6 +99,7 @@
         Estado: esperando acción...
       </div>
 
+      <!-- TABLE -->
       <div class="table-container bg-white rounded shadow-sm p-2 border">
         <table class="table table-hover mb-0">
           <thead class="table-light">
@@ -139,12 +141,12 @@
 
               <div class="row g-3">
                 <div class="col-md-3">
-                  <label class="form-label">proveedor_id</label>
+                  <label class="form-label">Proveedor ID</label>
                   <input id="proveedor_id" type="number" class="form-control" />
                 </div>
 
                 <div class="col-md-3">
-                  <label class="form-label">estado_id</label>
+                  <label class="form-label">Estado</label>
                   <select id="estado_id" class="form-select">
                     <option value="1">1 - Activo</option>
                     <option value="2">2 - Inactivo</option>
@@ -152,7 +154,7 @@
                 </div>
 
                 <div class="col-md-3">
-                  <label class="form-label">telefono_id</label>
+                  <label class="form-label">Teléfono ID</label>
                   <input id="telefono_id" type="number" class="form-control" />
                 </div>
 
@@ -183,9 +185,9 @@
       </div>
     </div>
 
-    <!-- SCRIPTS -->
-    <script src="../assets/js/jquery-1.11.0.min.js"></script>
-    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <!-- SCRIPTS (rutas corregidas) -->
+    <script src="assets/js/jquery-1.11.0.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/proveedoresAdmin.js"></script>
   </body>
 </html>
